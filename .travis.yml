@@ -1,0 +1,39 @@
+# -*- coding: utf-8 -*-
+#
+# This file is part of IDUtils
+# Copyright (C) 2015 CERN.
+#
+# IDUtils is free software; you can redistribute it and/or modify
+# it under the terms of the Revised BSD License; see LICENSE file for
+# more details.
+#
+# In applying this license, CERN does not waive the privileges and immunities
+# granted to it by virtue of its status as an Intergovernmental Organization
+# or submit itself to any jurisdiction.
+
+notifications:
+  email: false
+
+language: python
+
+python:
+  - "2.6"
+  - "2.7"
+  - "3.3"
+  - "3.4"
+
+install:
+  - pip install coveralls pep257 Sphinx
+  - pip install "coverage>=3.7.1,<4.0a1" "py>=1.4.29" pytest pytest-pep8 pytest-cov pytest-cache
+  - pip install -e .
+
+script:
+  - pep257 idutils
+  - "sphinx-build -qnNW docs docs/_build/html"
+  - python setup.py test
+
+after_success:
+  - coveralls
+
+notifications:
+  email: false
