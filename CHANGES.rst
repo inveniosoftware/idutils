@@ -14,6 +14,6 @@
 Changes
 =======
 
-Version 0.1.0 (2015-07-01)
+Version 0.1.0 (2015-07-02)
 
 - First public release.

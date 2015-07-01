@@ -2,7 +2,7 @@
  IDUtils v0.1.0 is released
 ===================================
 
-IDUtils v0.1.0 was released on 2015-07-01
+IDUtils v0.1.0 was released on 2015-07-02
 
 About
 -----
