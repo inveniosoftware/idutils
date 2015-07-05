@@ -18,3 +18,4 @@ Authors
 - Pedro Gaudencio <pmgaudencio@gmail.com>
 - Adrian Pawel Baran <adrian.pawel.baran@cern.ch>
 - Jiri Kuncar <jiri.kuncar@cern.ch>
+- Tibor Simko <tibor.simko@cern.ch>
