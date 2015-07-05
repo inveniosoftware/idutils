@@ -12,6 +12,6 @@
 # or submit itself to any jurisdiction.
 
 
-pep257 cernservicexml && \
+pep257 idutils && \
 sphinx-build -qnNW docs docs/_build/html && \
 python setup.py test

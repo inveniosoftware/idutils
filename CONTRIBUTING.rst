@@ -21,4 +21,4 @@ operating correctly:
 You can also test your feature branch using Docker::
 
   $ docker-compose build
-  $ docker-compose run --rm web python setup.py test
+  $ docker-compose run --rm web /code/run-tests.sh
