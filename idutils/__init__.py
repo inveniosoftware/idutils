@@ -71,7 +71,16 @@ lsid_regexp = re.compile("urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
 
 orcid_url = "http://orcid.org/"
 
-gnd_url = "http://d-nb.info/gnd/"
+gnd_regexp = re.compile(
+    "(gnd:|GND:)?("
+    "(1|10)\d{7}[0-9X]|"
+    "[47]\d{6}-\d|"
+    "[1-9]\d{0,7}-[0-9X]|"
+    "3\d{7}[0-9X]"
+    ")")
+"""See https://www.wikidata.org/wiki/Property:P227."""
+
+gnd_resolver_url = "http://d-nb.info/gnd/"
 
 
 def _convert_x_to_10(x):
@@ -308,15 +317,10 @@ def is_pmcid(val):
 
 def is_gnd(val):
     """Test if argument is a GND Identifier."""
-    if val.startswith(gnd_url):
-        val = val[len(gnd_url):]
+    if val.startswith(gnd_resolver_url):
+        val = val[len(gnd_resolver_url):]
 
-    try:
-        int(val)
-        return True
-    except ValueError:
-        return False
-
+    return gnd_regexp.match(val)
 
 PID_SCHEMES = [
     ('doi', is_doi),
@@ -350,6 +354,7 @@ SCHEME_FILTER = [
     ('isbn', ['gnd', 'pmid']),
     ('orcid', ['gnd', 'pmid']),
     ('isni', ['gnd', 'pmid']),
+    ('issn', ['gnd', ]),
 ]
 
 
@@ -405,10 +410,11 @@ def normalize_orcid(val):
 
 def normalize_gnd(val):
     """Normalize a GND identifier."""
-    if val.startswith(gnd_url):
-        val = val[len(gnd_url):]
-
-    return val
+    if val.startswith(gnd_resolver_url):
+        val = val[len(gnd_resolver_url):]
+    if val.lower().startswith("gnd:"):
+        val = val[len("gnd:"):]
+    return "gnd:{0}".format(val)
 
 
 def normalize_pmid(val):
@@ -420,9 +426,9 @@ def normalize_pmid(val):
 def normalize_arxiv(val):
     """Normalize an arXiv identifier."""
     if not val.lower().startswith("arxiv:"):
-        val = "arXiv:%s" % val
+        val = "arXiv:{0}".format(val)
     elif val[:6] != "arXiv:":
-        val = "arXiv:%s" % val[6:]
+        val = "arXiv:{0}".format(val[6:])
 
     # Normalize old identifiers to preferred scheme as specified by
     # http://arxiv.org/help/arxiv_identifier_for_services
@@ -465,24 +471,26 @@ def to_url(val, scheme):
     """Convert a resolvable identifier into a URL for a landing page."""
     val = normalize_pid(val, scheme)
     if scheme == 'doi':
-        return "http://dx.doi.org/%s" % val
+        return "http://dx.doi.org/{0}".format(val)
     elif scheme == 'handle':
-        return "http://hdl.handle.net/%s" % val
+        return "http://hdl.handle.net/{0}".format(val)
     elif scheme == 'arxiv':
-        return "http://arxiv.org/abs/%s" % val
+        return "http://arxiv.org/abs/{0}".format(val)
     elif scheme == 'orcid':
-        return orcid_url + "%s" % val
+        return "{0}{1}".format(orcid_url, val)
     elif scheme == 'gnd':
-        return gnd_url + "%s" % val
+        if val.startswith("gnd:"):
+            val = val[len("gnd:"):]
+        return "{0}{1}".format(gnd_resolver_url, val)
     elif scheme == 'pmid':
-        return "http://www.ncbi.nlm.nih.gov/pubmed/%s" % val
+        return "http://www.ncbi.nlm.nih.gov/pubmed/{0}".format(val)
     elif scheme == 'ads':
-        return "http://adsabs.harvard.edu/abs/%s" % val
+        return "http://adsabs.harvard.edu/abs/{0}".format(val)
     elif scheme == 'pmcid':
-        return "http://www.ncbi.nlm.nih.gov/pmc/%s" % val
+        return "http://www.ncbi.nlm.nih.gov/pmc/{0}".format(val)
     elif scheme == 'urn':
         if val.lower().startswith("urn:nbn:"):
-            return "http://nbn-resolving.org/%s" % val
+            return "http://nbn-resolving.org/{0}".format(val)
     elif scheme in ['purl', 'url']:
         return val
     return ""

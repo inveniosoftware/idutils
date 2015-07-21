@@ -42,7 +42,7 @@ identifiers = [
     ('9783468111242', ['isbn', 'ean13'], '', ''),
     ('4006381333931', ['ean13'], '', ''),
     ('73513537', ['ean8'], '', ''),
-    ('1562-6865', ['issn'], '', ''),  # 'eiss, ''n'
+    ('1562-6865', ['issn'], '', ''),
     ('10013/epic.10033', ['handle'], '',
         'http://hdl.handle.net/10013/epic.10033'),
     ('hdl:10013/epic.10033', ['handle'], '10013/epic.10033',
@@ -54,8 +54,9 @@ identifiers = [
     ('0077-5606', ['issn'], '', ''),
     ('urn:lsid:ubio.org:namebank:11815', ['lsid', 'urn'], '', ''),
     ('0A9 2002 12B4A105 7', ['istc'], '', ''),
-    ('1188-1534', ['issn'], '', ''),  # 'liss, ''n'
-    ('12082125', ['gnd', 'pmid'], '', 'http://d-nb.info/gnd/12082125'),
+    ('1188-1534', ['issn'], '', ''),
+    ('12082125', ['pmid'], 'pmid:12082125',
+        'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
     ('pmid:12082125', ['pmid'], '12082125',
         'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
     ('http://purl.oclc.org/foo/bar', ['purl', 'url'], '',
@@ -93,8 +94,12 @@ identifiers = [
         'http://arxiv.org/abs/arXiv:hep-th/9901001v27'),
     ('9912.12345v2', ['arxiv', ], 'arXiv:9912.12345v2',
         'http://arxiv.org/abs/arXiv:9912.12345v2'),
-    ('http://d-nb.info/gnd/12082125', ['gnd', 'url'], '',
-        'http://d-nb.info/gnd/12082125'),
+    ('http://d-nb.info/gnd/1055864695', ['gnd', 'url'], 'gnd:1055864695',
+        'http://d-nb.info/gnd/1055864695'),
+    ('GND:4079154-3', ['gnd', ], 'gnd:4079154-3',
+        'http://d-nb.info/gnd/4079154-3'),
+    ('4079154-3', ['gnd', ], 'gnd:4079154-3',
+        'http://d-nb.info/gnd/4079154-3'),
 
 ]
 
@@ -103,7 +108,6 @@ def test_detect_schemes():
     """Test scheme detection."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
-        print(i)
         assert schemes == expected_schemes
 
 
