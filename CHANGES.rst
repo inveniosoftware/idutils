@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 0.1.1 (2015-07-22)
+
+-  Fixes GND validation and normalization.
+
 Version 0.1.0 (2015-07-02)
 
 - First public release.

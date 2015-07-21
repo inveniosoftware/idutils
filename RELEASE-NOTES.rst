@@ -1,13 +1,18 @@
 ===================================
- IDUtils v0.1.0 is released
+ IDUtils v0.1.1 is released
 ===================================
 
-IDUtils v0.1.0 was released on 2015-07-02
+IDUtils v0.1.0 was released on 2015-07-22
 
 About
 -----
 
 Small library for persistent identifiers used in scholarly communication.
+
+What's new
+----------
+
+-  Fixes GND validation and normalization.
 
 Installation
 ------------
@@ -17,7 +22,7 @@ Installation
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.1.0
+   http://idutils.readthedocs.org/en/v0.1.1
 
 Homepage
 --------
