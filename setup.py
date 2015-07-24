@@ -25,6 +25,7 @@ history = open('CHANGES.rst').read()
 
 requirements = [
     'six>=1.7.2',
+    'isbnlib>=3.5.6',
 ]
 
 test_requirements = [

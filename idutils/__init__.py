@@ -17,6 +17,7 @@ from __future__ import absolute_import, print_function, unicode_literals
 
 import re
 
+from isbnlib import mask
 from six.moves.urllib.parse import urlparse
 
 from .version import __version__
@@ -441,6 +442,11 @@ def normalize_arxiv(val):
     return val
 
 
+def normalize_isbn(val):
+    """Normalize an ISBN identifier."""
+    return mask(val)
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -464,6 +470,8 @@ def normalize_pid(val, scheme):
         return normalize_orcid(val)
     elif scheme == 'gnd':
         return normalize_gnd(val)
+    elif scheme == 'isbn':
+        return normalize_isbn(val)
     return val
 
 
