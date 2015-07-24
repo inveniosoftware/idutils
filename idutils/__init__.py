@@ -447,6 +447,12 @@ def normalize_isbn(val):
     return mask(val)
 
 
+def normalize_issn(val):
+    """Normalize an ISSN identifier."""
+    val = val.replace(' ', '').replace('-', '').strip().upper()
+    return '{0}-{1}'.format(val[:4], val[4:])
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -472,6 +478,8 @@ def normalize_pid(val, scheme):
         return normalize_gnd(val)
     elif scheme == 'isbn':
         return normalize_isbn(val)
+    elif scheme == 'issn':
+        return normalize_issn(val)
     return val
 
 
