@@ -55,3 +55,7 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# KDevelop
+.kde4/
+*.kdev4
