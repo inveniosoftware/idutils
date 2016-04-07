@@ -19,4 +19,4 @@ and parsed by ``setup.py``.
 
 from __future__ import absolute_import, print_function
 
-__version__ = "0.1.2.dev20150722"
+__version__ = "0.2.0"

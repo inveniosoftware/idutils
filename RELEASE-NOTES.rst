@@ -1,8 +1,8 @@
 ===================================
- IDUtils v0.1.1 is released
+ IDUtils v0.2.0 is released
 ===================================
 
-IDUtils v0.1.0 was released on 2015-07-22
+IDUtils v0.2.0 was released on 2016-04-07
 
 About
 -----
@@ -28,7 +28,7 @@ Installation
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.1.1
+   http://idutils.readthedocs.org/en/v0.2.0
 
 Homepage
 --------

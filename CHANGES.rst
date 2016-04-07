@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 0.2.0 (2016-04-07)
+
+- Changes URL resolution for DOIs to use https://doi.org instead of
+  http://dx.doi.org according to
+  https://www.doi.org/doi_handbook/3_Resolution.html#3.8
+
 Version 0.1.1 (2015-07-22)
 
 - Fixes GND validation and normalization.

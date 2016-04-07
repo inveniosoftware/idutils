@@ -48,7 +48,7 @@ deploy:
   provider: pypi
   user: lnielsen
   password:
-    secure: ""
+    secure: sX/eAcV9W9vCW4fa7rL+mQ0RP9zbhM3LQzQf/A+VW56gdctBA4Ew4FxHYH0QabdZF6Bzq/TQpAQSeSqzZAu3bTBGycMhWBis5z7tIpsUthmab2UDFGKtrlnF5M0u8ZoRlccQ1RNI0FNWF8puB/siCAIZ8/Krl/cwZwFbULAbem3OHAq0Ci3yLnm0STDvjFVo1QfWI40S/JH6uSrZUfTQZnfiDoO7h4nadf9EhKqqVhC5t4QZ5FYLO+iKtfq9IaNLD9iIscDtNCJ1kWqcW33vs84swDe0P0QqDk5WtAhE/MZvfqroeCzUVvX5rkfvUuzxauc8v9GnoLfmgWvCSZZthJ3A58bMKsYFPqviUkyWj9IzRcWa/saFHnZbabaCDXhO59dF/bmxEdNnZnch7hUjWG/IZ7aYUhj1zkkbVnzLoNn0ByBJdFl0q84/ue92x3VUuiR9jy2q//HZN3INr0jsMNikmqg6JwFRH0SGWzVLFUWoLwYe0pr8eXYRh+gL/ShZZ97t8AWcIRiQoJu8K1wFaq0BK1sOQbl637//cq95s4GSauwBhSwxQcFPNhzsp+6Ac70pIYiakeY2Ri/t8hjEFAVW/Z7DTbJ5GCv8Gr8IyhHat6/H3XS58Fw5kPDJrezglOwrxcO+lJecGB7q5WKDC6zxtvw2Ze20HCH/EbaZVtM=
   distributions: "sdist bdist_wheel"
   on:
     tags: true
