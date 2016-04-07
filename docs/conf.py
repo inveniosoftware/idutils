@@ -1,38 +1,37 @@
 # -*- coding: utf-8 -*-
 #
-# This file is part of Invenio.
-# Copyright (C) 2015 CERN.
+# This file is part of IDUtils
+# Copyright (C) 2015, 2016 CERN.
 #
-# Invenio is free software; you can redistribute it
-# and/or modify it under the terms of the GNU General Public License as
-# published by the Free Software Foundation; either version 2 of the
-# License, or (at your option) any later version.
+# IDUtils is free software; you can redistribute it and/or modify
+# it under the terms of the Revised BSD License; see LICENSE file for
+# more details.
 #
-# Invenio is distributed in the hope that it will be
-# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-# General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with Invenio; if not, write to the
-# Free Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
-# MA 02111-1307, USA.
-#
-# In applying this license, CERN does not
-# waive the privileges and immunities granted to it by virtue of its status
-# as an Intergovernmental Organization or submit itself to any jurisdiction.
+# In applying this license, CERN does not waive the privileges and immunities
+# granted to it by virtue of its status as an Intergovernmental Organization
+# or submit itself to any jurisdiction.
+
+"""Sphinx configuration."""
 
 from __future__ import print_function
 
-import sys
 import os
-import shlex
+
+import sphinx.environment
+from docutils.utils import get_source_line
+
+
+def _warn_node(self, msg, node):
+    """Do not warn on external images."""
+    if not msg.startswith('nonlocal image URI found:'):
+        self._warnfunc(msg, '{0}:{1}'.format(get_source_line(node)))
+
+sphinx.environment.BuildEnvironment.warn_node = _warn_node
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-sys.path.insert(0, os.path.abspath('..'))
-sys.path.insert(0, os.path.abspath('_ext'))
+#sys.path.insert(0, os.path.abspath('.'))
 
 # -- General configuration ------------------------------------------------
 
@@ -44,7 +43,10 @@ sys.path.insert(0, os.path.abspath('_ext'))
 # ones.
 extensions = [
     'sphinx.ext.autodoc',
+    'sphinx.ext.coverage',
+    'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
+    'sphinx.ext.viewcode',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -63,8 +65,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'IDUtils'
-copyright = u'2015, CERN'
-author = u'Invenio Software'
+copyright = u'2016, CERN'
+author = u'Invenio Software Collaboration'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -127,17 +129,31 @@ todo_include_todos = False
 
 
 # -- Options for HTML output ----------------------------------------------
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+html_theme = 'alabaster'
 
-# only set the theme when we are not on RTD
-if not on_rtd:
-    try:
-        import sphinx_rtd_theme
-        html_theme = "sphinx_rtd_theme"
-        html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    except ImportError:
-        print("`sphinx_rtd_theme` not found, pip install it", file=sys.stderr)
-        html_theme = 'alabaster'
+html_theme_options = {
+    'description': 'Small library for validating and normalising persistent '
+                   'identifiers used in scholarly communication.',
+    'github_user': 'inveniosoftware',
+    'github_repo': 'idutils',
+    'github_button': False,
+    'github_banner': True,
+    'show_powered_by': False,
+    'extra_nav_links': {
+        'idutils@GitHub': 'http://github.com/inveniosoftware/idutils',
+        'idutils@PyPI': 'http://pypi.python.org/pypi/idutils/',
+    }
+}
+
+html_sidebars = {
+    '**': [
+        'about.html',
+        'navigation.html',
+        'relations.html',
+        'searchbox.html',
+        'donate.html',
+    ]
+}
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -169,7 +185,7 @@ if not on_rtd:
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-#html_static_path = ['_static']
+# html_static_path = ['_static']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied

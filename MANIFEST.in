@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015 CERN.
+# Copyright (C) 2015, 2016 CERN.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -11,10 +11,15 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-
-include LICENSE *.rst
-include .coveragerc run-tests.sh pytest.ini tox.ini
-include docs/*.rst docs/*.py docs/Makefile
+include *.rst
+include .coveragerc
+include .editorconfig
+include docs/*.py
+include docs/*.rst
+include docs/Makefile
+include LICENSE
+include pytest.ini
+include run-tests.sh
 recursive-include *.py *.css *.css_t *.conf *.html
+recursive-include docs *.py
 recursive-include tests *.py
-
