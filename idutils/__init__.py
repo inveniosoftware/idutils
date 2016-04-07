@@ -23,7 +23,8 @@ from six.moves.urllib.parse import urlparse
 from .version import __version__
 
 doi_regexp = re.compile(
-    "(doi:|http://dx.doi.org/)?(10\.\d+(.\d+)*/.*)$",
+    "(doi:|http://dx.doi.org/|https://dx.doi.org/|http://doi.org/|"
+    "https://doi.org/)?(10\.\d+(.\d+)*/.*)$",
     flags=re.I
 )
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
@@ -487,7 +488,7 @@ def to_url(val, scheme):
     """Convert a resolvable identifier into a URL for a landing page."""
     val = normalize_pid(val, scheme)
     if scheme == 'doi':
-        return "http://dx.doi.org/{0}".format(val)
+        return "https://doi.org/{0}".format(val)
     elif scheme == 'handle':
         return "http://hdl.handle.net/{0}".format(val)
     elif scheme == 'arxiv':

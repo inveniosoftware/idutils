@@ -17,8 +17,3 @@ operating correctly:
 .. code-block:: console
 
     $ ./run-tests.sh
-
-You can also test your feature branch using Docker::
-
-  $ docker-compose build
-  $ docker-compose run --rm web /code/run-tests.sh
