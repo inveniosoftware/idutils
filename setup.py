@@ -23,7 +23,7 @@ history = open('CHANGES.rst').read()
 
 install_requires = [
     'six>=1.7.2',
-    'isbnlib>=3.5.6',
+    'isbnid>=0.3.4',
 ]
 
 tests_require = [

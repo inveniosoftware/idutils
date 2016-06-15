@@ -17,7 +17,7 @@ from __future__ import absolute_import, print_function
 
 import re
 
-from isbnlib import mask
+from isbn import ISBN
 from six.moves.urllib.parse import urlparse
 
 from .version import __version__
@@ -445,7 +445,7 @@ def normalize_arxiv(val):
 
 def normalize_isbn(val):
     """Normalize an ISBN identifier."""
-    return mask(val)
+    return ISBN(val).hyphen()
 
 
 def normalize_issn(val):
