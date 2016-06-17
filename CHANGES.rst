@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 0.2.1 (2016-06-17)
+
+- Changes ISBN normalization to use `isbnid` instead of `isbnlib`. Now,
+  importing this library will not change the default socket timeout, resulting
+  in unwanted side effects.
+
 Version 0.2.0 (2016-04-07)
 
 - Changes URL resolution for DOIs to use https://doi.org instead of

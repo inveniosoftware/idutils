@@ -1,8 +1,8 @@
 ===================================
- IDUtils v0.2.0 is released
+ IDUtils v0.2.1 is released
 ===================================
 
-IDUtils v0.2.0 was released on 2016-04-07
+IDUtils v0.2.1 was released on 2016-06-17
 
 About
 -----
@@ -12,13 +12,9 @@ Small library for persistent identifiers used in scholarly communication.
 What's new
 ----------
 
-- Fixes GND validation and normalization.
-- Replaces invalid package name in `run-tests.sh` and makes `run-tests.sh` file
-  executable. One can now use `docker-compose run --rm web /code/run-tests.sh`
-  to run all the CI tests (pep257, sphinx, test suite).
-- Initial release of Docker configuration suitable for local developments.
-  `docker-compose build` rebuilds the image,
-  `docker-compose run --rm web /code/run-tests.sh` runs the test suite.
+-- Changes ISBN normalization to use `isbnid` instead of `isbnlib`. Now,
+-  importing this library will not change the default socket timeout, resulting
+-  in unwanted side effects.
 
 Installation
 ------------
@@ -28,7 +24,7 @@ Installation
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.2.0
+   http://idutils.readthedocs.org/en/v0.2.1
 
 Homepage
 --------
