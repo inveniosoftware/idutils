@@ -68,7 +68,7 @@ setup(
     keywords='persistent identifiers',
     license='Revised BSD License',
     author='Invenio Software',
-    author_email='info@invenio-software.org',
+    author_email='info@inveniosoftware.org',
     url='https://github.com/inveniosoftware/idutils',
     packages=[
         'idutils',
