@@ -445,6 +445,7 @@ def normalize_arxiv(val):
 
 def normalize_isbn(val):
     """Normalize an ISBN identifier."""
+    val = val.replace(' ', '').replace('-', '').strip().upper()
     return ISBN(val).hyphen()
 
 
