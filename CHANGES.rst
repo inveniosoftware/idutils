@@ -14,6 +14,11 @@
 Changes
 =======
 
+Version 0.2.2 (2016-09-16)
+
+- Fixes issue where a valid ISBN with dashes and spaces could not be
+  normalized.
+
 Version 0.2.1 (2016-06-17)
 
 - Changes ISBN normalization to use `isbnid` instead of `isbnlib`. Now,

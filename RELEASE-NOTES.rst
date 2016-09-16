@@ -1,8 +1,8 @@
-===================================
- IDUtils v0.2.1 is released
-===================================
+============================
+ IDUtils v0.2.2 is released
+============================
 
-IDUtils v0.2.1 was released on 2016-06-17
+IDUtils v0.2.2 was released on 2016-09-16
 
 About
 -----
@@ -12,19 +12,18 @@ Small library for persistent identifiers used in scholarly communication.
 What's new
 ----------
 
--- Changes ISBN normalization to use `isbnid` instead of `isbnlib`. Now,
--  importing this library will not change the default socket timeout, resulting
--  in unwanted side effects.
+- Fixes issue where a valid ISBN with dashes and spaces could not be
+  normalized.
 
 Installation
 ------------
 
-   $ pip install idutils
+   $ pip install idutils==0.2.2
 
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.2.1
+   http://idutils.readthedocs.org/en/v0.2.2
 
 Homepage
 --------
