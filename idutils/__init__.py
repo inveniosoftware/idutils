@@ -23,14 +23,14 @@ from six.moves.urllib.parse import urlparse
 from .version import __version__
 
 doi_regexp = re.compile(
-    "(doi:|http://dx.doi.org/|https://dx.doi.org/|http://doi.org/|"
-    "https://doi.org/)?(10\.\d+(.\d+)*/.*)$",
+    "(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(.\d+)*/.*)$",
     flags=re.I
 )
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
 
 handle_regexp = re.compile(
-    "(hdl:|http://hdl.handle.net/)?([^/\.]+(\.[^/\.]+)*/.*)$",
+    "(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?"
+    "([^/\.]+(\.[^/\.]+)*/.*)$",
     flags=re.I
 )
 """See http://handle.net/rfc/rfc3651.html.
@@ -363,7 +363,7 @@ SCHEME_FILTER = [
 def detect_identifier_schemes(val):
     """Detect persistent identifier scheme for a given value.
 
-    Note, some schemes like PMID are very generic.
+    .. note:: Some schemes like PMID are very generic.
     """
     schemes = []
     for scheme, test in PID_SCHEMES:
@@ -375,7 +375,8 @@ def detect_identifier_schemes(val):
             schemes = list(filter(lambda x: x not in remove_schemes, schemes))
 
     if 'handle' in schemes and 'url' in schemes \
-       and not val.startswith("http://hdl.handle.net/"):
+       and not val.startswith("http://hdl.handle.net/") \
+       and not val.startswith("https://hdl.handle.net/"):
         schemes = list(filter(lambda x: x != 'handle', schemes))
     elif 'handle' in schemes and ('ark' in schemes or 'arxiv' in schemes):
         schemes = list(filter(lambda x: x != 'handle', schemes))
@@ -485,30 +486,38 @@ def normalize_pid(val, scheme):
     return val
 
 
-def to_url(val, scheme):
-    """Convert a resolvable identifier into a URL for a landing page."""
-    val = normalize_pid(val, scheme)
-    if scheme == 'doi':
-        return "https://doi.org/{0}".format(val)
-    elif scheme == 'handle':
-        return "http://hdl.handle.net/{0}".format(val)
-    elif scheme == 'arxiv':
-        return "http://arxiv.org/abs/{0}".format(val)
-    elif scheme == 'orcid':
-        return "{0}{1}".format(orcid_url, val)
-    elif scheme == 'gnd':
-        if val.startswith("gnd:"):
-            val = val[len("gnd:"):]
-        return "{0}{1}".format(gnd_resolver_url, val)
-    elif scheme == 'pmid':
-        return "http://www.ncbi.nlm.nih.gov/pubmed/{0}".format(val)
-    elif scheme == 'ads':
-        return "http://adsabs.harvard.edu/abs/{0}".format(val)
-    elif scheme == 'pmcid':
-        return "http://www.ncbi.nlm.nih.gov/pmc/{0}".format(val)
-    elif scheme == 'urn':
-        if val.lower().startswith("urn:nbn:"):
-            return "http://nbn-resolving.org/{0}".format(val)
+LANDING_URLS = {
+    'doi': 'https://doi.org/{pid}',
+    'handle': '{scheme}://hdl.handle.net/{pid}',
+    'arxiv': '{scheme}://arxiv.org/abs/{pid}',
+    'orcid': '{scheme}://orcid.org/{pid}',
+    'pmid': '{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
+    'ads': 'http://adsabs.harvard.edu/abs/{pid}',
+    'pmcid': '{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
+    'gnd': 'http://d-nb.info/gnd/{pid}',
+    'urn': '{scheme}://nbn-resolving.org/{pid}',
+}
+"""URL generation configuration for the supported PID providers."""
+
+
+def to_url(val, scheme, url_scheme='http'):
+    """Convert a resolvable identifier into a URL for a landing page.
+
+    :param val: The identifier's value.
+    :param scheme: The identifier's scheme.
+    :param url_scheme: Scheme to use for URL generation, 'http' or 'https'.
+    :returns: URL for the identifier.
+
+    .. versionadded:: 0.3.0
+       ``url_scheme`` used for URL generation.
+    """
+    pid = normalize_pid(val, scheme)
+    if scheme in LANDING_URLS:
+        if scheme == 'gnd' and pid.startswith('gnd:'):
+            pid = pid[len('gnd:'):]
+        if scheme == 'urn' and not pid.lower().startswith('urn:nbn:'):
+            return ''
+        return LANDING_URLS[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ['purl', 'url']:
-        return val
-    return ""
+        return pid
+    return ''

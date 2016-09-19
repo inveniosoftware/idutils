@@ -36,10 +36,19 @@ identifiers = [
     ('doi:10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
         'https://doi.org/10.1016/j.epsl.2011.11.037'),
+    ('doi: 10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
+        '10.1016/j.epsl.2011.11.037',
+        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+    ('DOI:10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
+        '10.1016/j.epsl.2011.11.037',
+        'https://doi.org/10.1016/j.epsl.2011.11.037'),
     ('http://dx.doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'url', ],
         '10.1016/j.epsl.2011.11.037',
         'https://doi.org/10.1016/j.epsl.2011.11.037'),
     ('https://doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'url', ],
+        '10.1016/j.epsl.2011.11.037',
+        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+    ('doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
         'https://doi.org/10.1016/j.epsl.2011.11.037'),
     ('9783468111242', ['isbn', 'ean13'], '978-3-468-11124-2', ''),
@@ -50,7 +59,15 @@ identifiers = [
         'http://hdl.handle.net/10013/epic.10033'),
     ('hdl:10013/epic.10033', ['handle'], '10013/epic.10033',
         'http://hdl.handle.net/10013/epic.10033'),
+    ('hdl: 10013/epic.10033', ['handle'], '10013/epic.10033',
+        'http://hdl.handle.net/10013/epic.10033'),
+    ('HDL:10013/epic.10033', ['handle'], '10013/epic.10033',
+        'http://hdl.handle.net/10013/epic.10033'),
+    ('hdl.handle.net/10013/epic.10033', ['handle'], '10013/epic.10033',
+        'http://hdl.handle.net/10013/epic.10033'),
     ('http://hdl.handle.net/10013/epic.10033', ['handle', 'url'],
+        '10013/epic.10033', 'http://hdl.handle.net/10013/epic.10033'),
+    ('https://hdl.handle.net/10013/epic.10033', ['handle', 'url'],
         '10013/epic.10033', 'http://hdl.handle.net/10013/epic.10033'),
     ('978-3-905673-82- 1', ['isbn'], '978-3-905673-82-1', ''),
     ('978-3-905673-82-1', ['isbn'], '978-3-905673-82-1', ''),
@@ -144,7 +161,7 @@ def test_tourl():
     for i, expected_schemes, normalized_value, url_value in identifiers:
         assert idutils.to_url(
             idutils.normalize_pid(i, expected_schemes[0]), expected_schemes[0]
-            ) == url_value
+        ) == url_value
 
 
 def test_valueerror():
