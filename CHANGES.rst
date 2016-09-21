@@ -14,6 +14,13 @@
 Changes
 =======
 
+Version 0.2.3 (2016-09-21)
+
+- Adds an optional parameter in `idutils.to_url` to use HTTPS scheme
+  for PID providers that support it.
+- Detects and parses Handles and DOIs without the "http(s)://", and
+  ignores whitespace after scheme tags (eg. "doi:  10.123/456").
+
 Version 0.2.2 (2016-09-16)
 
 - Fixes issue where a valid ISBN with dashes and spaces could not be

@@ -1,29 +1,35 @@
 ============================
- IDUtils v0.2.2 is released
+ IDUtils v0.2.3 is released
 ============================
 
-IDUtils v0.2.2 was released on 2016-09-16
+IDUtils v0.2.3 was released on 2016-09-21
 
 About
 -----
 
 Small library for persistent identifiers used in scholarly communication.
 
-What's new
-----------
+New features
+------------
 
-- Fixes issue where a valid ISBN with dashes and spaces could not be
-  normalized.
+- Adds an optional parameter in `idutils.to_url` to use HTTPS scheme
+  for PID providers that support it.
+
+Improved features
+-----------------
+
+- Detects and parses Handles and DOIs without the "http(s)://", and
+  ignores whitespace after scheme tags (eg. "doi:  10.123/456").
 
 Installation
 ------------
 
-   $ pip install idutils==0.2.2
+   $ pip install idutils==0.2.3
 
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.2.2
+   http://idutils.readthedocs.org/en/v0.2.3
 
 Homepage
 --------
