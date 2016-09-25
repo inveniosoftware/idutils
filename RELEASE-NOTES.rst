@@ -29,7 +29,7 @@ Installation
 Documentation
 -------------
 
-   http://idutils.readthedocs.org/en/v0.2.3
+   http://idutils.readthedocs.io/en/v0.2.3
 
 Homepage
 --------

@@ -17,6 +17,7 @@ include .editorconfig
 include docs/*.py
 include docs/*.rst
 include docs/Makefile
+include docs/requirements.txt
 include LICENSE
 include pytest.ini
 include run-tests.sh

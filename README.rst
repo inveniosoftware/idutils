@@ -35,7 +35,7 @@ Small library for validating and normalising persistent identifiers used in
 scholarly communication.
 
 * Free software: Revised BSD license
-* Documentation: https://idutils.readthedocs.org.
+* Documentation: https://idutils.readthedocs.io.
 
 Features
 ========
