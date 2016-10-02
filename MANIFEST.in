@@ -18,7 +18,9 @@ include docs/*.py
 include docs/*.rst
 include docs/Makefile
 include docs/requirements.txt
+include .lgtm
 include LICENSE
+include MAINTAINERS
 include pytest.ini
 include run-tests.sh
 recursive-include *.py *.css *.css_t *.conf *.html
