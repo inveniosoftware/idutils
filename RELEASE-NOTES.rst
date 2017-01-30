@@ -1,35 +1,30 @@
 ============================
- IDUtils v0.2.3 is released
+ IDUtils v0.2.4 is released
 ============================
 
-IDUtils v0.2.3 was released on 2016-09-21
+IDUtils v0.2.4 was released on 2017-01-30
 
 About
 -----
 
 Small library for persistent identifiers used in scholarly communication.
 
-New features
-------------
-
-- Adds an optional parameter in `idutils.to_url` to use HTTPS scheme
-  for PID providers that support it.
-
 Improved features
 -----------------
 
-- Detects and parses Handles and DOIs without the "http(s)://", and
-  ignores whitespace after scheme tags (eg. "doi:  10.123/456").
+- Removes `Python 3.3` from a list of supported Python versions and
+  adds `Python 3.6`
+- Moves from `isbnid (v0.3.4)` to `isbnid_fork (v0.4.4)` library.
 
 Installation
 ------------
 
-   $ pip install idutils==0.2.3
+   $ pip install idutils==0.2.4
 
 Documentation
 -------------
 
-   http://idutils.readthedocs.io/en/v0.2.3
+   http://idutils.readthedocs.io/en/v0.2.4
 
 Homepage
 --------

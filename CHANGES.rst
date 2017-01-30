@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 0.2.4 (2017-01-30)
+
+- Removes `Python 3.3` from a list of supported Python versions and
+  adds `Python 3.6`
+- Moves from `isbnid (v0.3.4)` to `isbnid_fork (v0.4.4)` library.
+
 Version 0.2.3 (2016-09-21)
 
 - Adds an optional parameter in `idutils.to_url` to use HTTPS scheme
