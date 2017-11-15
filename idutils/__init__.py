@@ -55,6 +55,13 @@ arxiv_pre_2007_regexp = re.compile(
 """See http://arxiv.org/help/arxiv_identifier and
        http://arxiv.org/help/arxiv_identifier_for_services."""
 
+arxiv_post_2007_with_class_regexp = re.compile(
+    "(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
+    flags=re.I
+)
+"""Matches new style arXiv ID, with an old-style class specification;
+    technically malformed, however appears in real data."""
+
 ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Z]\S{13}[A-Z.:])$")
 """See http://adsabs.harvard.edu/abs_doc/help_pages/data.html"""
 
@@ -286,7 +293,8 @@ def is_ads(val):
 
 def is_arxiv_post_2007(val):
     """Test if argument is a post-2007 arXiv ID."""
-    return arxiv_post_2007_regexp.match(val)
+    return arxiv_post_2007_regexp.match(val) \
+        or arxiv_post_2007_with_class_regexp.match(val)
 
 
 def is_arxiv_pre_2007(val):
@@ -441,6 +449,12 @@ def normalize_arxiv(val):
         val = "".join(m.group(1, 2, 4, 5))
         if m.group(6):
             val += m.group(6)
+
+    m = is_arxiv_post_2007(val)
+    if m:
+        val = 'arXiv:' + '.'.join(m.group(2, 3))
+        if m.group(4):
+            val += m.group(4)
     return val
 
 
