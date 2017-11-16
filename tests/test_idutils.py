@@ -71,12 +71,12 @@ identifiers = [
         '10013/epic.10033', 'http://hdl.handle.net/10013/epic.10033'),
     ('978-3-905673-82- 1', ['isbn'], '978-3-905673-82-1', ''),
     ('978-3-905673-82-1', ['isbn'], '978-3-905673-82-1', ''),
-    ('0-9752298-0-X', ['isbn'], '0-9752298-0-X', ''),
+    ('0-9752298-0-X', ['isbn'], '978-0-9752298-0-4', ''),
     ('0077-5606', ['issn'], '', ''),
     ('urn:lsid:ubio.org:namebank:11815', ['lsid', 'urn'], '', ''),
     ('0A9 2002 12B4A105 7', ['istc'], '', ''),
     ('1188-1534', ['issn'], '1188-1534', ''),
-    ('12082125', ['pmid'], 'pmid:12082125',
+    ('12082125', ['pmid'], '12082125',
         'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
     ('pmid:12082125', ['pmid'], '12082125',
         'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
@@ -147,7 +147,7 @@ def test_normalize_pid():
     """Test persistent id normalization."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         assert idutils.normalize_pid(i, expected_schemes[0]) == \
-            normalized_value or i
+           (normalized_value or i)
 
     assert idutils.normalize_pid(None, 'handle') is None
 
