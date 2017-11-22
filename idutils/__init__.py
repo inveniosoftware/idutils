@@ -18,7 +18,8 @@ from __future__ import absolute_import, print_function
 import re
 
 from isbn import ISBN
-from six.moves.urllib.parse import urlparse
+from six.moves.urllib.parse import urlparse, quote_plus
+
 
 from .version import __version__
 
@@ -501,15 +502,15 @@ def normalize_pid(val, scheme):
 
 
 LANDING_URLS = {
-    'doi': 'https://doi.org/{pid}',
-    'handle': '{scheme}://hdl.handle.net/{pid}',
-    'arxiv': '{scheme}://arxiv.org/abs/{pid}',
-    'orcid': '{scheme}://orcid.org/{pid}',
-    'pmid': '{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
-    'ads': 'http://adsabs.harvard.edu/abs/{pid}',
-    'pmcid': '{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
-    'gnd': 'http://d-nb.info/gnd/{pid}',
-    'urn': '{scheme}://nbn-resolving.org/{pid}',
+    'doi': u'https://doi.org/{pid}',
+    'handle': u'{scheme}://hdl.handle.net/{pid}',
+    'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
+    'orcid': u'{scheme}://orcid.org/{pid}',
+    'pmid': u'{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
+    'ads': u'http://adsabs.harvard.edu/abs/{pid}',
+    'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
+    'gnd': u'http://d-nb.info/gnd/{pid}',
+    'urn': u'{scheme}://nbn-resolving.org/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 
