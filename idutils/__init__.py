@@ -18,7 +18,7 @@ from __future__ import absolute_import, print_function
 import re
 
 from isbn import ISBN
-from six.moves.urllib.parse import urlparse, quote_plus
+from six.moves.urllib.parse import urlparse
 
 
 from .version import __version__

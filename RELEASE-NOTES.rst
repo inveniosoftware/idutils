@@ -1,8 +1,8 @@
 ============================
- IDUtils v0.2.4 is released
+ IDUtils v1.0.0 is released
 ============================
 
-IDUtils v0.2.4 was released on 2017-01-30
+IDUtils v1.0.0 was released on 2017-12-07
 
 About
 -----
@@ -12,19 +12,18 @@ Small library for persistent identifiers used in scholarly communication.
 Improved features
 -----------------
 
-- Removes `Python 3.3` from a list of supported Python versions and
-  adds `Python 3.6`
-- Moves from `isbnid (v0.3.4)` to `isbnid_fork (v0.4.4)` library.
+- Fixes handling of unicode characters in DOIs.
+- Adds support for APS style arXiv identifiers.
 
 Installation
 ------------
 
-   $ pip install idutils==0.2.4
+   $ pip install idutils==1.0.0
 
 Documentation
 -------------
 
-   http://idutils.readthedocs.io/en/v0.2.4
+   http://idutils.readthedocs.io/en/v1.0.0
 
 Homepage
 --------

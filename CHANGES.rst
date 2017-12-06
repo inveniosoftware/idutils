@@ -14,6 +14,11 @@
 Changes
 =======
 
+Version 1.0.0 (2017-12-07)
+
+- Fixes handling of unicode characters in DOIs.
+- Adds support for APS style arXiv identifiers.
+
 Version 0.2.4 (2017-01-30)
 
 - Removes `Python 3.3` from a list of supported Python versions and
