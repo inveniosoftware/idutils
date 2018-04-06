@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015, 2016 CERN.
+# Copyright (C) 2015-2018 CERN.
+# Copyright (C) 2018 Alan Rubin.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -22,6 +23,123 @@ from six.moves.urllib.parse import urlparse
 
 
 from .version import __version__
+
+ENSEMBL_PREFIXES = (
+    "ENSPMA",  # Petromyzon marinus (Lamprey)
+    "ENSNGA",  # Nannospalax galili (Upper Galilee mountains blind mole rat)
+    "ENSOPR",  # Ochotona princeps (Pika)
+    "ENSMNE",  # Macaca nemestrina (Pig-tailed macaque)
+    "MGP_C57BL6NJ_",  # Mus musculus (Mouse C57BL/6NJ)
+    "MGP_LPJ_",  # Mus musculus (Mouse LP/J)
+    "FB",  # Drosophila melanogaster (Fruitfly)
+    "ENSORL",  # Oryzias latipes (Medaka)
+    "ENSONI",  # Oreochromis niloticus (Tilapia)
+    "ENSOCU",  # Oryctolagus cuniculus (Rabbit)
+    "ENSXET",  # Xenopus tropicalis (Xenopus)
+    "ENSRRO",  # Rhinopithecus roxellana (Golden snub-nosed monkey)
+    "ENSCAT",  # Cercocebus atys (Sooty mangabey)
+    "ENSAME",  # Ailuropoda melanoleuca (Panda)
+    "MGP_CASTEiJ_",  # Mus musculus castaneus (Mouse CAST/EiJ)
+    "ENSCSAV",  # Ciona savignyi
+    "ENSMAU",  # Mesocricetus auratus (Golden Hamster)
+    "ENSFAL",  # Ficedula albicollis (Flycatcher)
+    "ENSTRU",  # Takifugu rubripes (Fugu)
+    "ENSPTR",  # Pan troglodytes (Chimpanzee)
+    "ENSTTR",  # Tursiops truncatus (Dolphin)
+    "ENSCJA",  # Callithrix jacchus (Marmoset)
+    "ENSSAR",  # Sorex araneus (Shrew)
+    "ENSVPA",  # Vicugna pacos (Alpaca)
+    "ENSLAC",  # Latimeria chalumnae (Coelacanth)
+    "ENSPVA",  # Pteropus vampyrus (Megabat)
+    "ENSPAN",  # Papio anubis (Olive baboon)
+    "ENSHGLF",  # Heterocephalus glaber (Naked mole-rat female)
+    "MGP_PWKPhJ_",  # Mus musculus musculus (Mouse PWK/PhJ)
+    "MGP_NZOHlLtJ_",  # Mus musculus (Mouse NZO/HlLtJ)
+    "ENSCAF",  # Canis lupus familiaris (Dog)
+    "MGP_AJ_",  # Mus musculus (Mouse A/J)
+    "ENSMOD",  # Monodelphis domestica (Opossum)
+    "ENSMGA",  # Meleagris gallopavo (Turkey)
+    "ENSPCO",  # Propithecus coquereli (Coquerel's sifaka)
+    "ENSFDA",  # Fukomys damarensis (Damara mole rat)
+    "ENSBTA",  # Bos taurus (Cow)
+    "ENSGAL",  # Gallus gallus (Chicken)
+    "ENSLAF",  # Loxodonta africana (Elephant)
+    "ENSGGO",  # Gorilla gorilla gorilla (Gorilla)
+    "ENSCAP",  # Cavia aperea (Brazilian guinea pig)
+    "ENSMMU",  # Macaca mulatta (Macaque)
+    "ENSAPL",  # Anas platyrhynchos (Duck)
+    "ENSCEL",  # Caenorhabditis elegans (Caenorhabditis elegans)
+    "ENSMEU",  # Notamacropus eugenii (Wallaby)
+    "ENSCGR",  # Cricetulus griseus (Chinese hamster CriGri)
+    "ENSANA",  # Aotus nancymaae (Ma's night monkey)
+    "ENSGMO",  # Gadus morhua (Cod)
+    "ENSPEM",  # Peromyscus maniculatus bairdii (Northern American deer mouse)
+    "MGP_C3HHeJ_",  # Mus musculus (Mouse C3H/HeJ)
+    "ENSTGU",  # Taeniopygia guttata (Zebra Finch)
+    "ENSSCE",  # Saccharomyces cerevisiae (Saccharomyces cerevisiae)
+    "ENSOGA",  # Otolemur garnettii (Bushbaby)
+    "ENSACA",  # Anolis carolinensis (Anole lizard)
+    "ENSTSY",  # Carlito syrichta (Tarsier)
+    "ENSTBE",  # Tupaia belangeri (Tree Shrew)
+    "MGP_AKRJ_",  # Mus musculus (Mouse AKR/J)
+    "ENSDAR",  # Danio rerio (Zebrafish)
+    "ENSMUS",  # Mus musculus (Mouse)
+    "ENSETE",  # Echinops telfairi (Lesser hedgehog tenrec)
+    "ENSSBO",  # Saimiri boliviensis boliviensis (Bolivian squirrel monkey)
+    "ENS",  # Homo sapiens (Human)
+    "ENSCGR",  # Cricetulus griseus (Chinese hamster CHOK1GS)
+    "ENSFCA",  # Felis catus (Cat)
+    "MGP_BALBcJ_",  # Mus musculus (Mouse BALB/cJ)
+    "MGP_PahariEiJ_",  # Mus pahari (Shrew mouse)
+    "ENSCSA",  # Chlorocebus sabaeus (Vervet-AGM)
+    "ENSCCA",  # Cebus capucinus imitator (Capuchin)
+    "ENSOAR",  # Ovis aries (Sheep)
+    "ENSCHI",  # Capra hircus (Goat)
+    "ENSDOR",  # Dipodomys ordii (Kangaroo rat)
+    "ENSCHO",  # Choloepus hoffmanni (Sloth)
+    "ENSSHA",  # Sarcophilus harrisii (Tasmanian devil)
+    "ENSMPU",  # Mustela putorius furo (Ferret)
+    "ENSNLE",  # Nomascus leucogenys (Gibbon)
+    "ENSXMA",  # Xiphophorus maculatus (Platyfish)
+    "ENSSSC",  # Sus scrofa (Pig)
+    "ENSEEU",  # Erinaceus europaeus (Hedgehog)
+    "ENSPSI",  # Pelodiscus sinensis (Chinese softshell turtle)
+    "MGP_DBA2J_",  # Mus musculus (Mouse DBA/2J)
+    "ENSAMX",  # Astyanax mexicanus (Cave fish)
+    "MGP_WSBEiJ_",  # Mus musculus domesticus (Mouse WSB/EiJ)
+    "ENSJJA",  # Jaculus jaculus (Lesser Egyptian jerboa)
+    "ENSCIN",  # Ciona intestinalis
+    "ENSPPA",  # Pan paniscus (Bonobo)
+    "MGP_SPRETEiJ_",  # Mus spretus (Algerian mouse)
+    "ENSCAN",  # Colobus angolensis palliatus (Angola colobus)
+    "MGP_NODShiLtJ_",  # Mus musculus (Mouse NOD/ShiLtJ)
+    "ENSCLA",  # Chinchilla lanigera (Long-tailed chinchilla)
+    "ENSCPO",  # Cavia porcellus (Guinea Pig)
+    "ENSDNO",  # Dasypus novemcinctus (Armadillo)
+    "ENSPFO",  # Poecilia formosa (Amazon molly)
+    "ENSMIC",  # Microcebus murinus (Mouse Lemur)
+    "MGP_FVBNJ_",  # Mus musculus (Mouse FVB/NJ)
+    "MGP_CBAJ_",  # Mus musculus (Mouse CBA/J)
+    "ENSSTO",  # Ictidomys tridecemlineatus (Squirrel)
+    "ENSRNO",  # Rattus norvegicus (Rat)
+    "ENSMOC",  # Microtus ochrogaster (Prairie vole)
+    "ENSTNI",  # Tetraodon nigroviridis (Tetraodon)
+    "ENSPPY",  # Pongo abelii (Orangutan)
+    "ENSGAC",  # Gasterosteus aculeatus (Stickleback)
+    "ENSLOC",  # Lepisosteus oculatus (Spotted gar)
+    "ENSODE",  # Octodon degus (Degu)
+    "ENSPCA",  # Procavia capensis (Hyrax)
+    "ENSECA",  # Equus caballus (Horse)
+    "ENSOAN",  # Ornithorhynchus anatinus (Platypus)
+    "MGP_CAROLIEiJ_",  # Mus caroli (Ryukyu mouse)
+    "ENSHGLM",  # Heterocephalus glaber (Naked mole-rat male)
+    "MGP_129S1SvImJ_",  # Mus musculus (Mouse 129S1/SvImJ)
+    "ENSRBI",  # Rhinopithecus bieti (Black snub-nosed monkey)
+    "ENSMLU",  # Myotis lucifugus (Microbat)
+    "ENSMLE",  # Mandrillus leucophaeus (Drill)
+    "ENSMFA",  # Macaca fascicularis (Crab-eating macaque)
+)
+"""List of species-specific prefixes for Ensembl accession numbers."""
 
 doi_regexp = re.compile(
     "(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(.\d+)*/.+)$",
@@ -91,6 +209,30 @@ gnd_regexp = re.compile(
 """See https://www.wikidata.org/wiki/Property:P227."""
 
 gnd_resolver_url = "http://d-nb.info/gnd/"
+
+sra_regexp = re.compile("[SED]R[APRSXZ]\d+$")
+"""Sequence Read Archive regular expression."""
+
+bioproject_regexp = re.compile("PRJ(NA|EA|EB|DB)\d+$")
+"""BioProject regular expression."""
+
+biosample_regexp = re.compile("SAM(N|EA|D)\d+$")
+"""BioSample regular expression."""
+
+ensembl_regexp = re.compile("({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
+    prefixes="|".join(ENSEMBL_PREFIXES)))
+"""Ensembl regular expression."""
+
+uniprot_regexp = re.compile("([A-N,R-Z][0-9]([A-Z][A-Z,0-9]{2}[0-9]){1,2})|"
+                            "([O,P,Q][0-9][A-Z,0-9]{3}[0-9])(\.\d+)?$")
+"""UniProt regular expression."""
+
+refseq_regexp = re.compile("((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
+                           "NZ_[A-Z]{4})\d+(\.\d+)?$")
+"""RefSeq regular expression."""
+
+genome_regexp = re.compile("GC[AF]_\d+\.\d+$")
+"""GenBank or RefSeq genome assembly accession."""
 
 
 def _convert_x_to_10(x):
@@ -333,6 +475,42 @@ def is_gnd(val):
 
     return gnd_regexp.match(val)
 
+
+def is_sra(val):
+    """Test if argument is an SRA accession."""
+    return sra_regexp.match(val)
+
+
+def is_bioproject(val):
+    """Test if argument is a BioProject accession."""
+    return bioproject_regexp.match(val)
+
+
+def is_biosample(val):
+    """Test if argument is a BioSample accession."""
+    return biosample_regexp.match(val)
+
+
+def is_ensembl(val):
+    """Test if argument is an Ensembl accession."""
+    return ensembl_regexp.match(val)
+
+
+def is_uniprot(val):
+    """Test if argument is a UniProt accession."""
+    return uniprot_regexp.match(val)
+
+
+def is_refseq(val):
+    """Test if argument is a RefSeq accession."""
+    return refseq_regexp.match(val)
+
+
+def is_genome(val):
+    """Test if argument is a GenBank or RefSeq genome assembly accession."""
+    return genome_regexp.match(val)
+
+
 PID_SCHEMES = [
     ('doi', is_doi),
     ('ark', is_ark),
@@ -353,6 +531,13 @@ PID_SCHEMES = [
     ('gnd', is_gnd),
     ('url', is_url),
     ('pmid', is_pmid),
+    ('sra', is_sra),
+    ('bioproject', is_bioproject),
+    ('biosample', is_biosample),
+    ('ensembl', is_ensembl),
+    ('uniprot', is_uniprot),
+    ('refseq', is_refseq),
+    ('genome', is_genome),
 ]
 """Definition of scheme name and associated test function.
 
@@ -511,6 +696,13 @@ LANDING_URLS = {
     'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
     'gnd': u'http://d-nb.info/gnd/{pid}',
     'urn': u'{scheme}://nbn-resolving.org/{pid}',
+    'sra': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
+    'bioproject': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
+    'biosample': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
+    'ensembl': u'{scheme}://www.ensembl.org/id/{pid}',
+    'uniprot': u'{scheme}://purl.uniprot.org/uniprot/{pid}',
+    'refseq': u'{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}',
+    'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 
