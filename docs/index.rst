@@ -1,6 +1,7 @@
 ..
    This file is part of IDUtils
-   Copyright (C) 2015 CERN.
+   Copyright (C) 2015-2018 CERN.
+   Copyright (C) 2018 Alan Rubin.
 
    IDUtils is free software; you can redistribute it and/or modify
    it under the terms of the Revised BSD License; see LICENSE file for
@@ -26,7 +27,7 @@ Features
 - Generation of resolving links for persistent identifiers.
 - Supported schemes: ISBN10, ISBN13, ISSN, ISTC, DOI, Handle, EAN8, EAN13, ISNI
   ORCID, ARK, PURL, LSID, URN, Bibcode, arXiv, PubMed ID, PubMed Central ID,
-  GND.
+  GND, SRA, BioProject, BioSample, Ensembl, UniProt, RefSeq, Genome Assembly.
 
 Installation
 ============
@@ -42,7 +43,7 @@ API
 ===
 
 .. automodule:: idutils
-   :members: is_isbn10, is_isbn13, is_isbn, is_issn, is_istc, is_doi, is_handle, is_ean8, is_ean13, is_ean, is_isni, is_orcid, is_purl, is_url, is_lsid, is_urn, is_ads, is_arxiv_post_2007, is_arxiv_pre_2007, is_arxiv, is_pmid, is_pmcid, is_gnd, detect_identifier_schemes, normalize_doi, normalize_handle, normalize_ads, normalize_orcid, normalize_gnd, normalize_pmid, normalize_arxiv, normalize_pid, to_url
+   :members: is_isbn10, is_isbn13, is_isbn, is_issn, is_istc, is_doi, is_handle, is_ean8, is_ean13, is_ean, is_isni, is_orcid, is_purl, is_url, is_lsid, is_urn, is_ads, is_arxiv_post_2007, is_arxiv_pre_2007, is_arxiv, is_pmid, is_pmcid, is_gnd, is_sra, is_bioproject, is_biosample, is_ensembl, is_uniprot, is_refseq, is_genome, detect_identifier_schemes, normalize_doi, normalize_handle, normalize_ads, normalize_orcid, normalize_gnd, normalize_pmid, normalize_arxiv, normalize_pid, to_url
 
 
 .. include:: ../CHANGES.rst

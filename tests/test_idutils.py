@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015, 2016 CERN.
+# Copyright (C) 2015-2018 CERN.
+# Copyright (C) 2015-2018 Alan Rubin.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -136,7 +137,33 @@ identifiers = [
         'http://d-nb.info/gnd/4079154-3'),
     ('4079154-3', ['gnd', ], 'gnd:4079154-3',
         'http://d-nb.info/gnd/4079154-3'),
-
+    ('SRX3529244', ['sra', ], '',
+        'http://www.ebi.ac.uk/ena/data/view/SRX3529244'),
+    ('SRR6437777', ['sra', ], '',
+        'http://www.ebi.ac.uk/ena/data/view/SRR6437777'),
+    ('PRJNA224116', ['bioproject', ], '',
+        'http://www.ebi.ac.uk/ena/data/view/PRJNA224116'),
+    ('SAMN08289383', ['biosample', ], '',
+        'http://www.ebi.ac.uk/ena/data/view/SAMN08289383'),
+    ('ENSG00000012048', ['ensembl', ], '',
+        'http://www.ensembl.org/id/ENSG00000012048'),
+    ('ENSMUST00000017290', ['ensembl', ], '',
+        'http://www.ensembl.org/id/ENSMUST00000017290'),
+    ('P02833', ['uniprot', ], '',
+        'http://purl.uniprot.org/uniprot/P02833'),
+    ('Q9GYV0', ['uniprot', ], '',
+        'http://purl.uniprot.org/uniprot/Q9GYV0'),
+    ('NZ_JXSL01000036.1', ['refseq', ], '',
+        'http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val='
+        'NZ_JXSL01000036.1'),
+    ('NM_206454', ['refseq', ], '',
+        'http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=NM_206454'),
+    ('XM_002113800.1', ['refseq', ], '',
+        'http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=XM_002113800.1'),
+    ('GCA_000002275.2', ['genome', ], '',
+        'http://www.ncbi.nlm.nih.gov/assembly/GCA_000002275.2'),
+    ('GCF_000001405.38', ['genome', ], '',
+        'http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.38'),
 ]
 
 
