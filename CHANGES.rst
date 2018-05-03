@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.0.1 (2018-05-02)
+
+- Fixes bug causing invalid DOIs to be accepted.
+
 Version 1.0.0 (2017-12-07)
 
 - Fixes handling of unicode characters in DOIs.

@@ -1,8 +1,8 @@
 ============================
- IDUtils v1.0.0 is released
+ IDUtils v1.0.1 is released
 ============================
 
-IDUtils v1.0.0 was released on 2017-12-07
+IDUtils v1.0.1 was released on 2018-05-02
 
 About
 -----
@@ -12,18 +12,17 @@ Small library for persistent identifiers used in scholarly communication.
 Improved features
 -----------------
 
-- Fixes handling of unicode characters in DOIs.
-- Adds support for APS style arXiv identifiers.
+- Fixes bug causing invalid DOIs to be accepted.
 
 Installation
 ------------
 
-   $ pip install idutils==1.0.0
+   $ pip install idutils==1.0.1
 
 Documentation
 -------------
 
-   http://idutils.readthedocs.io/en/v1.0.0
+   http://idutils.readthedocs.io/en/v1.0.1
 
 Homepage
 --------
