@@ -202,3 +202,10 @@ def test_compund_isbn():
     assert idutils.is_isbn('0-9752298-0-X')
     assert not idutils.is_isbn13('0-9752298-0-X')
     assert idutils.is_isbn10('0-9752298-0-X')
+
+
+def test_doi():
+    """Test DOI validation."""
+    assert idutils.is_doi('10.1000/123456')
+    assert idutils.is_doi('10.1038/issn.1476-4687')
+    assert not idutils.is_doi('10.1000/')

@@ -24,7 +24,7 @@ from six.moves.urllib.parse import urlparse
 from .version import __version__
 
 doi_regexp = re.compile(
-    "(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(.\d+)*/.*)$",
+    "(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(.\d+)*/.+)$",
     flags=re.I
 )
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
