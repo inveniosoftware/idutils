@@ -63,7 +63,7 @@ arxiv_post_2007_with_class_regexp = re.compile(
 """Matches new style arXiv ID, with an old-style class specification;
     technically malformed, however appears in real data."""
 
-ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Z]\S{13}[A-Z.:])$")
+ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Z.:])$")
 """See http://adsabs.harvard.edu/abs_doc/help_pages/data.html"""
 
 pmcid_regexp = re.compile("PMC\d+$", flags=re.I)
