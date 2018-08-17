@@ -45,7 +45,7 @@ Features
 - Generation of resolving links for persistent identifiers.
 - Supported schemes: ISBN10, ISBN13, ISSN, ISTC, DOI, Handle, EAN8, EAN13, ISNI
   ORCID, ARK, PURL, LSID, URN, Bibcode, arXiv, PubMed ID, PubMed Central ID,
-  GND.
+  GND, SRA, BioProject, BioSample, Ensembl, UniProt, RefSeq, GenBank/RefSeq.
 
 Installation
 ============

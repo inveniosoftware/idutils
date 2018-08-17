@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 1.1.0 (2018-08-17)
+
+- Adds support for genomic identifiers: SRA, BioProject, BioSample, Ensembl,
+  UniProt, RefSeq, GenBank/RefSeq.
+- Fixes bug in bibcode detection for non-capitalized journals.
+
 Version 1.0.1 (2018-05-02)
 
 - Fixes bug causing invalid DOIs to be accepted.
