@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 1.1.1 (2018-11-18)
+
+- Changes URL resolution for bibcodes to use https://ui.adsabs.harvard instead
+  of https://adsabs.harvard.edu/abs/.
+- Allows choosing HTTP/HTTPS for any generated URL by ``idutils.to_url``.
+
 Version 1.1.0 (2018-08-17)
 
 - Adds support for genomic identifiers: SRA, BioProject, BioSample, Ensembl,
