@@ -33,33 +33,35 @@ identifiers = [
     ('http://www.example.org/ark:/13030/tqb3kh97gh8w', ['ark', 'url'], '', ''),
     ('10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('doi:10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('doi: 10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('DOI:10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('http://dx.doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'url', ],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('https://doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'url', ],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     ('doi.org/10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
-        'https://doi.org/10.1016/j.epsl.2011.11.037'),
+        'http://doi.org/10.1016/j.epsl.2011.11.037'),
     (u'10.1016/üникóδé-дôΐ', ['doi', 'handle'],
-        u'10.1016/üникóδé-дôΐ', u'https://doi.org/10.1016/üникóδé-дôΐ'),
+        u'10.1016/üникóδé-дôΐ',
+        u'http://doi.org/10.1016/üникóδé-дôΐ'),
     (u'10.1016/སྦ་བཞེད་', ['doi', 'handle'],
-        u'10.1016/སྦ་བཞེད་', u'https://doi.org/10.1016/སྦ་བཞེད་'),
+        u'10.1016/སྦ་བཞེད་',
+        u'http://doi.org/10.1016/སྦ་བཞེད་'),
     ('10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P',
         ['doi', 'handle'],
         '10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P',
-        ('https://doi.org/'
+        ('http://doi.org/'
          '10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P')),
     ('9783468111242', ['isbn', 'ean13'], '978-3-468-11124-2', ''),
     ('4006381333931', ['ean13'], '', ''),
@@ -198,12 +200,18 @@ def test_idempotence():
             idutils.detect_identifier_schemes(val_norm)
 
 
-def test_tourl():
+def test_to_url():
     """Test URL generation."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         assert idutils.to_url(
             idutils.normalize_pid(i, expected_schemes[0]), expected_schemes[0]
         ) == url_value
+        assert idutils.to_url(
+            idutils.normalize_pid(i, expected_schemes[0]), expected_schemes[0],
+            url_scheme='https',
+        ) == (url_value.replace('http://', 'https://')
+              # If the value is already a URL its scheme is preserved
+              if expected_schemes[0] not in ['purl', 'url'] else url_value)
 
 
 def test_valueerror():

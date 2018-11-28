@@ -687,14 +687,14 @@ def normalize_pid(val, scheme):
 
 
 LANDING_URLS = {
-    'doi': u'https://doi.org/{pid}',
+    'doi': u'{scheme}://doi.org/{pid}',
     'handle': u'{scheme}://hdl.handle.net/{pid}',
     'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
     'orcid': u'{scheme}://orcid.org/{pid}',
     'pmid': u'{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
-    'ads': u'http://ui.adsabs.harvard.edu/#abs/{pid}',
+    'ads': u'{scheme}://ui.adsabs.harvard.edu/#abs/{pid}',
     'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
-    'gnd': u'http://d-nb.info/gnd/{pid}',
+    'gnd': u'{scheme}://d-nb.info/gnd/{pid}',
     'urn': u'{scheme}://nbn-resolving.org/{pid}',
     'sra': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
     'bioproject': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
