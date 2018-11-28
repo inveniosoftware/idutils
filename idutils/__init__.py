@@ -692,7 +692,7 @@ LANDING_URLS = {
     'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
     'orcid': u'{scheme}://orcid.org/{pid}',
     'pmid': u'{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
-    'ads': u'http://adsabs.harvard.edu/abs/{pid}',
+    'ads': u'http://ui.adsabs.harvard.edu/#abs/{pid}',
     'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
     'gnd': u'http://d-nb.info/gnd/{pid}',
     'urn': u'{scheme}://nbn-resolving.org/{pid}',
