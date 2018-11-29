@@ -181,6 +181,11 @@ arxiv_post_2007_with_class_regexp = re.compile(
 """Matches new style arXiv ID, with an old-style class specification;
     technically malformed, however appears in real data."""
 
+hal_regexp = re.compile(
+    "(hal:|HAL:)?([a-z]{3}[a-z]*-|(sic|mem|ijn)_)\d{8}(v\d+)?$"
+    )
+"""Matches HAL identifiers (sic mem and ijn are old identifiers form)."""
+
 ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Z.:])$")
 """See http://adsabs.harvard.edu/abs_doc/help_pages/data.html"""
 
@@ -454,6 +459,14 @@ def is_arxiv(val):
     return is_arxiv_post_2007(val) or is_arxiv_pre_2007(val)
 
 
+def is_hal(val):
+    """Test if argument is a HAL identifier.
+
+    See (https://hal.archives-ouvertes.fr)
+    """
+    return hal_regexp.match(val)
+
+
 def is_pmid(val):
     """Test if argument is a PubMed ID.
 
@@ -520,6 +533,7 @@ PID_SCHEMES = [
     ('urn', is_urn),
     ('ads', is_ads),
     ('arxiv', is_arxiv),
+    ('hal', is_hal),
     ('pmcid', is_pmcid),
     ('isbn', is_isbn),
     ('issn', is_issn),
@@ -644,6 +658,12 @@ def normalize_arxiv(val):
     return val
 
 
+def normalize_hal(val):
+    """Normalize a HAL identifier."""
+    val = val.replace(' ', '').lower().replace('hal:', '')
+    return val
+
+
 def normalize_isbn(val):
     """Normalize an ISBN identifier."""
     val = val.replace(' ', '').replace('-', '').strip().upper()
@@ -683,6 +703,8 @@ def normalize_pid(val, scheme):
         return normalize_isbn(val)
     elif scheme == 'issn':
         return normalize_issn(val)
+    elif scheme == 'hal':
+        return normalize_hal(val)
     return val
 
 
@@ -703,6 +725,7 @@ LANDING_URLS = {
     'uniprot': u'{scheme}://purl.uniprot.org/uniprot/{pid}',
     'refseq': u'{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}',
     'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
+    'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 

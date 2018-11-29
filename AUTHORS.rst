@@ -17,6 +17,7 @@ Authors
 - Adrian Pawel Baran
 - Alan Rubin
 - Alexander Ioannidis
+- Bruno Marmol
 - Jiri Kuncar
 - Lars Holm Nielsen
 - Pedro Gaudencio

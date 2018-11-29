@@ -166,6 +166,12 @@ identifiers = [
         'http://www.ncbi.nlm.nih.gov/assembly/GCA_000002275.2'),
     ('GCF_000001405.38', ['genome', ], '',
         'http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.38'),
+    ('hal:inserm-13102590', ['hal', ], 'inserm-13102590',
+        'http://hal.archives-ouvertes.fr/inserm-13102590'),
+    ('inserm-13102590', ['hal', ], 'inserm-13102590',
+        'http://hal.archives-ouvertes.fr/inserm-13102590'),
+    ('mem_13102590', ['hal', ], 'mem_13102590',
+        'http://hal.archives-ouvertes.fr/mem_13102590'),
 ]
 
 
