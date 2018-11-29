@@ -988,7 +988,7 @@ LANDING_URLS = {
 """URL generation configuration for the supported PID providers."""
 
 
-def to_url(val, scheme, url_scheme="http"):
+def to_url(val, scheme, url_scheme="https"):
     """Convert a resolvable identifier into a URL for a landing page.
 
     :param val: The identifier's value.
