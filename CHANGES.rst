@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.1.2 (2019-02-12)
+
+- Adds support for HAL identifiers.
+
 Version 1.1.1 (2018-11-18)
 
 - Changes URL resolution for bibcodes to use https://ui.adsabs.harvard instead

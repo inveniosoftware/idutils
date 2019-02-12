@@ -35,7 +35,7 @@ tests_require = [
     'pytest-cov>=1.8.0',
     'pytest-pep8>=1.0.6',
     'pytest-runner>=2.6.2',
-    'pytest>=3.3.0',
+    'pytest>=3.6.0',
 ]
 
 extras_require = {
