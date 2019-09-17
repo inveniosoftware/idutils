@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.1.3 (2019-09-17)
+
+- Adds support for HTTPS ORCiD identifiers.
+
 Version 1.1.2 (2019-02-12)
 
 - Adds support for HAL identifiers.
