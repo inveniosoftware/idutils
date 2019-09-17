@@ -22,7 +22,6 @@ import re
 from isbn import ISBN
 from six.moves.urllib.parse import urlparse
 
-
 from .version import __version__
 
 ENSEMBL_PREFIXES = (
@@ -203,7 +202,7 @@ ark_suffix_regexp = re.compile("ark:/\d+/.+$")
 lsid_regexp = re.compile("urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
 """See http://en.wikipedia.org/wiki/LSID."""
 
-orcid_url = "http://orcid.org/"
+orcid_urls = ["http://orcid.org/", "https://orcid.org/"]
 
 gnd_regexp = re.compile(
     "(gnd:|GND:)?("
@@ -387,8 +386,10 @@ def is_orcid(val):
     See http://support.orcid.org/knowledgebase/
         articles/116780-structure-of-the-orcid-identifier
     """
-    if val.startswith(orcid_url):
-        val = val[len(orcid_url):]
+    for orcid_url in orcid_urls:
+        if val.startswith(orcid_url):
+            val = val[len(orcid_url):]
+            break
 
     val = val.replace("-", "").replace(" ", "")
     if is_isni(val):
@@ -613,8 +614,10 @@ def normalize_ads(val):
 
 def normalize_orcid(val):
     """Normalize an ORCID identifier."""
-    if val.startswith(orcid_url):
-        val = val[len(orcid_url):]
+    for orcid_url in orcid_urls:
+        if val.startswith(orcid_url):
+            val = val[len(orcid_url):]
+            break
     val = val.replace("-", "").replace(" ", "")
 
     return "-".join([val[0:4], val[4:8], val[8:12], val[12:16]])
