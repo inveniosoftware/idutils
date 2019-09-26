@@ -174,6 +174,7 @@ identifiers = [
         'http://hal.archives-ouvertes.fr/inserm-13102590'),
     ('mem_13102590', ['hal', ], 'mem_13102590',
         'http://hal.archives-ouvertes.fr/mem_13102590'),
+    ('ascl:1908.011', ['ascl', ], 'ascl:1908.011', 'http://ascl.net/1908.011')
 ]
 
 
@@ -254,3 +255,10 @@ def test_doi():
     assert idutils.is_doi('10.1000/123456')
     assert idutils.is_doi('10.1038/issn.1476-4687')
     assert not idutils.is_doi('10.1000/')
+
+
+def test_ascl():
+    """Test ASCL validation."""
+    assert idutils.is_ascl('ascl:1908.011')
+    assert idutils.is_ascl('ascl:1908.0113')
+    assert not idutils.is_ascl('1990.0803')
