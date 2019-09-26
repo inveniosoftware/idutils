@@ -239,6 +239,9 @@ refseq_regexp = re.compile("((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
 genome_regexp = re.compile("GC[AF]_\d+\.\d+$")
 """GenBank or RefSeq genome assembly accession."""
 
+ascl_regexp = re.compile("^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
+"""ASCL regular expression."""
+
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
@@ -526,6 +529,11 @@ def is_genome(val):
     return genome_regexp.match(val)
 
 
+def is_ascl(val):
+    """Test if argument is a ASCL accession."""
+    return ascl_regexp.match(val)
+
+
 PID_SCHEMES = [
     ('doi', is_doi),
     ('ark', is_ark),
@@ -535,6 +543,7 @@ PID_SCHEMES = [
     ('urn', is_urn),
     ('ads', is_ads),
     ('arxiv', is_arxiv),
+    ('ascl', is_ascl),
     ('hal', is_hal),
     ('pmcid', is_pmcid),
     ('isbn', is_isbn),
@@ -716,6 +725,7 @@ LANDING_URLS = {
     'doi': u'{scheme}://doi.org/{pid}',
     'handle': u'{scheme}://hdl.handle.net/{pid}',
     'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
+    'ascl': u'{scheme}://ascl.net/{pid}',
     'orcid': u'{scheme}://orcid.org/{pid}',
     'pmid': u'{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
     'ads': u'{scheme}://ui.adsabs.harvard.edu/#abs/{pid}',
@@ -751,6 +761,8 @@ def to_url(val, scheme, url_scheme='http'):
             pid = pid[len('gnd:'):]
         if scheme == 'urn' and not pid.lower().startswith('urn:nbn:'):
             return ''
+        if scheme == 'ascl':
+            pid = val.split(':')[1]
         return LANDING_URLS[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ['purl', 'url']:
         return pid
