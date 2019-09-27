@@ -14,6 +14,11 @@
 Changes
 =======
 
+Version 1.1.4 (2019-09-27)
+
+- Adds support for ASCL identifiers.
+- Fixes the ADS identifier regex to also detect lower-case author initials.
+
 Version 1.1.3 (2019-09-17)
 
 - Adds support for HTTPS ORCiD identifiers.
