@@ -186,7 +186,7 @@ hal_regexp = re.compile(
     )
 """Matches HAL identifiers (sic mem and ijn are old identifiers form)."""
 
-ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Z.:])$")
+ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Za-z.:])$")
 """See http://adsabs.harvard.edu/abs_doc/help_pages/data.html"""
 
 pmcid_regexp = re.compile("PMC\d+$", flags=re.I)

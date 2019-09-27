@@ -106,6 +106,8 @@ identifiers = [
         'http://ui.adsabs.harvard.edu/#abs/2016arXiv161002026S'),
     ('ads:2011ApJS..192...18K', ['ads'], '2011ApJS..192...18K',
         'http://ui.adsabs.harvard.edu/#abs/2011ApJS..192...18K'),
+    ('ads:2017zndo....495787v', ['ads'], '2017zndo....495787v',
+        'http://ui.adsabs.harvard.edu/#abs/2017zndo....495787v'),
     ('0000000218250097', ['orcid', 'isni'], '0000-0002-1825-0097',
         'http://orcid.org/0000-0002-1825-0097'),
     ('http://orcid.org/0000-0002-1825-0097', ['orcid', 'url'],
