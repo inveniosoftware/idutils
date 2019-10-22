@@ -256,7 +256,10 @@ def test_doi():
     """Test DOI validation."""
     assert idutils.is_doi('10.1000/123456')
     assert idutils.is_doi('10.1038/issn.1476-4687')
+    assert idutils.is_doi('10.1000.10/123456')
     assert not idutils.is_doi('10.1000/')
+    assert not idutils.is_doi('10.10O0/123456')
+    assert not idutils.is_doi('10.1.NOTGOOD.0/123456')
 
 
 def test_ascl():
