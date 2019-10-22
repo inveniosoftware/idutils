@@ -142,7 +142,7 @@ ENSEMBL_PREFIXES = (
 """List of species-specific prefixes for Ensembl accession numbers."""
 
 doi_regexp = re.compile(
-    "(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(.\d+)*/.+)$",
+    r"(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(\.\d+)*/.+)$",
     flags=re.I
 )
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
