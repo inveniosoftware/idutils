@@ -176,7 +176,34 @@ identifiers = [
         'http://hal.archives-ouvertes.fr/inserm-13102590'),
     ('mem_13102590', ['hal', ], 'mem_13102590',
         'http://hal.archives-ouvertes.fr/mem_13102590'),
-    ('ascl:1908.011', ['ascl', ], 'ascl:1908.011', 'http://ascl.net/1908.011')
+    ('ascl:1908.011', ['ascl', ], 'ascl:1908.011', 'http://ascl.net/1908.011'),
+    ('swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2', ['swh', ],
+        'swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2',
+        ('http://archive.softwareheritage.org/'
+         'swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2')),
+    ('swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505', ['swh', ],
+        'swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505',
+        ('http://archive.softwareheritage.org/'
+         'swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505')),
+    ('swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d', ['swh', ],
+        'swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d',
+        ('http://archive.softwareheritage.org/'
+         'swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d')),
+    ('swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f', ['swh', ],
+        'swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f',
+        ('http://archive.softwareheritage.org/'
+         'swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f')),
+    ('swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453', ['swh', ],
+        'swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453',
+        ('http://archive.softwareheritage.org/'
+         'swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453')),
+    (('swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505'
+      ';origin=https://github.com/user/repo'), ['swh', ],
+        ('swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505'
+         ';origin=https://github.com/user/repo'),
+        ('http://archive.softwareheritage.org/'
+         'swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505'
+         ';origin=https://github.com/user/repo')),
 ]
 
 
