@@ -242,6 +242,11 @@ genome_regexp = re.compile("GC[AF]_\d+\.\d+$")
 ascl_regexp = re.compile("^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
 
+swh_regexp = re.compile(
+    "swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}(;origin=\S+)?$"
+    )
+"""Matches Software Heritage identifiers."""
+
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
@@ -331,7 +336,7 @@ def is_handle(val):
     Note, DOIs are also handles, and handle are very generic so they will also
     match e.g. any URL your parse.
     """
-    return handle_regexp.match(val)
+    return handle_regexp.match(val) and not swh_regexp.match(val)
 
 
 def is_ean8(val):
@@ -534,6 +539,14 @@ def is_ascl(val):
     return ascl_regexp.match(val)
 
 
+def is_swh(val):
+    """Test if argument is a Software Heritage identifier.
+
+    https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+    """
+    return swh_regexp.match(val)
+
+
 PID_SCHEMES = [
     ('doi', is_doi),
     ('ark', is_ark),
@@ -563,6 +576,7 @@ PID_SCHEMES = [
     ('uniprot', is_uniprot),
     ('refseq', is_refseq),
     ('genome', is_genome),
+    ('swh', is_swh),
 ]
 """Definition of scheme name and associated test function.
 
@@ -740,6 +754,7 @@ LANDING_URLS = {
     'refseq': u'{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}',
     'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
     'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
+    'swh': u'{scheme}://archive.softwareheritage.org/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 
