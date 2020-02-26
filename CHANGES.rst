@@ -1,6 +1,6 @@
 ..
    This file is part of IDUtils
-   Copyright (C) 2015 CERN.
+   Copyright (C) 2015-2020 CERN.
 
    IDUtils is free software; you can redistribute it and/or modify
    it under the terms of the Revised BSD License; see LICENSE file for
@@ -13,6 +13,11 @@
 
 Changes
 =======
+
+Version 1.1.5 (2020-02-26)
+
+- Adds support for Software Heritage identifiers.
+- Fixes handling of non-digit characters in DOI detection.
 
 Version 1.1.4 (2019-09-27)
 
