@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.1.6 (2020-05-07)
+
+- Deprecates Python versions lower than 3.6.0. Now supporting 3.6.0 and 3.7.0.
+
 Version 1.1.5 (2020-02-26)
 
 - Adds support for Software Heritage identifiers.
