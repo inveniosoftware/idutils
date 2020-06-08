@@ -204,6 +204,7 @@ identifiers = [
         ('http://archive.softwareheritage.org/'
          'swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505'
          ';origin=https://github.com/user/repo')),
+    ('03yrm5c26', ['ror'], '03yrm5c26', 'http://ror.org/03yrm5c26'),
 ]
 
 

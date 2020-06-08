@@ -247,6 +247,12 @@ swh_regexp = re.compile(
     )
 """Matches Software Heritage identifiers."""
 
+ror_regexp = re.compile(
+    r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$",
+    flags=re.I
+)
+"""See https://ror.org/facts/#core-components."""
+
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
@@ -547,6 +553,11 @@ def is_swh(val):
     return swh_regexp.match(val)
 
 
+def is_ror(val):
+    """Test if argument is a ROR id."""
+    return ror_regexp.match(val)
+
+
 PID_SCHEMES = [
     ('doi', is_doi),
     ('ark', is_ark),
@@ -577,6 +588,7 @@ PID_SCHEMES = [
     ('refseq', is_refseq),
     ('genome', is_genome),
     ('swh', is_swh),
+    ('ror', is_ror),
 ]
 """Definition of scheme name and associated test function.
 
@@ -755,6 +767,7 @@ LANDING_URLS = {
     'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
     'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
     'swh': u'{scheme}://archive.softwareheritage.org/{pid}',
+    'ror': u'{scheme}://ror.org/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 
