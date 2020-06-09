@@ -205,6 +205,38 @@ identifiers = [
          'swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505'
          ';origin=https://github.com/user/repo')),
     ('03yrm5c26', ['ror'], '03yrm5c26', 'http://ror.org/03yrm5c26'),
+    (('swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';origin=https://github.com/python/cpython'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';path=/Programs/python.c;lines=12-16'), ['swh', ],
+     ('swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';origin=https://github.com/python/cpython'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';path=/Programs/python.c;lines=12-16'),
+     ('http://archive.softwareheritage.org/'
+      'swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';origin=https://github.com/python/cpython'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';path=/Programs/python.c;lines=12-16')),
+    (('swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';path=/Programs/python.c;lines=12-16'
+      ';origin=https://github.com/python/cpython'), ['swh', ],
+     ('swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';path=/Programs/python.c;lines=12-16'
+      ';origin=https://github.com/python/cpython'),
+     ('http://archive.softwareheritage.org/'
+      'swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562'
+      ';anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977'
+      ';visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b'
+      ';path=/Programs/python.c;lines=12-16'
+      ';origin=https://github.com/python/cpython'))
 ]
 
 
