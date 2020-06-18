@@ -14,6 +14,11 @@
 Changes
 =======
 
+Version 1.1.7 (2020-06-19)
+
+- Updates support for Software Heritage identifiers with new qualifiers.
+- Adds support for ROR identifiers
+
 Version 1.1.6 (2020-05-07)
 
 - Deprecates Python versions lower than 3.6.0. Now supporting 3.6.0 and 3.7.0.
