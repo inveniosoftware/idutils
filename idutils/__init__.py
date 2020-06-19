@@ -148,8 +148,8 @@ doi_regexp = re.compile(
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
 
 handle_regexp = re.compile(
-    "(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?"
-    "([^/\.]+(\.[^/\.]+)*/.*)$",
+    r"(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?"
+    r"([^/\.]+(\.[^/\.]+)*/.*)$",
     flags=re.I
 )
 """See http://handle.net/rfc/rfc3651.html.
@@ -161,90 +161,90 @@ handle_regexp = re.compile(
 """
 
 arxiv_post_2007_regexp = re.compile(
-    "(arxiv:)?(\d{4})\.(\d{4,5})(v\d+)?$",
+    r"(arxiv:)?(\d{4})\.(\d{4,5})(v\d+)?$",
     flags=re.I
 )
 """See http://arxiv.org/help/arxiv_identifier and
        http://arxiv.org/help/arxiv_identifier_for_services."""
 
 arxiv_pre_2007_regexp = re.compile(
-    "(arxiv:)?([a-z\-]+)(\.[a-z]{2})?(/\d{4})(\d+)(v\d+)?$",
+    r"(arxiv:)?([a-z\-]+)(\.[a-z]{2})?(/\d{4})(\d+)(v\d+)?$",
     flags=re.I
 )
 """See http://arxiv.org/help/arxiv_identifier and
        http://arxiv.org/help/arxiv_identifier_for_services."""
 
 arxiv_post_2007_with_class_regexp = re.compile(
-    "(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
+    r"(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
     flags=re.I
 )
 """Matches new style arXiv ID, with an old-style class specification;
     technically malformed, however appears in real data."""
 
 hal_regexp = re.compile(
-    "(hal:|HAL:)?([a-z]{3}[a-z]*-|(sic|mem|ijn)_)\d{8}(v\d+)?$"
-    )
+    r"(hal:|HAL:)?([a-z]{3}[a-z]*-|(sic|mem|ijn)_)\d{8}(v\d+)?$"
+)
 """Matches HAL identifiers (sic mem and ijn are old identifiers form)."""
 
-ads_regexp = re.compile("(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Za-z.:])$")
+ads_regexp = re.compile(r"(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Za-z.:])$")
 """See http://adsabs.harvard.edu/abs_doc/help_pages/data.html"""
 
-pmcid_regexp = re.compile("PMC\d+$", flags=re.I)
+pmcid_regexp = re.compile(r"PMC\d+$", flags=re.I)
 """PubMed Central ID regular expression."""
 
-pmid_regexp = re.compile("(pmid:)?(\d+)$", flags=re.I)
+pmid_regexp = re.compile(r"(pmid:)?(\d+)$", flags=re.I)
 """PubMed ID regular expression."""
 
-ark_suffix_regexp = re.compile("ark:/\d+/.+$")
+ark_suffix_regexp = re.compile(r"ark:/\d+/.+$")
 """See http://en.wikipedia.org/wiki/Archival_Resource_Key and
        https://confluence.ucop.edu/display/Curation/ARK."""
 
-lsid_regexp = re.compile("urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
+lsid_regexp = re.compile(r"urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
 """See http://en.wikipedia.org/wiki/LSID."""
 
 orcid_urls = ["http://orcid.org/", "https://orcid.org/"]
 
 gnd_regexp = re.compile(
-    "(gnd:|GND:)?("
-    "(1|10)\d{7}[0-9X]|"
-    "[47]\d{6}-\d|"
-    "[1-9]\d{0,7}-[0-9X]|"
-    "3\d{7}[0-9X]"
-    ")")
+    r"(gnd:|GND:)?("
+    r"(1|10)\d{7}[0-9X]|"
+    r"[47]\d{6}-\d|"
+    r"[1-9]\d{0,7}-[0-9X]|"
+    r"3\d{7}[0-9X]"
+    r")")
 """See https://www.wikidata.org/wiki/Property:P227."""
 
 gnd_resolver_url = "http://d-nb.info/gnd/"
 
-sra_regexp = re.compile("[SED]R[APRSXZ]\d+$")
+sra_regexp = re.compile(r"[SED]R[APRSXZ]\d+$")
 """Sequence Read Archive regular expression."""
 
-bioproject_regexp = re.compile("PRJ(NA|EA|EB|DB)\d+$")
+bioproject_regexp = re.compile(r"PRJ(NA|EA|EB|DB)\d+$")
 """BioProject regular expression."""
 
-biosample_regexp = re.compile("SAM(N|EA|D)\d+$")
+biosample_regexp = re.compile(r"SAM(N|EA|D)\d+$")
 """BioSample regular expression."""
 
-ensembl_regexp = re.compile("({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
+ensembl_regexp = re.compile(r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
     prefixes="|".join(ENSEMBL_PREFIXES)))
 """Ensembl regular expression."""
 
-uniprot_regexp = re.compile("([A-N,R-Z][0-9]([A-Z][A-Z,0-9]{2}[0-9]){1,2})|"
-                            "([O,P,Q][0-9][A-Z,0-9]{3}[0-9])(\.\d+)?$")
+uniprot_regexp = re.compile(r"([A-N,R-Z][0-9]([A-Z][A-Z,0-9]{2}[0-9]){1,2})|"
+                            r"([O,P,Q][0-9][A-Z,0-9]{3}[0-9])(\.\d+)?$")
 """UniProt regular expression."""
 
-refseq_regexp = re.compile("((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
-                           "NZ_[A-Z]{4})\d+(\.\d+)?$")
+refseq_regexp = re.compile(r"((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
+                           r"NZ_[A-Z]{4})\d+(\.\d+)?$")
 """RefSeq regular expression."""
 
-genome_regexp = re.compile("GC[AF]_\d+\.\d+$")
+genome_regexp = re.compile(r"GC[AF]_\d+\.\d+$")
 """GenBank or RefSeq genome assembly accession."""
 
-ascl_regexp = re.compile("^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
+ascl_regexp = re.compile(r"^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
 
 swh_regexp = re.compile(
-    "swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}"
-    "(;(origin|visit|anchor|path|lines)=\S+)*$"
+    r"swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}"
+    r"(;(origin|visit|anchor|path|lines)=\S+)*$"
 )
 """Matches Software Heritage identifiers."""
 
