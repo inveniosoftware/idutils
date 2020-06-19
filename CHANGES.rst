@@ -14,10 +14,12 @@
 Changes
 =======
 
-Version 1.1.7 (2020-06-19)
+Version 1.1.8 (2020-06-22)
 
+- skips 1.1.7 because of git history
 - Updates support for Software Heritage identifiers with new qualifiers.
 - Adds support for ROR identifiers
+- Removes deprecation warning for using non-raw string in regexes by using raw strings
 
 Version 1.1.6 (2020-05-07)
 
