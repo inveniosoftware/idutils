@@ -243,8 +243,9 @@ ascl_regexp = re.compile("^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
 
 swh_regexp = re.compile(
-    "swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}(;origin=\S+)?$"
-    )
+    "swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}"
+    "(;(origin|visit|anchor|path|lines)=\S+)*$"
+)
 """Matches Software Heritage identifiers."""
 
 ror_regexp = re.compile(
