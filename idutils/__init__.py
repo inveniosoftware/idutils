@@ -139,7 +139,70 @@ ENSEMBL_PREFIXES = (
     "ENSMLE",  # Mandrillus leucophaeus (Drill)
     "ENSMFA",  # Macaca fascicularis (Crab-eating macaque)
 )
-"""List of species-specific prefixes for Ensembl accession numbers."""
+"""List of species-specific prefixes for Ensembl accession numbers.
+
+Used for building ensembl_regexp.
+
+See https://asia.ensembl.org/info/genome/stable_ids/prefixes.html
+"""
+
+ARRAYEXPRESS_CODES = (
+    "AFFY",
+    "AFMX",
+    "AGIL",
+    "ATMX",
+    "BAIR",
+    "BASE",
+    "BIOD",
+    "BUGS",
+    "CAGE",
+    "CBIL",
+    "DKFZ",
+    "DORD",
+    "EMBL",
+    "ERAD",
+    "FLYC",
+    "FPMI",
+    "GEAD",
+    "GEHB",
+    "GEOD",
+    "GEUV",
+    "HGMP",
+    "IPKG",
+    "JCVI",
+    "JJRD",
+    "LGCL",
+    "MANP",
+    "MARS",
+    "MAXD",
+    "MEXP",
+    "MIMR",
+    "MNIA",
+    "MTAB",
+    "MUGN",
+    "NASC",
+    "NCMF",
+    "NGEN",
+    "RUBN",
+    "RZPD",
+    "SGRP",
+    "SMDB",
+    "SNGR",
+    "SYBR",
+    "TABM",
+    "TIGR",
+    "TOXM",
+    "UCON",
+    "UHNC",
+    "UMCU",
+    "WMIT",
+)
+"""List of ArrayExpress four-letter codes.
+
+Used for building arrayexpress_array_regexp and arrayexpress_experiment_regexp.
+
+See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
+"""
 
 doi_regexp = re.compile(
     r"(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(\.\d+)*/.+)$",
@@ -149,7 +212,7 @@ doi_regexp = re.compile(
 
 handle_regexp = re.compile(
     r"(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?"
-    r"([^/\.]+(\.[^/\.]+)*/.*)$",
+    r"([^/.]+(\.[^/.]+)*/.*)$",
     flags=re.I
 )
 """See http://handle.net/rfc/rfc3651.html.
@@ -216,28 +279,74 @@ gnd_regexp = re.compile(
 gnd_resolver_url = "http://d-nb.info/gnd/"
 
 sra_regexp = re.compile(r"[SED]R[APRSXZ]\d+$")
-"""Sequence Read Archive regular expression."""
+"""Sequence Read Archive regular expression.
+
+See
+    https://www.ncbi.nlm.nih.gov/books/NBK56913/#search.what_do_the_different_sra_accessi
+"""
 
 bioproject_regexp = re.compile(r"PRJ(NA|EA|EB|DB)\d+$")
-"""BioProject regular expression."""
+"""BioProject regular expression.
+
+See https://www.ddbj.nig.ac.jp/bioproject/faq-e.html#project-accession
+    https://www.ebi.ac.uk/ena/submit/project-format
+    https://www.ncbi.nlm.nih.gov/bioproject/docs/faq/#under-what-circumstances-is-it-n
+"""
 
 biosample_regexp = re.compile(r"SAM(N|EA|D)\d+$")
-"""BioSample regular expression."""
+"""BioSample regular expression.
+
+See https://www.ddbj.nig.ac.jp/biosample/faq-e.html
+    https://ena-docs.readthedocs.io/en/latest/submit/samples/programmatic.html#accession-numbers-in-the-receipt-xml
+    https://www.ncbi.nlm.nih.gov/biosample/docs/submission/faq/
+"""
 
 ensembl_regexp = re.compile(r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
     prefixes="|".join(ENSEMBL_PREFIXES)))
-"""Ensembl regular expression."""
+"""Ensembl regular expression.
 
-uniprot_regexp = re.compile(r"([A-N,R-Z][0-9]([A-Z][A-Z,0-9]{2}[0-9]){1,2})|"
-                            r"([O,P,Q][0-9][A-Z,0-9]{3}[0-9])(\.\d+)?$")
-"""UniProt regular expression."""
+See https://asia.ensembl.org/info/genome/stable_ids/prefixes.html
+"""
+
+uniprot_regexp = re.compile(r"([A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})|"
+                            r"([OPQ][0-9][A-Z0-9]{3}[0-9])(\.\d+)?$")
+"""UniProt regular expression.
+
+See https://www.uniprot.org/help/accession_numbers
+"""
 
 refseq_regexp = re.compile(r"((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
                            r"NZ_[A-Z]{4})\d+(\.\d+)?$")
-"""RefSeq regular expression."""
+"""RefSeq regular expression.
+
+See https://academic.oup.com/nar/article/44/D1/D733/2502674 (Table 1)
+"""
 
 genome_regexp = re.compile(r"GC[AF]_\d+\.\d+$")
-"""GenBank or RefSeq genome assembly accession."""
+"""GenBank or RefSeq genome assembly accession.
+
+See https://www.ebi.ac.uk/ena/browse/genome-assembly-database
+"""
+
+geo_regexp = re.compile(r"G(PL|SM|SE|DS)\d+$")
+"""Gene Expression Omnibus (GEO) accession.
+
+See https://www.ncbi.nlm.nih.gov/geo/info/overview.html#org
+"""
+
+arrayexpress_array_regexp = re.compile("A-({codes})-\d+$".format(
+    codes="|".join(ARRAYEXPRESS_CODES)))
+"""ArrayExpress array accession.
+
+See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
+"""
+
+arrayexpress_experiment_regexp = re.compile("E-({codes})-\d+$".format(
+    codes="|".join(ARRAYEXPRESS_CODES)))
+"""ArrayExpress array accession.
+
+See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
+"""
 
 ascl_regexp = re.compile(r"^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
@@ -541,6 +650,21 @@ def is_genome(val):
     return genome_regexp.match(val)
 
 
+def is_geo(val):
+    """Test if argument is a Gene Expression Omnibus (GEO) accession."""
+    return geo_regexp.match(val)
+
+
+def is_arrayexpress_array(val):
+    """Test if argument is an ArrayExpress array accession."""
+    return arrayexpress_array_regexp.match(val)
+
+
+def is_arrayexpress_experiment(val):
+    """Test if argument is an ArrayExpress experiment accession."""
+    return arrayexpress_experiment_regexp.match(val)
+
+
 def is_ascl(val):
     """Test if argument is a ASCL accession."""
     return ascl_regexp.match(val)
@@ -588,6 +712,9 @@ PID_SCHEMES = [
     ('uniprot', is_uniprot),
     ('refseq', is_refseq),
     ('genome', is_genome),
+    ('geo', is_geo),
+    ('arrayexpress_array', is_arrayexpress_array),
+    ('arrayexpress_experiment', is_arrayexpress_experiment),
     ('swh', is_swh),
     ('ror', is_ror),
 ]
@@ -766,6 +893,11 @@ LANDING_URLS = {
     'uniprot': u'{scheme}://purl.uniprot.org/uniprot/{pid}',
     'refseq': u'{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}',
     'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
+    'geo': u'{scheme}://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={pid}',
+    'arrayexpress_array':
+        u'{scheme}://www.ebi.ac.uk/arrayexpress/arrays/{pid}',
+    'arrayexpress_experiment':
+        u'{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}',
     'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
     'swh': u'{scheme}://archive.softwareheritage.org/{pid}',
     'ror': u'{scheme}://ror.org/{pid}',
