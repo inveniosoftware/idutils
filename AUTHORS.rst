@@ -19,6 +19,7 @@ Authors
 - Alexander Ioannidis
 - Antoine Lambert
 - Bruno Marmol
+- Guillaume Viger
 - Jiri Kuncar
 - Lars Holm Nielsen
 - Pedro Gaudencio

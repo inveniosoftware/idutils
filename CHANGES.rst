@@ -14,6 +14,12 @@
 Changes
 =======
 
+Version 1.1.7 (2020-06-22)
+
+- Updates Software Heritage identifiers
+- Adds Research Organization Registry identifiers
+- Fixes DeprctationWarnings by using raw strings for regular expressions
+
 Version 1.1.6 (2020-05-07)
 
 - Deprecates Python versions lower than 3.6.0. Now supporting 3.6.0 and 3.7.0.
