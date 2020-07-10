@@ -12,7 +12,7 @@
 # or submit itself to any jurisdiction.
 
 pydocstyle idutils tests && \
-isort -rc -c -df **/*.py && \
+isort --check-only --diff **/*.py && \
 check-manifest --ignore ".travis-*" && \
 sphinx-build -qnNW docs docs/_build/html && \
 python setup.py test && \
