@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.1.8 (2020-08-13)
+
+- Adds support for GEO and ArrayExpress identifiers.
+
 Version 1.1.7 (2020-06-22)
 
 - Updates Software Heritage identifiers
