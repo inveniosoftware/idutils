@@ -15,8 +15,8 @@
 IDUtils
 =======
 
-.. image:: https://img.shields.io/travis/inveniosoftware/idutils.svg
-        :target: https://travis-ci.org/inveniosoftware/idutils
+.. image:: https://github.com/inveniosoftware/idutils/workflows/CI/badge.svg
+        :target: https://github.com/inveniosoftware/idutils/actions?query=workflow%3ACI
 
 .. image:: https://img.shields.io/coveralls/inveniosoftware/idutils.svg
         :target: https://coveralls.io/r/inveniosoftware/idutils

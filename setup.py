@@ -27,20 +27,14 @@ install_requires = [
 ]
 
 tests_require = [
-    'check-manifest>=0.25',
-    'coverage>=4.0',
-    'isort>=4.2.2',
-    'pydocstyle>=1.0',
-    'pytest-cache>=1.0',
-    'pytest-cov>=1.8.0',
-    'pytest-pep8>=1.0.6',
-    'pytest-runner>=2.6.2',
-    'pytest>=3.6.0',
+    "pytest-cache>=1.0",
+    "pytest-runner>=2.6.2",
+    "pytest-invenio>=1.4.0"
 ]
 
 extras_require = {
     'docs': [
-        'Sphinx>=1.4.2',
+        'Sphinx>=3',
     ],
     'tests': tests_require
 }
