@@ -26,3 +26,4 @@ include run-tests.sh
 recursive-include *.py *.css *.css_t *.conf *.html
 recursive-include docs *.py
 recursive-include tests *.py
+recursive-include .github/workflows *.yml
