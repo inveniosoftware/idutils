@@ -334,14 +334,14 @@ geo_regexp = re.compile(r"G(PL|SM|SE|DS)\d+$")
 See https://www.ncbi.nlm.nih.gov/geo/info/overview.html#org
 """
 
-arrayexpress_array_regexp = re.compile("A-({codes})-\d+$".format(
+arrayexpress_array_regexp = re.compile(r"A-({codes})-\d+$".format(
     codes="|".join(ARRAYEXPRESS_CODES)))
 """ArrayExpress array accession.
 
 See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
 """
 
-arrayexpress_experiment_regexp = re.compile("E-({codes})-\d+$".format(
+arrayexpress_experiment_regexp = re.compile(r"E-({codes})-\d+$".format(
     codes="|".join(ARRAYEXPRESS_CODES)))
 """ArrayExpress array accession.
 
