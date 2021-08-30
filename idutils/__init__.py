@@ -258,7 +258,7 @@ pmcid_regexp = re.compile(r"PMC\d+$", flags=re.I)
 pmid_regexp = re.compile(r"(pmid:)?(\d+)$", flags=re.I)
 """PubMed ID regular expression."""
 
-ark_suffix_regexp = re.compile(r"ark:/\d+/.+$")
+ark_suffix_regexp = re.compile(r"ark:/[0-9bcdfghjkmnpqrstvwxz]+/.+$")
 """See http://en.wikipedia.org/wiki/Archival_Resource_Key and
        https://confluence.ucop.edu/display/Curation/ARK."""
 

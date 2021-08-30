@@ -30,6 +30,7 @@ identifiers = [
         'http://nbn-resolving.org/urn:nbn:de:bvb:19-146642'),
     ('urn:lex:eu:council:directive:2010-03-09;2010-19-UE', ['urn', ], '', ''),
     ('ark:/13030/tqb3kh97gh8w', ['ark'], '', ''),
+    ('ark:/c8131/g3js3v', ['ark'], '', ''),
     ('http://www.example.org/ark:/13030/tqb3kh97gh8w', ['ark', 'url'], '', ''),
     ('10.1016/j.epsl.2011.11.037', ['doi', 'handle'],
         '10.1016/j.epsl.2011.11.037',
