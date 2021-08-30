@@ -23,9 +23,8 @@ jobs:
           pip install setuptools wheel
 
       - name: Build package
-        # Remove `compile_catalog` if the package has no translations.
         run: |
-          python setup.py compile_catalog sdist bdist_wheel
+          python setup.py sdist bdist_wheel
 
       - name: Publish on PyPI
         uses: pypa/gh-action-pypi-publish@v1.3.1
