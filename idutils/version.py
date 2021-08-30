@@ -17,4 +17,4 @@ This file is imported by ``idutils.__init__``,
 and parsed by ``setup.py``.
 """
 
-__version__ = "1.1.8"
+__version__ = "1.1.9"

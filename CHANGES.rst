@@ -14,6 +14,10 @@
 Changes
 =======
 
+Version 1.1.9 (2021-08-30)
+
+- Update ARK's NAAN regex per https://datatracker.ietf.org/doc/html/draft-kunze-ark-28#section-2.3.
+
 Version 1.1.8 (2020-08-13)
 
 - Adds support for GEO and ArrayExpress identifiers.
