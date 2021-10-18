@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015, 2016 CERN.
+# Copyright (C) 2015, 2016, 2021 CERN.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -23,7 +23,7 @@ history = open('CHANGES.rst').read()
 
 install_requires = [
     'six>=1.10',
-    'isbnid_fork>=0.4.4',
+    'isbnlib>=3.10.8',
 ]
 
 tests_require = [

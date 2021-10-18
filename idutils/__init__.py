@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015-2019 CERN.
+# Copyright (C) 2015-2021 CERN.
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
 #
@@ -19,7 +19,7 @@ from __future__ import absolute_import, print_function
 
 import re
 
-from isbn import ISBN
+import isbnlib
 from six.moves.urllib.parse import urlparse
 
 from .version import __version__
@@ -372,39 +372,11 @@ def _convert_x_to_10(x):
     return int(x) if x != 'X' else 10
 
 
-def is_isbn10(val):
-    """Test if argument is an ISBN-10 number.
+is_isbn10 = isbnlib.is_isbn10
+"""Test if argument is an ISBN-10 number."""
 
-    Courtesy Wikipedia:
-    http://en.wikipedia.org/wiki/International_Standard_Book_Number
-    """
-    val = val.replace("-", "").replace(" ", "").upper()
-    if len(val) != 10:
-        return False
-    try:
-        r = sum([(10 - i) * (_convert_x_to_10(x)) for i, x in enumerate(val)])
-        return not (r % 11)
-    except ValueError:
-        return False
-
-
-def is_isbn13(val):
-    """Test if argument is an ISBN-13 number.
-
-    Courtesy Wikipedia:
-    http://en.wikipedia.org/wiki/International_Standard_Book_Number
-    """
-    val = val.replace("-", "").replace(" ", "").upper()
-    if len(val) != 13:
-        return False
-    try:
-        total = sum([
-            int(num) * weight for num, weight in zip(val, (1, 3) * 6)
-        ])
-        ck = (10 - total) % 10
-        return ck == int(val[-1])
-    except ValueError:
-        return False
+is_isbn13 = isbnlib.is_isbn13
+"""Test if argument is an ISBN-13 number."""
 
 
 def is_isbn(val):
@@ -729,6 +701,11 @@ Order of list is important, as identifier scheme detection will test in the
 order given by this list."""
 
 SCHEME_FILTER = [
+    (
+        'url',
+        # None these can have URLs, in which case we exclude them
+        ['isbn', 'istc', 'urn', 'lsid', 'issn', 'ean8'],
+    ),
     ('ean8', ['gnd', 'pmid']),
     ('ean13', ['gnd', 'pmid']),
     ('isbn', ['gnd', 'pmid']),
@@ -747,6 +724,12 @@ def detect_identifier_schemes(val):
     for scheme, test in PID_SCHEMES:
         if test(val):
             schemes.append(scheme)
+
+    # GNDs and ISBNs numbers can clash...
+    if 'gnd' in schemes and 'isbn' in schemes:
+        # ...in which case check explicitly if it's clearly a GND
+        if val.lower().startswith('gnd:'):
+            schemes.remove('isbn')
 
     for first, remove_schemes in SCHEME_FILTER:
         if first in schemes:
@@ -837,9 +820,13 @@ def normalize_hal(val):
 
 
 def normalize_isbn(val):
-    """Normalize an ISBN identifier."""
-    val = val.replace(' ', '').replace('-', '').strip().upper()
-    return ISBN(val).hyphen()
+    """Normalize an ISBN identifier.
+
+    Also converts ISBN10 to ISBN13.
+    """
+    if is_isbn10(val):
+        val = isbnlib.to_isbn13(val)
+    return isbnlib.mask(isbnlib.canonical(val))
 
 
 def normalize_issn(val):

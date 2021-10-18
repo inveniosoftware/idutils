@@ -19,7 +19,7 @@ from __future__ import absolute_import, print_function
 import idutils
 
 identifiers = [
-    ('urn:isbn:0451450523', ['urn', ], '', ''),
+    ('urn:isbn:0451450523', ['urn', 'isbn'], '', ''),
     ('urn:isan:0000-0000-9E59-0000-O-0000-0000-2', ['urn', ], '', ''),
     ('urn:issn:0167-6423', ['urn', ], '', ''),
     ('urn:ietf:rfc:2648', ['urn', ], '', ''),
@@ -65,6 +65,7 @@ identifiers = [
         ('http://doi.org/'
          '10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P')),
     ('9783468111242', ['isbn', 'ean13'], '978-3-468-11124-2', ''),
+    ('978-65-87773-12-4', ['isbn'], '', ''),
     ('4006381333931', ['ean13'], '', ''),
     ('73513537', ['ean8'], '', ''),
     ('15626865', ['issn', 'pmid'], '1562-6865', ''),
@@ -275,7 +276,7 @@ def test_detect_schemes():
     """Test scheme detection."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
-        assert schemes == expected_schemes
+        assert schemes == expected_schemes, i
 
 
 def test_is_type():
