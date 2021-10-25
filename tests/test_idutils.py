@@ -95,6 +95,8 @@ identifiers = [
         'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
     ('http://purl.oclc.org/foo/bar', ['purl', 'url'], '',
         'http://purl.oclc.org/foo/bar'),
+    ('https://purl.fdlp.gov/GPO/gpo154197', ['purl', 'url'], '',
+        'https://purl.fdlp.gov/GPO/gpo154197'),
     ('http://www.heatflow.und.edu/index2.html', ['url'], '',
         'http://www.heatflow.und.edu/index2.html'),
     ('urn:nbn:de:101:1-201102033592', ['urn'], '',

@@ -537,9 +537,11 @@ def is_ark(val):
 def is_purl(val):
     """Test if argument is a PURL."""
     res = urlparse(val)
-    return (res.scheme == 'http' and
-            res.netloc in ['purl.org', 'purl.oclc.org', 'purl.net',
-                           'purl.com'] and
+    purl_netlocs = [
+        'purl.org', 'purl.oclc.org', 'purl.net', 'purl.com', 'purl.fdlp.gov'
+    ]
+    return (res.scheme in ['http', 'https'] and
+            res.netloc in purl_netlocs and
             res.path != '')
 
 
