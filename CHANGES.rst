@@ -14,6 +14,11 @@
 Changes
 =======
 
+Version 1.1.10 (2022-01-11)
+
+- Add purl.fdlp.gov as a valid PURL netloc
+- Normalize ror identifiers
+
 Version 1.1.9 (2021-08-30)
 
 - Update ARK's NAAN regex per https://datatracker.ietf.org/doc/html/draft-kunze-ark-28#section-2.3.
