@@ -705,6 +705,7 @@ PID_SCHEMES = [
     ('ean8', is_ean8),
     ('istc', is_istc),
     ('gnd', is_gnd),
+    ('ror', is_ror),
     ('url', is_url),
     ('pmid', is_pmid),
     ('sra', is_sra),
@@ -718,7 +719,6 @@ PID_SCHEMES = [
     ('arrayexpress_array', is_arrayexpress_array),
     ('arrayexpress_experiment', is_arrayexpress_experiment),
     ('swh', is_swh),
-    ('ror', is_ror),
 ]
 """Definition of scheme name and associated test function.
 
@@ -845,6 +845,12 @@ def normalize_issn(val):
     return '{0}-{1}'.format(val[:4], val[4:])
 
 
+def normalize_ror(val):
+    """Normalize a ROR."""
+    m = ror_regexp.match(val)
+    return m.group(1)
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -874,6 +880,8 @@ def normalize_pid(val, scheme):
         return normalize_issn(val)
     elif scheme == 'hal':
         return normalize_hal(val)
+    elif scheme == 'ror':
+        return normalize_ror(val)
     return val
 
 
