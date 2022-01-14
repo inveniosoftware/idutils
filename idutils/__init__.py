@@ -255,7 +255,10 @@ ads_regexp = re.compile(r"(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Za-z.:])$")
 pmcid_regexp = re.compile(r"PMC\d+$", flags=re.I)
 """PubMed Central ID regular expression."""
 
-pmid_regexp = re.compile(r"(pmid:)?(\d+)$", flags=re.I)
+pmid_regexp = re.compile(
+    r"(pmid:|https?://pubmed.ncbi.nlm.nih.gov/)?(\d+)/?$",
+    flags=re.I
+)
 """PubMed ID regular expression."""
 
 ark_suffix_regexp = re.compile(r"ark:/[0-9bcdfghjkmnpqrstvwxz]+/.+$")
@@ -706,8 +709,8 @@ PID_SCHEMES = [
     ('istc', is_istc),
     ('gnd', is_gnd),
     ('ror', is_ror),
-    ('url', is_url),
     ('pmid', is_pmid),
+    ('url', is_url),
     ('sra', is_sra),
     ('bioproject', is_bioproject),
     ('biosample', is_biosample),
@@ -798,7 +801,7 @@ def normalize_gnd(val):
 
 
 def normalize_pmid(val):
-    """Normalize an PubMed ID."""
+    """Normalize a PubMed ID."""
     m = pmid_regexp.match(val)
     return m.group(2)
 
@@ -891,7 +894,7 @@ LANDING_URLS = {
     'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
     'ascl': u'{scheme}://ascl.net/{pid}',
     'orcid': u'{scheme}://orcid.org/{pid}',
-    'pmid': u'{scheme}://www.ncbi.nlm.nih.gov/pubmed/{pid}',
+    'pmid': u'{scheme}://pubmed.ncbi.nlm.nih.gov/{pid}',
     'ads': u'{scheme}://ui.adsabs.harvard.edu/#abs/{pid}',
     'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
     'gnd': u'{scheme}://d-nb.info/gnd/{pid}',

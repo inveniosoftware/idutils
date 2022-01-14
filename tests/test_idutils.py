@@ -90,9 +90,13 @@ identifiers = [
     ('0A9 2002 12B4A105 7', ['istc'], '', ''),
     ('1188-1534', ['issn'], '1188-1534', ''),
     ('12082125', ['pmid'], '12082125',
-        'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
+        'http://pubmed.ncbi.nlm.nih.gov/12082125'),
     ('pmid:12082125', ['pmid'], '12082125',
-        'http://www.ncbi.nlm.nih.gov/pubmed/12082125'),
+        'http://pubmed.ncbi.nlm.nih.gov/12082125'),
+    ('https://pubmed.ncbi.nlm.nih.gov/12082125', ['pmid', 'url'], '12082125',
+        'http://pubmed.ncbi.nlm.nih.gov/12082125'),
+    ('https://pubmed.ncbi.nlm.nih.gov/12082125/', ['pmid', 'url'], '12082125',
+        'http://pubmed.ncbi.nlm.nih.gov/12082125'),
     ('http://purl.oclc.org/foo/bar', ['purl', 'url'], '',
         'http://purl.oclc.org/foo/bar'),
     ('https://purl.fdlp.gov/GPO/gpo154197', ['purl', 'url'], '',
@@ -271,6 +275,7 @@ def test_detect_schemes():
     """Test scheme detection."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
+        print(i)
         assert schemes == expected_schemes
 
 
