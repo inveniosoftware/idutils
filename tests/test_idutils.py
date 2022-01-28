@@ -275,7 +275,6 @@ def test_detect_schemes():
     """Test scheme detection."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
-        print(i)
         assert schemes == expected_schemes
 
 
