@@ -1,6 +1,7 @@
 ..
    This file is part of IDUtils
    Copyright (C) 2015-2020 CERN.
+   Copyright (C) 2022 Northwestern University.
 
    IDUtils is free software; you can redistribute it and/or modify
    it under the terms of the Revised BSD License; see LICENSE file for
@@ -13,6 +14,10 @@
 
 Changes
 =======
+
+Version 1.1.11 (2022-01-28)
+
+- Normalize pmid + their URL identifiers
 
 Version 1.1.10 (2022-01-11)
 
