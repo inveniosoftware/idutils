@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015, 2016, 2021 CERN.
+# Copyright (C) 2015-2022 CERN.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for

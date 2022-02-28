@@ -1,6 +1,6 @@
 ..
    This file is part of IDUtils
-   Copyright (C) 2015-2020 CERN.
+   Copyright (C) 2015-2022 CERN.
    Copyright (C) 2022 Northwestern University.
 
    IDUtils is free software; you can redistribute it and/or modify
@@ -14,6 +14,10 @@
 
 Changes
 =======
+
+Version 1.1.12 (2022-02-28)
+
+- Replaces ``isbnid_fork`` with ``isbnlib``
 
 Version 1.1.11 (2022-01-28)
 

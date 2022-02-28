@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015-2021 CERN.
+# Copyright (C) 2015-2022 CERN.
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
 #

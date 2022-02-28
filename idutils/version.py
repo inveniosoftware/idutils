@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015-2020 CERN.
+# Copyright (C) 2015-2022 CERN.
 # Copyright (C) 2022 Northwestern University.
 #
 # IDUtils is free software; you can redistribute it and/or modify
@@ -18,4 +18,4 @@ This file is imported by ``idutils.__init__``,
 and parsed by ``setup.py``.
 """
 
-__version__ = "1.1.11"
+__version__ = "1.1.12"
