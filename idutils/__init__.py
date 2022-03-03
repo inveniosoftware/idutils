@@ -366,6 +366,10 @@ ror_regexp = re.compile(
 )
 """See https://ror.org/facts/#core-components."""
 
+viaf_regexp = re.compile(
+    r"(?:http?://)?(?:viaf\.org/viaf/)?(\d+)$",
+    flags=re.I
+)
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
@@ -660,6 +664,11 @@ def is_ror(val):
     return ror_regexp.match(val)
 
 
+def is_viaf(val):
+    """Test if argument is a VIAF id."""
+    return viaf_regexp.match(val)
+
+
 PID_SCHEMES = [
     ('doi', is_doi),
     ('ark', is_ark),
@@ -694,6 +703,7 @@ PID_SCHEMES = [
     ('arrayexpress_array', is_arrayexpress_array),
     ('arrayexpress_experiment', is_arrayexpress_experiment),
     ('swh', is_swh),
+    ('viaf', is_viaf),
 ]
 """Definition of scheme name and associated test function.
 
@@ -841,6 +851,12 @@ def normalize_ror(val):
     return m.group(1)
 
 
+def normalize_viaf(val):
+    """Normalize a VIAF identifier"""
+    m = viaf_regexp.match(val)
+    return m.group(1)
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -872,6 +888,8 @@ def normalize_pid(val, scheme):
         return normalize_hal(val)
     elif scheme == 'ror':
         return normalize_ror(val)
+    elif scheme == 'viaf':
+        return normalize_viaf(val)
     return val
 
 
@@ -901,6 +919,7 @@ LANDING_URLS = {
     'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
     'swh': u'{scheme}://archive.softwareheritage.org/{pid}',
     'ror': u'{scheme}://ror.org/{pid}',
+    'viaf': u'{scheme}://viaf.org/viaf/{pid}',
 }
 """URL generation configuration for the supported PID providers."""
 
