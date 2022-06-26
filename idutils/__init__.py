@@ -22,7 +22,6 @@ import re
 import isbnlib
 from six.moves.urllib.parse import urlparse
 
-from .version import __version__
 
 ENSEMBL_PREFIXES = (
     "ENSPMA",  # Petromyzon marinus (Lamprey)
@@ -928,3 +927,6 @@ def to_url(val, scheme, url_scheme='http'):
     elif scheme in ['purl', 'url']:
         return pid
     return ''
+
+
+__version__ = "1.1.12"
