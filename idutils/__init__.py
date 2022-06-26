@@ -22,7 +22,6 @@ import re
 import isbnlib
 from six.moves.urllib.parse import urlparse
 
-
 ENSEMBL_PREFIXES = (
     "ENSPMA",  # Petromyzon marinus (Lamprey)
     "ENSNGA",  # Nannospalax galili (Upper Galilee mountains blind mole rat)
@@ -204,15 +203,12 @@ See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
 """
 
 doi_regexp = re.compile(
-    r"(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(\.\d+)*/.+)$",
-    flags=re.I
+    r"(doi:\s*|(?:https?://)?(?:dx\.)?doi\.org/)?(10\.\d+(\.\d+)*/.+)$", flags=re.I
 )
 """See http://en.wikipedia.org/wiki/Digital_object_identifier."""
 
 handle_regexp = re.compile(
-    r"(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?"
-    r"([^/.]+(\.[^/.]+)*/.*)$",
-    flags=re.I
+    r"(hdl:\s*|(?:https?://)?hdl\.handle\.net/)?" r"([^/.]+(\.[^/.]+)*/.*)$", flags=re.I
 )
 """See http://handle.net/rfc/rfc3651.html.
 
@@ -222,30 +218,23 @@ handle_regexp = re.compile(
 <LocalName>       = Any UTF8 char
 """
 
-arxiv_post_2007_regexp = re.compile(
-    r"(arxiv:)?(\d{4})\.(\d{4,5})(v\d+)?$",
-    flags=re.I
-)
+arxiv_post_2007_regexp = re.compile(r"(arxiv:)?(\d{4})\.(\d{4,5})(v\d+)?$", flags=re.I)
 """See http://arxiv.org/help/arxiv_identifier and
        http://arxiv.org/help/arxiv_identifier_for_services."""
 
 arxiv_pre_2007_regexp = re.compile(
-    r"(arxiv:)?([a-z\-]+)(\.[a-z]{2})?(/\d{4})(\d+)(v\d+)?$",
-    flags=re.I
+    r"(arxiv:)?([a-z\-]+)(\.[a-z]{2})?(/\d{4})(\d+)(v\d+)?$", flags=re.I
 )
 """See http://arxiv.org/help/arxiv_identifier and
        http://arxiv.org/help/arxiv_identifier_for_services."""
 
 arxiv_post_2007_with_class_regexp = re.compile(
-    r"(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$",
-    flags=re.I
+    r"(arxiv:)?(?:[a-z\-]+)(?:\.[a-z]{2})?/(\d{4})\.(\d{4,5})(v\d+)?$", flags=re.I
 )
 """Matches new style arXiv ID, with an old-style class specification;
     technically malformed, however appears in real data."""
 
-hal_regexp = re.compile(
-    r"(hal:|HAL:)?([a-z]{3}[a-z]*-|(sic|mem|ijn)_)\d{8}(v\d+)?$"
-)
+hal_regexp = re.compile(r"(hal:|HAL:)?([a-z]{3}[a-z]*-|(sic|mem|ijn)_)\d{8}(v\d+)?$")
 """Matches HAL identifiers (sic mem and ijn are old identifiers form)."""
 
 ads_regexp = re.compile(r"(ads:|ADS:)?(\d{4}[A-Za-z]\S{13}[A-Za-z.:])$")
@@ -255,8 +244,7 @@ pmcid_regexp = re.compile(r"PMC\d+$", flags=re.I)
 """PubMed Central ID regular expression."""
 
 pmid_regexp = re.compile(
-    r"(pmid:|https?://pubmed.ncbi.nlm.nih.gov/)?(\d+)/?$",
-    flags=re.I
+    r"(pmid:|https?://pubmed.ncbi.nlm.nih.gov/)?(\d+)/?$", flags=re.I
 )
 """PubMed ID regular expression."""
 
@@ -275,7 +263,8 @@ gnd_regexp = re.compile(
     r"[47]\d{6}-\d|"
     r"[1-9]\d{0,7}-[0-9X]|"
     r"3\d{7}[0-9X]"
-    r")")
+    r")"
+)
 """See https://www.wikidata.org/wiki/Property:P227."""
 
 gnd_resolver_url = "http://d-nb.info/gnd/"
@@ -303,22 +292,28 @@ See https://www.ddbj.nig.ac.jp/biosample/faq-e.html
     https://www.ncbi.nlm.nih.gov/biosample/docs/submission/faq/
 """
 
-ensembl_regexp = re.compile(r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
-    prefixes="|".join(ENSEMBL_PREFIXES)))
+ensembl_regexp = re.compile(
+    r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
+        prefixes="|".join(ENSEMBL_PREFIXES)
+    )
+)
 """Ensembl regular expression.
 
 See https://asia.ensembl.org/info/genome/stable_ids/prefixes.html
 """
 
-uniprot_regexp = re.compile(r"([A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})|"
-                            r"([OPQ][0-9][A-Z0-9]{3}[0-9])(\.\d+)?$")
+uniprot_regexp = re.compile(
+    r"([A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2})|"
+    r"([OPQ][0-9][A-Z0-9]{3}[0-9])(\.\d+)?$"
+)
 """UniProt regular expression.
 
 See https://www.uniprot.org/help/accession_numbers
 """
 
-refseq_regexp = re.compile(r"((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|"
-                           r"NZ_[A-Z]{4})\d+(\.\d+)?$")
+refseq_regexp = re.compile(
+    r"((AC|NC|NG|NT|NW|NM|NR|XM|XR|AP|NP|YP|XP|WP)_|" r"NZ_[A-Z]{4})\d+(\.\d+)?$"
+)
 """RefSeq regular expression.
 
 See https://academic.oup.com/nar/article/44/D1/D733/2502674 (Table 1)
@@ -336,15 +331,17 @@ geo_regexp = re.compile(r"G(PL|SM|SE|DS)\d+$")
 See https://www.ncbi.nlm.nih.gov/geo/info/overview.html#org
 """
 
-arrayexpress_array_regexp = re.compile(r"A-({codes})-\d+$".format(
-    codes="|".join(ARRAYEXPRESS_CODES)))
+arrayexpress_array_regexp = re.compile(
+    r"A-({codes})-\d+$".format(codes="|".join(ARRAYEXPRESS_CODES))
+)
 """ArrayExpress array accession.
 
 See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
 """
 
-arrayexpress_experiment_regexp = re.compile(r"E-({codes})-\d+$".format(
-    codes="|".join(ARRAYEXPRESS_CODES)))
+arrayexpress_experiment_regexp = re.compile(
+    r"E-({codes})-\d+$".format(codes="|".join(ARRAYEXPRESS_CODES))
+)
 """ArrayExpress array accession.
 
 See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
@@ -359,16 +356,13 @@ swh_regexp = re.compile(
 )
 """Matches Software Heritage identifiers."""
 
-ror_regexp = re.compile(
-    r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$",
-    flags=re.I
-)
+ror_regexp = re.compile(r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$", flags=re.I)
 """See https://ror.org/facts/#core-components."""
 
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
-    return int(x) if x != 'X' else 10
+    return int(x) if x != "X" else 10
 
 
 is_isbn10 = isbnlib.is_isbn10
@@ -408,7 +402,7 @@ def is_istc(val):
         return False
     sequence = [11, 9, 3, 1]
     try:
-        r = sum([int(x, 16)*sequence[i % 4] for i, x in enumerate(val[:-1])])
+        r = sum([int(x, 16) * sequence[i % 4] for i, x in enumerate(val[:-1])])
         ck = hex(r % 16)[2:].upper()
         return ck == val[-1]
     except ValueError:
@@ -435,7 +429,7 @@ def is_ean8(val):
         return False
     sequence = [3, 1]
     try:
-        r = sum([int(x)*sequence[i % 2] for i, x in enumerate(val[:-1])])
+        r = sum([int(x) * sequence[i % 2] for i, x in enumerate(val[:-1])])
         ck = (10 - r % 10) % 10
         return ck == int(val[-1])
     except ValueError:
@@ -448,7 +442,7 @@ def is_ean13(val):
         return False
     sequence = [1, 3]
     try:
-        r = sum([int(x)*sequence[i % 2] for i, x in enumerate(val[:-1])])
+        r = sum([int(x) * sequence[i % 2] for i, x in enumerate(val[:-1])])
         ck = (10 - r % 10) % 10
         return ck == int(val[-1])
     except ValueError:
@@ -471,7 +465,7 @@ def is_isni(val):
     try:
         r = 0
         for x in val[:-1]:
-            r = (r + int(x))*2
+            r = (r + int(x)) * 2
         ck = (12 - r % 11) % 11
         return ck == _convert_x_to_10(val[-1])
     except ValueError:
@@ -486,7 +480,7 @@ def is_orcid(val):
     """
     for orcid_url in orcid_urls:
         if val.startswith(orcid_url):
-            val = val[len(orcid_url):]
+            val = val[len(orcid_url) :]
             break
 
     val = val.replace("-", "").replace(" ", "")
@@ -500,11 +494,12 @@ def is_ark(val):
     """Test if argument is an ARK."""
     res = urlparse(val)
     return ark_suffix_regexp.match(val) or (
-        res.scheme == 'http' and
-        res.netloc != '' and
+        res.scheme == "http"
+        and res.netloc != ""
+        and
         # Note res.path includes leading slash, hence [1:] to use same reexp
-        ark_suffix_regexp.match(res.path[1:]) and
-        res.params == ''
+        ark_suffix_regexp.match(res.path[1:])
+        and res.params == ""
     )
 
 
@@ -512,17 +507,23 @@ def is_purl(val):
     """Test if argument is a PURL."""
     res = urlparse(val)
     purl_netlocs = [
-        'purl.org', 'purl.oclc.org', 'purl.net', 'purl.com', 'purl.fdlp.gov'
+        "purl.org",
+        "purl.oclc.org",
+        "purl.net",
+        "purl.com",
+        "purl.fdlp.gov",
     ]
-    return (res.scheme in ['http', 'https'] and
-            res.netloc in purl_netlocs and
-            res.path != '')
+    return (
+        res.scheme in ["http", "https"]
+        and res.netloc in purl_netlocs
+        and res.path != ""
+    )
 
 
 def is_url(val):
     """Test if argument is a URL."""
     res = urlparse(val)
-    return bool(res.scheme and res.netloc and res.params == '')
+    return bool(res.scheme and res.netloc and res.params == "")
 
 
 def is_lsid(val):
@@ -533,7 +534,7 @@ def is_lsid(val):
 def is_urn(val):
     """Test if argument is an URN."""
     res = urlparse(val)
-    return bool(res.scheme == 'urn' and res.netloc == '' and res.path != '')
+    return bool(res.scheme == "urn" and res.netloc == "" and res.path != "")
 
 
 def is_ads(val):
@@ -543,8 +544,9 @@ def is_ads(val):
 
 def is_arxiv_post_2007(val):
     """Test if argument is a post-2007 arXiv ID."""
-    return arxiv_post_2007_regexp.match(val) \
-        or arxiv_post_2007_with_class_regexp.match(val)
+    return arxiv_post_2007_regexp.match(val) or arxiv_post_2007_with_class_regexp.match(
+        val
+    )
 
 
 def is_arxiv_pre_2007(val):
@@ -586,7 +588,7 @@ def is_pmcid(val):
 def is_gnd(val):
     """Test if argument is a GND Identifier."""
     if val.startswith(gnd_resolver_url):
-        val = val[len(gnd_resolver_url):]
+        val = val[len(gnd_resolver_url) :]
 
     return gnd_regexp.match(val)
 
@@ -660,39 +662,39 @@ def is_ror(val):
 
 
 PID_SCHEMES = [
-    ('doi', is_doi),
-    ('ark', is_ark),
-    ('handle', is_handle),
-    ('purl', is_purl),
-    ('lsid', is_lsid),
-    ('urn', is_urn),
-    ('ads', is_ads),
-    ('arxiv', is_arxiv),
-    ('ascl', is_ascl),
-    ('hal', is_hal),
-    ('pmcid', is_pmcid),
-    ('isbn', is_isbn),
-    ('issn', is_issn),
-    ('orcid', is_orcid),
-    ('isni', is_isni),
-    ('ean13', is_ean13),
-    ('ean8', is_ean8),
-    ('istc', is_istc),
-    ('gnd', is_gnd),
-    ('ror', is_ror),
-    ('pmid', is_pmid),
-    ('url', is_url),
-    ('sra', is_sra),
-    ('bioproject', is_bioproject),
-    ('biosample', is_biosample),
-    ('ensembl', is_ensembl),
-    ('uniprot', is_uniprot),
-    ('refseq', is_refseq),
-    ('genome', is_genome),
-    ('geo', is_geo),
-    ('arrayexpress_array', is_arrayexpress_array),
-    ('arrayexpress_experiment', is_arrayexpress_experiment),
-    ('swh', is_swh),
+    ("doi", is_doi),
+    ("ark", is_ark),
+    ("handle", is_handle),
+    ("purl", is_purl),
+    ("lsid", is_lsid),
+    ("urn", is_urn),
+    ("ads", is_ads),
+    ("arxiv", is_arxiv),
+    ("ascl", is_ascl),
+    ("hal", is_hal),
+    ("pmcid", is_pmcid),
+    ("isbn", is_isbn),
+    ("issn", is_issn),
+    ("orcid", is_orcid),
+    ("isni", is_isni),
+    ("ean13", is_ean13),
+    ("ean8", is_ean8),
+    ("istc", is_istc),
+    ("gnd", is_gnd),
+    ("ror", is_ror),
+    ("pmid", is_pmid),
+    ("url", is_url),
+    ("sra", is_sra),
+    ("bioproject", is_bioproject),
+    ("biosample", is_biosample),
+    ("ensembl", is_ensembl),
+    ("uniprot", is_uniprot),
+    ("refseq", is_refseq),
+    ("genome", is_genome),
+    ("geo", is_geo),
+    ("arrayexpress_array", is_arrayexpress_array),
+    ("arrayexpress_experiment", is_arrayexpress_experiment),
+    ("swh", is_swh),
 ]
 """Definition of scheme name and associated test function.
 
@@ -701,16 +703,21 @@ order given by this list."""
 
 SCHEME_FILTER = [
     (
-        'url',
+        "url",
         # None these can have URLs, in which case we exclude them
-        ['isbn', 'istc', 'urn', 'lsid', 'issn', 'ean8'],
+        ["isbn", "istc", "urn", "lsid", "issn", "ean8"],
     ),
-    ('ean8', ['gnd', 'pmid']),
-    ('ean13', ['gnd', 'pmid']),
-    ('isbn', ['gnd', 'pmid']),
-    ('orcid', ['gnd', 'pmid']),
-    ('isni', ['gnd', 'pmid']),
-    ('issn', ['gnd', ]),
+    ("ean8", ["gnd", "pmid"]),
+    ("ean13", ["gnd", "pmid"]),
+    ("isbn", ["gnd", "pmid"]),
+    ("orcid", ["gnd", "pmid"]),
+    ("isni", ["gnd", "pmid"]),
+    (
+        "issn",
+        [
+            "gnd",
+        ],
+    ),
 ]
 
 
@@ -725,21 +732,24 @@ def detect_identifier_schemes(val):
             schemes.append(scheme)
 
     # GNDs and ISBNs numbers can clash...
-    if 'gnd' in schemes and 'isbn' in schemes:
+    if "gnd" in schemes and "isbn" in schemes:
         # ...in which case check explicitly if it's clearly a GND
-        if val.lower().startswith('gnd:'):
-            schemes.remove('isbn')
+        if val.lower().startswith("gnd:"):
+            schemes.remove("isbn")
 
     for first, remove_schemes in SCHEME_FILTER:
         if first in schemes:
             schemes = list(filter(lambda x: x not in remove_schemes, schemes))
 
-    if 'handle' in schemes and 'url' in schemes \
-       and not val.startswith("http://hdl.handle.net/") \
-       and not val.startswith("https://hdl.handle.net/"):
-        schemes = list(filter(lambda x: x != 'handle', schemes))
-    elif 'handle' in schemes and ('ark' in schemes or 'arxiv' in schemes):
-        schemes = list(filter(lambda x: x != 'handle', schemes))
+    if (
+        "handle" in schemes
+        and "url" in schemes
+        and not val.startswith("http://hdl.handle.net/")
+        and not val.startswith("https://hdl.handle.net/")
+    ):
+        schemes = list(filter(lambda x: x != "handle", schemes))
+    elif "handle" in schemes and ("ark" in schemes or "arxiv" in schemes):
+        schemes = list(filter(lambda x: x != "handle", schemes))
 
     return schemes
 
@@ -766,7 +776,7 @@ def normalize_orcid(val):
     """Normalize an ORCID identifier."""
     for orcid_url in orcid_urls:
         if val.startswith(orcid_url):
-            val = val[len(orcid_url):]
+            val = val[len(orcid_url) :]
             break
     val = val.replace("-", "").replace(" ", "")
 
@@ -776,9 +786,9 @@ def normalize_orcid(val):
 def normalize_gnd(val):
     """Normalize a GND identifier."""
     if val.startswith(gnd_resolver_url):
-        val = val[len(gnd_resolver_url):]
+        val = val[len(gnd_resolver_url) :]
     if val.lower().startswith("gnd:"):
-        val = val[len("gnd:"):]
+        val = val[len("gnd:") :]
     return "gnd:{0}".format(val)
 
 
@@ -806,7 +816,7 @@ def normalize_arxiv(val):
 
     m = is_arxiv_post_2007(val)
     if m:
-        val = 'arXiv:' + '.'.join(m.group(2, 3))
+        val = "arXiv:" + ".".join(m.group(2, 3))
         if m.group(4):
             val += m.group(4)
     return val
@@ -814,7 +824,7 @@ def normalize_arxiv(val):
 
 def normalize_hal(val):
     """Normalize a HAL identifier."""
-    val = val.replace(' ', '').lower().replace('hal:', '')
+    val = val.replace(" ", "").lower().replace("hal:", "")
     return val
 
 
@@ -830,8 +840,8 @@ def normalize_isbn(val):
 
 def normalize_issn(val):
     """Normalize an ISSN identifier."""
-    val = val.replace(' ', '').replace('-', '').strip().upper()
-    return '{0}-{1}'.format(val[:4], val[4:])
+    val = val.replace(" ", "").replace("-", "").strip().upper()
+    return "{0}-{1}".format(val[:4], val[4:])
 
 
 def normalize_ror(val):
@@ -849,62 +859,60 @@ def normalize_pid(val, scheme):
     if not val:
         return val
 
-    if scheme == 'doi':
+    if scheme == "doi":
         return normalize_doi(val)
-    elif scheme == 'handle':
+    elif scheme == "handle":
         return normalize_handle(val)
-    elif scheme == 'ads':
+    elif scheme == "ads":
         return normalize_ads(val)
-    elif scheme == 'pmid':
+    elif scheme == "pmid":
         return normalize_pmid(val)
-    elif scheme == 'arxiv':
+    elif scheme == "arxiv":
         return normalize_arxiv(val)
-    elif scheme == 'orcid':
+    elif scheme == "orcid":
         return normalize_orcid(val)
-    elif scheme == 'gnd':
+    elif scheme == "gnd":
         return normalize_gnd(val)
-    elif scheme == 'isbn':
+    elif scheme == "isbn":
         return normalize_isbn(val)
-    elif scheme == 'issn':
+    elif scheme == "issn":
         return normalize_issn(val)
-    elif scheme == 'hal':
+    elif scheme == "hal":
         return normalize_hal(val)
-    elif scheme == 'ror':
+    elif scheme == "ror":
         return normalize_ror(val)
     return val
 
 
 LANDING_URLS = {
-    'doi': u'{scheme}://doi.org/{pid}',
-    'handle': u'{scheme}://hdl.handle.net/{pid}',
-    'arxiv': u'{scheme}://arxiv.org/abs/{pid}',
-    'ascl': u'{scheme}://ascl.net/{pid}',
-    'orcid': u'{scheme}://orcid.org/{pid}',
-    'pmid': u'{scheme}://pubmed.ncbi.nlm.nih.gov/{pid}',
-    'ads': u'{scheme}://ui.adsabs.harvard.edu/#abs/{pid}',
-    'pmcid': u'{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}',
-    'gnd': u'{scheme}://d-nb.info/gnd/{pid}',
-    'urn': u'{scheme}://nbn-resolving.org/{pid}',
-    'sra': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
-    'bioproject': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
-    'biosample': u'{scheme}://www.ebi.ac.uk/ena/data/view/{pid}',
-    'ensembl': u'{scheme}://www.ensembl.org/id/{pid}',
-    'uniprot': u'{scheme}://purl.uniprot.org/uniprot/{pid}',
-    'refseq': u'{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}',
-    'genome': u'{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}',
-    'geo': u'{scheme}://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={pid}',
-    'arrayexpress_array':
-        u'{scheme}://www.ebi.ac.uk/arrayexpress/arrays/{pid}',
-    'arrayexpress_experiment':
-        u'{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}',
-    'hal': u'{scheme}://hal.archives-ouvertes.fr/{pid}',
-    'swh': u'{scheme}://archive.softwareheritage.org/{pid}',
-    'ror': u'{scheme}://ror.org/{pid}',
+    "doi": "{scheme}://doi.org/{pid}",
+    "handle": "{scheme}://hdl.handle.net/{pid}",
+    "arxiv": "{scheme}://arxiv.org/abs/{pid}",
+    "ascl": "{scheme}://ascl.net/{pid}",
+    "orcid": "{scheme}://orcid.org/{pid}",
+    "pmid": "{scheme}://pubmed.ncbi.nlm.nih.gov/{pid}",
+    "ads": "{scheme}://ui.adsabs.harvard.edu/#abs/{pid}",
+    "pmcid": "{scheme}://www.ncbi.nlm.nih.gov/pmc/{pid}",
+    "gnd": "{scheme}://d-nb.info/gnd/{pid}",
+    "urn": "{scheme}://nbn-resolving.org/{pid}",
+    "sra": "{scheme}://www.ebi.ac.uk/ena/data/view/{pid}",
+    "bioproject": "{scheme}://www.ebi.ac.uk/ena/data/view/{pid}",
+    "biosample": "{scheme}://www.ebi.ac.uk/ena/data/view/{pid}",
+    "ensembl": "{scheme}://www.ensembl.org/id/{pid}",
+    "uniprot": "{scheme}://purl.uniprot.org/uniprot/{pid}",
+    "refseq": "{scheme}://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val={pid}",
+    "genome": "{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}",
+    "geo": "{scheme}://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={pid}",
+    "arrayexpress_array": "{scheme}://www.ebi.ac.uk/arrayexpress/arrays/{pid}",
+    "arrayexpress_experiment": "{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}",
+    "hal": "{scheme}://hal.archives-ouvertes.fr/{pid}",
+    "swh": "{scheme}://archive.softwareheritage.org/{pid}",
+    "ror": "{scheme}://ror.org/{pid}",
 }
 """URL generation configuration for the supported PID providers."""
 
 
-def to_url(val, scheme, url_scheme='http'):
+def to_url(val, scheme, url_scheme="http"):
     """Convert a resolvable identifier into a URL for a landing page.
 
     :param val: The identifier's value.
@@ -917,16 +925,17 @@ def to_url(val, scheme, url_scheme='http'):
     """
     pid = normalize_pid(val, scheme)
     if scheme in LANDING_URLS:
-        if scheme == 'gnd' and pid.startswith('gnd:'):
-            pid = pid[len('gnd:'):]
-        if scheme == 'urn' and not pid.lower().startswith('urn:nbn:'):
-            return ''
-        if scheme == 'ascl':
-            pid = val.split(':')[1]
+        if scheme == "gnd" and pid.startswith("gnd:"):
+            pid = pid[len("gnd:") :]
+        if scheme == "urn" and not pid.lower().startswith("urn:nbn:"):
+            return ""
+        if scheme == "ascl":
+            pid = val.split(":")[1]
         return LANDING_URLS[scheme].format(scheme=url_scheme, pid=pid)
-    elif scheme in ['purl', 'url']:
+    elif scheme in ["purl", "url"]:
         return pid
-    return ''
+
+    return ""
 
 
 __version__ = "1.1.12"
