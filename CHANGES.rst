@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 1.1.13 (2022-10-05)
+
+- Fixes an ISBN normalization issue.
+
 Version 1.1.12 (2022-02-28)
 
 - Replaces ``isbnid_fork`` with ``isbnlib``
