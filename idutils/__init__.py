@@ -269,6 +269,8 @@ gnd_regexp = re.compile(
 
 gnd_resolver_url = "http://d-nb.info/gnd/"
 
+urn_resolver_url = "https://nbn-resolving.org/"
+
 sra_regexp = re.compile(r"[SED]R[APRSXZ]\d+$")
 """Sequence Read Archive regular expression.
 
@@ -791,6 +793,14 @@ def normalize_gnd(val):
         val = val[len("gnd:") :]
     return "gnd:{0}".format(val)
 
+
+def normalize_urn(val):
+    """Normalize a URN."""
+    if val.startswith(urn_resolver_url):
+        val = val[len(urn_resolver_url) :]
+    if val.lower().startswith("urn:"):
+        val = val[len("urn:") :]
+    return "urn:{0}".format(val)
 
 def normalize_pmid(val):
     """Normalize a PubMed ID."""
