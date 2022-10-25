@@ -700,6 +700,12 @@ identifiers = [
         "http://ror.org/03yrm5c26",
     ),
     (
+        "https://viaf.org/viaf/75121530",
+        ["viaf"],
+        "viaf:75121530",
+        "https://viaf.org/viaf/75121530",
+    ),
+    (
         (
             "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
             ";origin=https://github.com/python/cpython"

@@ -60,3 +60,5 @@ target/
 # KDevelop
 .kde4/
 *.kdev4
+
+.idea

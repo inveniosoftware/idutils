@@ -4,6 +4,7 @@
 # Copyright (C) 2015-2022 CERN.
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
+# Copyright (C) 2022 University of Münster.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -269,6 +270,8 @@ gnd_regexp = re.compile(
 
 gnd_resolver_url = "http://d-nb.info/gnd/"
 
+urn_resolver_url = "https://nbn-resolving.org/"
+
 sra_regexp = re.compile(r"[SED]R[APRSXZ]\d+$")
 """Sequence Read Archive regular expression.
 
@@ -358,6 +361,19 @@ swh_regexp = re.compile(
 
 ror_regexp = re.compile(r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$", flags=re.I)
 """See https://ror.org/facts/#core-components."""
+
+viaf_urls = [
+    "http://viaf.org/viaf/",
+    "https://viaf.org/viaf/",
+    "http://www.viaf.org/viaf/",
+    "https://www.viaf.org/viaf/",
+]
+
+viaf_regexp = re.compile(
+    r"(viaf:|VIAF:)?([1-9]\d(?:\d{0,7}|\d{17,20}))($|\/|\?|#)",
+    flags=re.I,
+)
+"""See https://www.wikidata.org/wiki/Property:P214."""
 
 
 def _convert_x_to_10(x):
@@ -661,6 +677,18 @@ def is_ror(val):
     return ror_regexp.match(val)
 
 
+def is_viaf(val):
+    """Test if argument is a VIAF id."""
+    for viaf_url in viaf_urls:
+        if val.startswith(viaf_url):
+            return True
+    res = viaf_regexp.match(val)
+    if res:
+        return viaf_regexp.match(val).group() == val
+    else:
+        return False
+
+
 PID_SCHEMES = [
     ("doi", is_doi),
     ("ark", is_ark),
@@ -695,6 +723,7 @@ PID_SCHEMES = [
     ("arrayexpress_array", is_arrayexpress_array),
     ("arrayexpress_experiment", is_arrayexpress_experiment),
     ("swh", is_swh),
+    ("viaf", is_viaf),
 ]
 """Definition of scheme name and associated test function.
 
@@ -705,9 +734,9 @@ SCHEME_FILTER = [
     (
         "url",
         # None these can have URLs, in which case we exclude them
-        ["isbn", "istc", "urn", "lsid", "issn", "ean8"],
+        ["isbn", "istc", "urn", "lsid", "issn", "ean8", "viaf"],
     ),
-    ("ean8", ["gnd", "pmid"]),
+    ("ean8", ["gnd", "pmid", "viaf"]),
     ("ean13", ["gnd", "pmid"]),
     ("isbn", ["gnd", "pmid"]),
     ("orcid", ["gnd", "pmid"]),
@@ -716,8 +745,10 @@ SCHEME_FILTER = [
         "issn",
         [
             "gnd",
+            "viaf",
         ],
     ),
+    ("pmid", ["viaf"]),
 ]
 
 
@@ -736,6 +767,17 @@ def detect_identifier_schemes(val):
         # ...in which case check explicitly if it's clearly a GND
         if val.lower().startswith("gnd:"):
             schemes.remove("isbn")
+
+    if "viaf" in schemes and "url" in schemes:
+        # check explicitly if it's a viaf
+        for viaf_url in viaf_urls:
+            if val.startswith(viaf_url):
+                schemes.remove("url")
+    if "viaf" in schemes and "handle" in schemes:
+        # check explicitly if it's a viaf
+        for viaf_url in viaf_urls:
+            if val.startswith(viaf_url):
+                schemes.remove("handle")
 
     for first, remove_schemes in SCHEME_FILTER:
         if first in schemes:
@@ -790,6 +832,15 @@ def normalize_gnd(val):
     if val.lower().startswith("gnd:"):
         val = val[len("gnd:") :]
     return "gnd:{0}".format(val)
+
+
+def normalize_urn(val):
+    """Normalize a URN."""
+    if val.startswith(urn_resolver_url):
+        val = val[len(urn_resolver_url) :]
+    if val.lower().startswith("urn:"):
+        val = val[len("urn:") :]
+    return "urn:{0}".format(val)
 
 
 def normalize_pmid(val):
@@ -850,6 +901,17 @@ def normalize_ror(val):
     return m.group(1)
 
 
+def normalize_viaf(val):
+    """Normalize a VIAF identifier."""
+    for viaf_url in viaf_urls:
+        if val.startswith(viaf_url):
+            val = val[len(viaf_url) :]
+            break
+    if val.lower().startswith("viaf:"):
+        val = val[len("viaf:") :]
+    return "viaf:{0}".format(val)
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -881,6 +943,10 @@ def normalize_pid(val, scheme):
         return normalize_hal(val)
     elif scheme == "ror":
         return normalize_ror(val)
+    elif scheme == "urn":
+        return normalize_urn(val)
+    elif scheme == "viaf":
+        return normalize_viaf(val)
     return val
 
 
@@ -908,6 +974,7 @@ LANDING_URLS = {
     "hal": "{scheme}://hal.archives-ouvertes.fr/{pid}",
     "swh": "{scheme}://archive.softwareheritage.org/{pid}",
     "ror": "{scheme}://ror.org/{pid}",
+    "viaf": "{scheme}://viaf.org/viaf/{pid}",
 }
 """URL generation configuration for the supported PID providers."""
 
@@ -931,6 +998,9 @@ def to_url(val, scheme, url_scheme="http"):
             return ""
         if scheme == "ascl":
             pid = val.split(":")[1]
+        if scheme == "viaf" and pid.startswith("viaf:"):
+            pid = pid[len("viaf:") :]
+            url_scheme = "https"
         return LANDING_URLS[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ["purl", "url"]:
         return pid
@@ -938,4 +1008,4 @@ def to_url(val, scheme, url_scheme="http"):
     return ""
 
 
-__version__ = "1.1.12"
+__version__ = "1.1.14"
