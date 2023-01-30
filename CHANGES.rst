@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 1.2.0 (2023-01-30)
+
+- schemes: add support for viaf and urn
+
 Version 1.1.12 (2022-02-28)
 
 - Replaces ``isbnid_fork`` with ``isbnlib``
