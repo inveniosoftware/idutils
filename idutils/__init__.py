@@ -257,6 +257,15 @@ lsid_regexp = re.compile(r"urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
 """See http://en.wikipedia.org/wiki/LSID."""
 
 orcid_urls = ["http://orcid.org/", "https://orcid.org/"]
+orcid_isni_ranges = [
+    (15_000_000, 35_000_000),
+    (900_000_000_000, 900_100_000_000),
+]
+"""Valid ORCiD ISNI block ranges.
+
+See
+    https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
+"""
 
 gnd_regexp = re.compile(
     r"(gnd:|GND:)?("
@@ -502,7 +511,7 @@ def is_orcid(val):
     val = val.replace("-", "").replace(" ", "")
     if is_isni(val):
         val = int(val[:-1], 10)  # Remove check digit and convert to int.
-        return val >= 15000000 and val <= 35000000
+        return any(start <= val <= end for start, end in orcid_isni_ranges)
     return False
 
 
