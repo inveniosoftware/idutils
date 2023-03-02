@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of IDUtils
-# Copyright (C) 2015-2022 CERN.
+# Copyright (C) 2015-2023 CERN.
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
 # Copyright (C) 2022 University of Münster.
@@ -1017,4 +1017,4 @@ def to_url(val, scheme, url_scheme="http"):
     return ""
 
 
-__version__ = "1.2.0"
+__version__ = "1.2.1"
