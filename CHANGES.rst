@@ -1,6 +1,6 @@
 ..
    This file is part of IDUtils
-   Copyright (C) 2015-2022 CERN.
+   Copyright (C) 2015-2023 CERN.
    Copyright (C) 2022 Northwestern University.
 
    IDUtils is free software; you can redistribute it and/or modify
@@ -14,6 +14,10 @@
 
 Changes
 =======
+
+Version 1.1.14 (2023-03-02)
+
+- Fixes ORCiD validation, by adding the new ISNI block range.
 
 Version 1.1.13 (2022-10-05)
 
