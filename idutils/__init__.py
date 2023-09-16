@@ -20,6 +20,7 @@ from __future__ import absolute_import, print_function
 
 import re
 
+import unicodedata
 import isbnlib
 from six.moves.urllib.parse import urlparse
 
@@ -564,6 +565,7 @@ def is_urn(val):
 
 def is_ads(val):
     """Test if argument is an ADS bibliographic code."""
+    val = unicodedata.normalize("NFKD", val)
     return ads_regexp.match(val)
 
 
@@ -819,6 +821,7 @@ def normalize_handle(val):
 
 def normalize_ads(val):
     """Normalize an ADS bibliographic code."""
+    val = unicodedata.normalize("NFKD", val)
     m = ads_regexp.match(val)
     return m.group(2)
 

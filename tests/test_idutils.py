@@ -269,6 +269,12 @@ identifiers = [
         "http://ui.adsabs.harvard.edu/#abs/2017zndo....495787v",
     ),
     (
+        "1992ApJ…400L…1W",
+        ["ads"],
+        "1992ApJ...400L...1W",
+        "http://ui.adsabs.harvard.edu/#abs/1992ApJ...400L...1W",
+    ),
+    (
         "0000000218250097",
         ["orcid", "isni"],
         "0000-0002-1825-0097",
