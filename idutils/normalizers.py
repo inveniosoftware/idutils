@@ -13,6 +13,8 @@
 
 """ID normalizer helper functions."""
 
+import unicodedata
+
 import isbnlib
 
 from .proxies import custom_schemes_registry
@@ -34,6 +36,7 @@ def normalize_handle(val):
 
 def normalize_ads(val):
     """Normalize an ADS bibliographic code."""
+    val = unicodedata.normalize("NFKD", val)
     m = ads_regexp.match(val)
     return m.group(2)
 

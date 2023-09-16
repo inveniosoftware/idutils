@@ -14,6 +14,7 @@
 """Utility file containing ID validators."""
 
 
+import unicodedata
 from urllib.parse import urlparse
 
 from .utils import *
@@ -187,6 +188,7 @@ def is_urn(val):
 
 def is_ads(val):
     """Test if argument is an ADS bibliographic code."""
+    val = unicodedata.normalize("NFKD", val)
     return ads_regexp.match(val)
 
 
