@@ -16,12 +16,10 @@
 
 """Small library for persistent identifiers used in scholarly communication."""
 
-from __future__ import absolute_import, print_function
-
 import re
+from urllib.parse import urlparse
 
 import isbnlib
-from six.moves.urllib.parse import urlparse
 
 ENSEMBL_PREFIXES = (
     "ENSPMA",  # Petromyzon marinus (Lamprey)
@@ -548,7 +546,7 @@ def is_purl(val):
 def is_url(val):
     """Test if argument is a URL."""
     res = urlparse(val)
-    return bool(res.scheme and res.netloc and res.params == "")
+    return bool(res.scheme and res.netloc)
 
 
 def is_lsid(val):

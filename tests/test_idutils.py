@@ -866,3 +866,10 @@ def test_ascl():
     assert idutils.is_ascl("ascl:1908.011")
     assert idutils.is_ascl("ascl:1908.0113")
     assert not idutils.is_ascl("1990.0803")
+
+
+def test_url():
+    """Test URL validation."""
+    for i, expected_schemes, normalized_value, url_value in identifiers:
+        if url_value:
+            assert idutils.is_url(url_value)
