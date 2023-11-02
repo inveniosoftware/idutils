@@ -35,7 +35,7 @@ jobs:
 
       - name: Generate dependencies
         run: |
-          pip install wheel requirements-builder
+          pip install setuptools wheel requirements-builder
           requirements-builder -e "$EXTRAS" --level=${{ matrix.requirements-level }} setup.py > .${{ matrix.requirements-level }}-${{ matrix.python-version }}-requirements.txt
 
       - name: Cache pip
