@@ -771,6 +771,18 @@ identifiers = [
             ";origin=https://github.com/python/cpython"
         ),
     ),
+    (
+        "user1@example.com",
+        ["email"],
+        "user1@example.com",
+        "mailto:user1@example.com",
+    ),
+    (
+        "5b5056cbf89049064b44d5101764aaae42eb1447",
+        ["sha1"],
+        "5b5056cbf89049064b44d5101764aaae42eb1447",
+        "",
+    ),
 ]
 
 
