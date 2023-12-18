@@ -386,7 +386,7 @@ viaf_regexp = re.compile(
 
 email_regexp = re.compile(r"\S+@(\S+\.)+\S+")
 
-sha1_regexp = re.compile(r"^[a-zA-Z0-9]{40}$")
+sha1_regexp = re.compile(r"^[a-fA-F0-9]{40}$")
 
 
 def _convert_x_to_10(x):
