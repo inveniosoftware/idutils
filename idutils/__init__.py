@@ -999,7 +999,9 @@ LANDING_URLS = {
     "genome": "{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}",
     "geo": "{scheme}://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={pid}",
     "arrayexpress_array": "{scheme}://www.ebi.ac.uk/arrayexpress/arrays/{pid}",
-    "arrayexpress_experiment": "{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}",
+    "arrayexpress_experiment": (
+        "{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}"
+    ),
     "hal": "{scheme}://hal.archives-ouvertes.fr/{pid}",
     "swh": "{scheme}://archive.softwareheritage.org/{pid}",
     "ror": "{scheme}://ror.org/{pid}",
