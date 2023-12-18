@@ -387,6 +387,7 @@ viaf_regexp = re.compile(
 email_regexp = re.compile(r"\S+@(\S+\.)+\S+")
 
 sha1_regexp = re.compile(r"^[a-fA-F0-9]{40}$")
+"""See https://www.w3.org/TR/annotation-model/#agents."""
 
 
 def _convert_x_to_10(x):
