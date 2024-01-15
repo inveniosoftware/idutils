@@ -1017,4 +1017,4 @@ def to_url(val, scheme, url_scheme="http"):
     return ""
 
 
-__version__ = "1.2.1"
+__version__ = "1.2.2"
