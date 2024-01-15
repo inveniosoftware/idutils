@@ -19,6 +19,7 @@
 from __future__ import absolute_import, print_function
 
 import re
+from typing import Match, Union
 
 import isbnlib
 from six.moves.urllib.parse import urlparse
@@ -385,7 +386,7 @@ viaf_regexp = re.compile(
 """See https://www.wikidata.org/wiki/Property:P214."""
 
 
-def _convert_x_to_10(x):
+def _convert_x_to_10(x: str) -> int:
     """Convert char to int with X being converted to 10."""
     return int(x) if x != "X" else 10
 
@@ -397,7 +398,7 @@ is_isbn13 = isbnlib.is_isbn13
 """Test if argument is an ISBN-13 number."""
 
 
-def is_isbn(val):
+def is_isbn(val: str) -> bool:
     """Test if argument is an ISBN-10 or ISBN-13 number."""
     if is_isbn10(val) or is_isbn13(val):
         if val[0:3] in ["978", "979"] or not is_ean13(val):
@@ -405,7 +406,7 @@ def is_isbn(val):
     return False
 
 
-def is_issn(val):
+def is_issn(val: str) -> bool:
     """Test if argument is an ISSN number."""
     try:
         val = val.replace("-", "").replace(" ", "").upper()
@@ -417,7 +418,7 @@ def is_issn(val):
         return False
 
 
-def is_istc(val):
+def is_istc(val: str) -> bool:
     """Test if argument is a International Standard Text Code.
 
     See http://www.istc-international.org/html/about_structure_syntax.aspx
@@ -434,12 +435,12 @@ def is_istc(val):
         return False
 
 
-def is_doi(val):
+def is_doi(val: str) -> Union[Match[str], None]:
     """Test if argument is a DOI."""
     return doi_regexp.match(val)
 
 
-def is_handle(val):
+def is_handle(val: str) -> Union[bool, None]:
     """Test if argument is a Handle.
 
     Note, DOIs are also handles, and handle are very generic so they will also
@@ -448,7 +449,7 @@ def is_handle(val):
     return handle_regexp.match(val) and not swh_regexp.match(val)
 
 
-def is_ean8(val):
+def is_ean8(val: str) -> bool:
     """Test if argument is a International Article Number (EAN-8)."""
     if len(val) != 8:
         return False
@@ -461,7 +462,7 @@ def is_ean8(val):
         return False
 
 
-def is_ean13(val):
+def is_ean13(val: str) -> bool:
     """Test if argument is a International Article Number (EAN-13)."""
     if len(val) != 13:
         return False
@@ -474,7 +475,7 @@ def is_ean13(val):
         return False
 
 
-def is_ean(val):
+def is_ean(val: str) -> bool:
     """Test if argument is a International Article Number (EAN-13 or EAN-8).
 
     See http://en.wikipedia.org/wiki/International_Article_Number_(EAN).
@@ -482,7 +483,7 @@ def is_ean(val):
     return is_ean13(val) or is_ean8(val)
 
 
-def is_isni(val):
+def is_isni(val: str) -> bool:
     """Test if argument is an International Standard Name Identifier."""
     val = val.replace("-", "").replace(" ", "").upper()
     if len(val) != 16:
@@ -497,7 +498,7 @@ def is_isni(val):
         return False
 
 
-def is_orcid(val):
+def is_orcid(val: str) -> bool:
     """Test if argument is an ORCID ID.
 
     See http://support.orcid.org/knowledgebase/
@@ -510,12 +511,12 @@ def is_orcid(val):
 
     val = val.replace("-", "").replace(" ", "")
     if is_isni(val):
-        val = int(val[:-1], 10)  # Remove check digit and convert to int.
-        return any(start <= val <= end for start, end in orcid_isni_ranges)
+        ival = int(val[:-1], 10)  # Remove check digit and convert to int.
+        return any(start <= ival <= end for start, end in orcid_isni_ranges)
     return False
 
 
-def is_ark(val):
+def is_ark(val: str) -> Union[Match[str], bool, None]:
     """Test if argument is an ARK."""
     res = urlparse(val)
     return ark_suffix_regexp.match(val) or (
@@ -528,7 +529,7 @@ def is_ark(val):
     )
 
 
-def is_purl(val):
+def is_purl(val: str) -> bool:
     """Test if argument is a PURL."""
     res = urlparse(val)
     purl_netlocs = [
@@ -545,41 +546,41 @@ def is_purl(val):
     )
 
 
-def is_url(val):
+def is_url(val: str) -> bool:
     """Test if argument is a URL."""
     res = urlparse(val)
     return bool(res.scheme and res.netloc and res.params == "")
 
 
-def is_lsid(val):
+def is_lsid(val: str) -> Union[Match[str], bool, None]:
     """Test if argument is a LSID."""
     return is_urn(val) and lsid_regexp.match(val)
 
 
-def is_urn(val):
+def is_urn(val: str) -> bool:
     """Test if argument is an URN."""
     res = urlparse(val)
     return bool(res.scheme == "urn" and res.netloc == "" and res.path != "")
 
 
-def is_ads(val):
+def is_ads(val: str) -> Union[Match[str], None]:
     """Test if argument is an ADS bibliographic code."""
     return ads_regexp.match(val)
 
 
-def is_arxiv_post_2007(val):
+def is_arxiv_post_2007(val: str) -> Union[Match[str], None]:
     """Test if argument is a post-2007 arXiv ID."""
     return arxiv_post_2007_regexp.match(val) or arxiv_post_2007_with_class_regexp.match(
         val
     )
 
 
-def is_arxiv_pre_2007(val):
+def is_arxiv_pre_2007(val: str) -> Union[Match[str], None]:
     """Test if argument is a pre-2007 arXiv ID."""
     return arxiv_pre_2007_regexp.match(val)
 
 
-def is_arxiv(val):
+def is_arxiv(val: str) -> Union[Match[str], None]:
     """Test if argument is an arXiv ID.
 
     See http://arxiv.org/help/arxiv_identifier and
@@ -588,7 +589,7 @@ def is_arxiv(val):
     return is_arxiv_post_2007(val) or is_arxiv_pre_2007(val)
 
 
-def is_hal(val):
+def is_hal(val: str) -> Union[Match[str], None]:
     """Test if argument is a HAL identifier.
 
     See (https://hal.archives-ouvertes.fr)
@@ -596,7 +597,7 @@ def is_hal(val):
     return hal_regexp.match(val)
 
 
-def is_pmid(val):
+def is_pmid(val: str) -> Union[Match[str], None]:
     """Test if argument is a PubMed ID.
 
     Warning: PMID are just integers, with no structure, so this function will
@@ -605,12 +606,12 @@ def is_pmid(val):
     return pmid_regexp.match(val)
 
 
-def is_pmcid(val):
+def is_pmcid(val: str) -> Union[Match[str], None]:
     """Test if argument is a PubMed Central ID."""
     return pmcid_regexp.match(val)
 
 
-def is_gnd(val):
+def is_gnd(val: str) -> Union[Match[str], None]:
     """Test if argument is a GND Identifier."""
     if val.startswith(gnd_resolver_url):
         val = val[len(gnd_resolver_url) :]
@@ -618,62 +619,62 @@ def is_gnd(val):
     return gnd_regexp.match(val)
 
 
-def is_sra(val):
+def is_sra(val: str) -> Union[Match[str], None]:
     """Test if argument is an SRA accession."""
     return sra_regexp.match(val)
 
 
-def is_bioproject(val):
+def is_bioproject(val: str) -> Union[Match[str], None]:
     """Test if argument is a BioProject accession."""
     return bioproject_regexp.match(val)
 
 
-def is_biosample(val):
+def is_biosample(val: str) -> Union[Match[str], None]:
     """Test if argument is a BioSample accession."""
     return biosample_regexp.match(val)
 
 
-def is_ensembl(val):
+def is_ensembl(val: str) -> Union[Match[str], None]:
     """Test if argument is an Ensembl accession."""
     return ensembl_regexp.match(val)
 
 
-def is_uniprot(val):
+def is_uniprot(val: str) -> Union[Match[str], None]:
     """Test if argument is a UniProt accession."""
     return uniprot_regexp.match(val)
 
 
-def is_refseq(val):
+def is_refseq(val: str) -> Union[Match[str], None]:
     """Test if argument is a RefSeq accession."""
     return refseq_regexp.match(val)
 
 
-def is_genome(val):
+def is_genome(val: str) -> Union[Match[str], None]:
     """Test if argument is a GenBank or RefSeq genome assembly accession."""
     return genome_regexp.match(val)
 
 
-def is_geo(val):
+def is_geo(val: str) -> Union[Match[str], None]:
     """Test if argument is a Gene Expression Omnibus (GEO) accession."""
     return geo_regexp.match(val)
 
 
-def is_arrayexpress_array(val):
+def is_arrayexpress_array(val: str) -> Union[Match[str], None]:
     """Test if argument is an ArrayExpress array accession."""
     return arrayexpress_array_regexp.match(val)
 
 
-def is_arrayexpress_experiment(val):
+def is_arrayexpress_experiment(val: str) -> Union[Match[str], None]:
     """Test if argument is an ArrayExpress experiment accession."""
     return arrayexpress_experiment_regexp.match(val)
 
 
-def is_ascl(val):
+def is_ascl(val: str) -> Union[Match[str], None]:
     """Test if argument is a ASCL accession."""
     return ascl_regexp.match(val)
 
 
-def is_swh(val):
+def is_swh(val: str) -> Union[Match[str], None]:
     """Test if argument is a Software Heritage identifier.
 
     https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
@@ -681,19 +682,19 @@ def is_swh(val):
     return swh_regexp.match(val)
 
 
-def is_ror(val):
+def is_ror(val: str) -> Union[Match[str], None]:
     """Test if argument is a ROR id."""
     return ror_regexp.match(val)
 
 
-def is_viaf(val):
+def is_viaf(val: str) -> bool:
     """Test if argument is a VIAF id."""
     for viaf_url in viaf_urls:
         if val.startswith(viaf_url):
             return True
     res = viaf_regexp.match(val)
-    if res:
-        return viaf_regexp.match(val).group() == val
+    if res is not None:
+        return res.group() == val
     else:
         return False
 
@@ -761,7 +762,7 @@ SCHEME_FILTER = [
 ]
 
 
-def detect_identifier_schemes(val):
+def detect_identifier_schemes(val: str) -> list[str]:
     """Detect persistent identifier scheme for a given value.
 
     .. note:: Some schemes like PMID are very generic.
@@ -805,25 +806,28 @@ def detect_identifier_schemes(val):
     return schemes
 
 
-def normalize_doi(val):
+def normalize_doi(val: str) -> str:
     """Normalize a DOI."""
     m = doi_regexp.match(val)
+    assert m is not None
     return m.group(2)
 
 
-def normalize_handle(val):
+def normalize_handle(val: str) -> str:
     """Normalize a Handle identifier."""
     m = handle_regexp.match(val)
+    assert m is not None
     return m.group(2)
 
 
-def normalize_ads(val):
+def normalize_ads(val: str) -> str:
     """Normalize an ADS bibliographic code."""
     m = ads_regexp.match(val)
+    assert m is not None
     return m.group(2)
 
 
-def normalize_orcid(val):
+def normalize_orcid(val: str) -> str:
     """Normalize an ORCID identifier."""
     for orcid_url in orcid_urls:
         if val.startswith(orcid_url):
@@ -834,7 +838,7 @@ def normalize_orcid(val):
     return "-".join([val[0:4], val[4:8], val[8:12], val[12:16]])
 
 
-def normalize_gnd(val):
+def normalize_gnd(val: str) -> str:
     """Normalize a GND identifier."""
     if val.startswith(gnd_resolver_url):
         val = val[len(gnd_resolver_url) :]
@@ -843,7 +847,7 @@ def normalize_gnd(val):
     return "gnd:{0}".format(val)
 
 
-def normalize_urn(val):
+def normalize_urn(val: str) -> str:
     """Normalize a URN."""
     if val.startswith(urn_resolver_url):
         val = val[len(urn_resolver_url) :]
@@ -852,13 +856,14 @@ def normalize_urn(val):
     return "urn:{0}".format(val)
 
 
-def normalize_pmid(val):
+def normalize_pmid(val: str) -> str:
     """Normalize a PubMed ID."""
     m = pmid_regexp.match(val)
+    assert m is not None
     return m.group(2)
 
 
-def normalize_arxiv(val):
+def normalize_arxiv(val: str) -> str:
     """Normalize an arXiv identifier."""
     if not val.lower().startswith("arxiv:"):
         val = "arXiv:{0}".format(val)
@@ -882,13 +887,13 @@ def normalize_arxiv(val):
     return val
 
 
-def normalize_hal(val):
+def normalize_hal(val: str) -> str:
     """Normalize a HAL identifier."""
     val = val.replace(" ", "").lower().replace("hal:", "")
     return val
 
 
-def normalize_isbn(val):
+def normalize_isbn(val: str) -> str:
     """Normalize an ISBN identifier.
 
     Also converts ISBN10 to ISBN13.
@@ -898,19 +903,20 @@ def normalize_isbn(val):
     return isbnlib.mask(isbnlib.canonical(val))
 
 
-def normalize_issn(val):
+def normalize_issn(val: str) -> str:
     """Normalize an ISSN identifier."""
     val = val.replace(" ", "").replace("-", "").strip().upper()
     return "{0}-{1}".format(val[:4], val[4:])
 
 
-def normalize_ror(val):
+def normalize_ror(val: str):
     """Normalize a ROR."""
     m = ror_regexp.match(val)
+    assert m is not None
     return m.group(1)
 
 
-def normalize_viaf(val):
+def normalize_viaf(val: str) -> str:
     """Normalize a VIAF identifier."""
     for viaf_url in viaf_urls:
         if val.startswith(viaf_url):
@@ -921,7 +927,7 @@ def normalize_viaf(val):
     return "viaf:{0}".format(val)
 
 
-def normalize_pid(val, scheme):
+def normalize_pid(val: str, scheme: str) -> str:
     """Normalize an identifier.
 
     E.g. doi:10.1234/foo and http://dx.doi.org/10.1234/foo and 10.1234/foo
@@ -979,7 +985,9 @@ LANDING_URLS = {
     "genome": "{scheme}://www.ncbi.nlm.nih.gov/assembly/{pid}",
     "geo": "{scheme}://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={pid}",
     "arrayexpress_array": "{scheme}://www.ebi.ac.uk/arrayexpress/arrays/{pid}",
-    "arrayexpress_experiment": "{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}",
+    "arrayexpress_experiment": (
+        "{scheme}://www.ebi.ac.uk/arrayexpress/experiments/{pid}"
+    ),
     "hal": "{scheme}://hal.archives-ouvertes.fr/{pid}",
     "swh": "{scheme}://archive.softwareheritage.org/{pid}",
     "ror": "{scheme}://ror.org/{pid}",
@@ -988,7 +996,7 @@ LANDING_URLS = {
 """URL generation configuration for the supported PID providers."""
 
 
-def to_url(val, scheme, url_scheme="http"):
+def to_url(val: str, scheme: str, url_scheme: str = "http") -> str:
     """Convert a resolvable identifier into a URL for a landing page.
 
     :param val: The identifier's value.
