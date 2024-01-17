@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 2.0.0 (2023-03-16)
+
+- Uses HTTPS by default when calling ``idutils.to_url``.
+
 Version 1.2.1 (2023-03-02)
 
 - Fixes ORCiD validation, by adding the new ISNI block range.
@@ -72,7 +76,7 @@ Version 1.1.2 (2019-02-12)
 
 - Adds support for HAL identifiers.
 
-Version 1.1.1 (2018-11-18)
+Version 1.1.1 (2018-11-28)
 
 - Changes URL resolution for bibcodes to use https://ui.adsabs.harvard instead
   of https://adsabs.harvard.edu/abs/.
