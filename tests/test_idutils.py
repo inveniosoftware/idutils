@@ -16,6 +16,8 @@
 
 from __future__ import absolute_import, print_function
 
+import pytest
+
 import idutils
 
 identifiers = [
@@ -771,10 +773,16 @@ identifiers = [
             ";origin=https://github.com/python/cpython"
         ),
     ),
+    (
+        "custom_scheme_valid",
+        ["custom_scheme"],
+        "custom_scheme_valid",
+        "http://custom/scheme/custom_scheme_valid",
+    ),
 ]
 
 
-def test_detect_schemes():
+def test_detect_schemes(base_app):
     """Test scheme detection."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
@@ -785,7 +793,8 @@ def test_is_type():
     """Test type detection."""
     for i, schemes, normalized_value, url_value in identifiers:
         for s in schemes:
-            assert getattr(idutils, "is_%s" % s)(i)
+            if not s.startswith("custom"):
+                assert getattr(idutils, "is_%s" % s)(i)
 
 
 def test_normalize_pid():
@@ -796,7 +805,7 @@ def test_normalize_pid():
     assert idutils.normalize_pid(None, "handle") is None
 
 
-def test_idempotence():
+def test_idempotence(base_app):
     """Test persistent id normalization."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         val_norm = idutils.normalize_pid(i, expected_schemes[0])
@@ -806,14 +815,9 @@ def test_idempotence():
 def test_to_url():
     """Test URL generation."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
-        assert (
-            idutils.to_url(
-                idutils.normalize_pid(i, expected_schemes[0]), expected_schemes[0]
-            )
-            == url_value
-        )
+        assert idutils.to_url(i, expected_schemes[0]) == url_value
         assert idutils.to_url(
-            idutils.normalize_pid(i, expected_schemes[0]),
+            i,
             expected_schemes[0],
             url_scheme="https",
         ) == (
@@ -824,7 +828,7 @@ def test_to_url():
         )
 
 
-def test_valueerror():
+def test_valueerror(base_app):
     """Test for bad validators."""
     # Many validators rely on a special length of the identifier before
     # testing further. This test, checks that the validators are still

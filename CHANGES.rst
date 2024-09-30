@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 2.0.0 (2024-09-30)
+
+- Restructure module to be configurable and readable.
+
 Version 1.2.1 (2023-03-02)
 
 - Fixes ORCiD validation, by adding the new ISNI block range.
