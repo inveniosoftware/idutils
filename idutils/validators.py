@@ -14,7 +14,7 @@
 """Utility file containing ID validators."""
 
 
-from six.moves.urllib.parse import urlparse
+from urllib.parse import urlparse
 
 from .utils import *
 from .utils import _convert_x_to_10

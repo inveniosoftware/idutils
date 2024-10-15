@@ -15,9 +15,11 @@
 Changes
 =======
 
-Version 2.0.0 (2024-09-30)
+Version 1.3.0 (2024-10-15)
 
 - Restructure module to be configurable and readable.
+- Adds a new entrypoint to register new custom schemes
+- Adds deprecations for direct imports of schemes
 
 Version 1.2.1 (2023-03-02)
 
