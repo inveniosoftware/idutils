@@ -15,7 +15,7 @@
 
 from . import validators
 
-IDUTILS_PID_SCHEMES_CONFIG = [
+IDUTILS_PID_SCHEMES = [
     ("doi", validators.is_doi),
     ("ark", validators.is_ark),
     ("handle", validators.is_handle),
@@ -57,7 +57,7 @@ Order of list is important, as identifier scheme detection will test in the
 order given by this list."""
 
 
-IDUTILS_SCHEME_FILTER_CONFIG = [
+IDUTILS_SCHEME_FILTER = [
     (
         "url",
         # None these can have URLs, in which case we exclude them

@@ -17,7 +17,7 @@ from threading import Lock
 
 from importlib_metadata import entry_points
 
-from .config import IDUTILS_PID_SCHEMES_CONFIG
+from .schemes import IDUTILS_PID_SCHEMES
 
 
 def _set_default_custom_scheme_config(scheme_config):
@@ -48,7 +48,7 @@ class CustomSchemesRegistry:
         """Create a new instance."""
         with cls._lock:
             if cls._instance is None:
-                cls._instance = super(CustomSchemesRegistry, cls).__new__(cls)
+                cls._instance = super().__new__(cls)
                 cls._instance._custom_schemes_registry = (
                     {}
                 )  # Internal dictionary to store schemes
@@ -84,7 +84,7 @@ class CustomSchemesRegistry:
 
     def _load_entry_points(self, ep_name):
         """Load entry points into the internal registry."""
-        existing_id_names = set(scheme[0] for scheme in IDUTILS_PID_SCHEMES_CONFIG)
+        existing_id_names = set(scheme[0] for scheme in IDUTILS_PID_SCHEMES)
 
         # Load entry points from the specified group
         for ep in set(entry_points(group=ep_name)):

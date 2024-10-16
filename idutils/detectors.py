@@ -14,17 +14,18 @@
 """Functions for detecting the persistent identifier."""
 
 from . import validators
-from .config import IDUTILS_PID_SCHEMES_CONFIG, IDUTILS_SCHEME_FILTER_CONFIG
 from .proxies import custom_schemes_registry
+from .schemes import IDUTILS_PID_SCHEMES as _IDUTILS_PID_SCHEMES
+from .schemes import IDUTILS_SCHEME_FILTER as _IDUTILS_SCHEME_FILTER
 
-IDUTILS_PID_SCHEMES = IDUTILS_PID_SCHEMES_CONFIG
+IDUTILS_PID_SCHEMES = _IDUTILS_PID_SCHEMES
 """Definition of scheme name and associated test function.
 
 Order of list is important, as identifier scheme detection will test in the
 order given by this list."""
 
 
-IDUTILS_SCHEME_FILTER = IDUTILS_SCHEME_FILTER_CONFIG
+IDUTILS_SCHEME_FILTER = _IDUTILS_SCHEME_FILTER
 """(present_scheme, [list of schemes to remove if present_scheme found])."""
 
 
