@@ -13,8 +13,7 @@
 
 """Proxy definitions."""
 
-from flask import current_app
-from werkzeug.local import LocalProxy
+from .ext import CustomSchemesRegistry
 
-current_idutils = LocalProxy(lambda: current_app.extensions["idutils"])
-"""Proxy to the extension."""
+custom_schemes_registry = lambda: CustomSchemesRegistry()
+"""Proxy to the custom scheme registrty."""

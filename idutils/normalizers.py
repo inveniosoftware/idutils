@@ -15,7 +15,7 @@
 
 import isbnlib
 
-from .proxies import current_idutils
+from .proxies import custom_schemes_registry
 from .utils import *
 from .validators import is_arxiv_post_2007, is_arxiv_pre_2007
 
@@ -172,7 +172,9 @@ def normalize_pid(val, scheme):
     elif scheme == "viaf":
         return normalize_viaf(val)
     else:
-        for custom_scheme, normalizer in current_idutils.pick_scheme_key("normalizer"):
+        for custom_scheme, normalizer in custom_schemes_registry().pick_scheme_key(
+            "normalizer"
+        ):
             if scheme == custom_scheme:
                 return normalizer(val)
     return val
@@ -234,7 +236,7 @@ def to_url(val, scheme, url_scheme="http"):
     elif scheme in ["purl", "url"]:
         return pid
     else:
-        for custom_scheme, url_generator in current_idutils.pick_scheme_key(
+        for custom_scheme, url_generator in custom_schemes_registry().pick_scheme_key(
             "url_generator"
         ):
             if scheme == custom_scheme:

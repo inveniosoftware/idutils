@@ -11,16 +11,17 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-"""Pytest configuration."""
+"""Persistent identifier utilities tests."""
 
 import pytest
 
+from idutils.proxies import custom_schemes_registry
 
-@pytest.fixture(scope="module")
-def extra_entry_points():
-    """Register `custom_scheme` entrypoints."""
-    return {
-        "idutils.custom_schemes": [
-            "custom_scheme = mock_module.custom_schemes:custom_scheme"
-        ]
-    }
+
+def test_custom_registry_singleton(entry_points):
+    """Test that the registry is instantiated only once."""
+    instance1 = custom_schemes_registry()
+
+    instance2 = custom_schemes_registry()
+
+    assert instance1 is instance2

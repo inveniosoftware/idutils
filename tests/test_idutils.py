@@ -780,8 +780,9 @@ identifiers = [
 ]
 
 
-def test_detect_schemes(base_app):
+def test_detect_schemes(entry_points):
     """Test scheme detection."""
+
     for i, expected_schemes, normalized_value, url_value in identifiers:
         schemes = idutils.detect_identifier_schemes(i)
         assert schemes == expected_schemes, i
@@ -803,14 +804,14 @@ def test_normalize_pid():
     assert idutils.normalize_pid(None, "handle") is None
 
 
-def test_idempotence(base_app):
+def test_idempotence(entry_points):
     """Test persistent id normalization."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         val_norm = idutils.normalize_pid(i, expected_schemes[0])
         assert expected_schemes[0] in idutils.detect_identifier_schemes(val_norm)
 
 
-def test_to_url():
+def test_to_url(entry_points):
     """Test URL generation."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         assert idutils.to_url(i, expected_schemes[0]) == url_value
@@ -826,7 +827,7 @@ def test_to_url():
         )
 
 
-def test_valueerror(base_app):
+def test_valueerror(entry_points):
     """Test for bad validators."""
     # Many validators rely on a special length of the identifier before
     # testing further. This test, checks that the validators are still
