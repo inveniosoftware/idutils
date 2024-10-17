@@ -15,7 +15,13 @@
 Changes
 =======
 
-Version 1.3.0 (2024-10-15)
+Version 1.4.0 (2024-10-17)
+
+- Restructure module to be configurable and readable.
+- Adds a new entrypoint to register new custom schemes
+- Adds deprecations for direct imports of schemes
+
+Version 1.3.0 (2024-10-15) (yanked due to undesired flask dependency)
 
 - Restructure module to be configurable and readable.
 - Adds a new entrypoint to register new custom schemes
