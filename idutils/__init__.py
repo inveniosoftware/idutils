@@ -14,42 +14,7 @@
 # granted to it by virtue of its status as an Intergovernmental Organization
 # or submit itself to any jurisdiction.
 
-"""Small library for persistent identifiers used in scholarly communication.
-
-Setting up custom schemes
--------------------------
-In order to define your own custom schemes you can use the following entrypoint to
-register them
-
-.. code-block:: python
-
-    [options.entry_points]
-    idutils.custom_schemes =
-        my_new_scheme = my_module.get_scheme_config_func
-
-The entry point ``'my_new_scheme = my_module.get_scheme_config_func'`` defines an entry
-point named ``my_new_scheme`` pointing to the function ``my_module.get_scheme_config_func``
-which returns the config for your new registered scheme.
-
-That function must return a dictionary with the following format:
-
-.. code-block:: python
-
-    def get_scheme_config_func():
-        return {
-            # See examples in `idutils.validators` file.
-            "validator": lambda value: True else False,
-            # Used in `idutils.normalizers.normalize_pid` function.
-            "normalizer": lambda value: normalized_value,
-            # See examples in `idutils.detectors.IDUTILS_SCHEME_FILTER` config.
-            "filter": ["list_of_schemes_to_filter_out"],
-            # Used in `idutils.normalizers.to_url` function.
-            "url_generator": lambda scheme, normalized_pid: "normalized_url",
-        }
-
-Each key is optional and if not provided a default value is defined in
-`idutils.ext._set_default_custom_scheme_config()` function.
-"""
+"""Small library for persistent identifiers used in scholarly communication."""
 
 import importlib
 import pkgutil
