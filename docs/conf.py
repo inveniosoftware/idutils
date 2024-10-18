@@ -14,8 +14,6 @@
 
 """Sphinx configuration."""
 
-from __future__ import print_function
-
 import sphinx.environment
 from docutils.utils import get_source_line
 

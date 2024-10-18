@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 1.4.1 (2024-10-18)
+
+- install: add importlib_metadata
+
 Version 1.4.0 (2024-10-17)
 
 - Restructure module to be configurable and readable.
