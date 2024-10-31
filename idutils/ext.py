@@ -51,10 +51,11 @@ Note: You can only add new schemes but not override existing ones.
 from threading import Lock
 
 from importlib_metadata import entry_points
-# when Python >=3.12, remove importlib_metadata and replace with:
-# from importlib.metadata import entry_points
 
 from .schemes import IDUTILS_PID_SCHEMES
+
+# when Python >=3.12, remove importlib_metadata and replace with:
+# from importlib.metadata import entry_points
 
 
 def _set_default_custom_scheme_config(scheme_config):

@@ -7,28 +7,22 @@ on:
 
 jobs:
   Publish:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.7
-
+          python-version: 3.9
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install setuptools wheel babel
-
       - name: Build package
         run: |
           python setup.py sdist bdist_wheel
-
-      - name: Publish on PyPI
-        uses: pypa/gh-action-pypi-publish@v1.8.10
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@v1.11.0
         with:
           user: __token__
-          # The token is provided by the inveniosoftware organization
           password: ${{ secrets.pypi_token }}
