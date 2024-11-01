@@ -15,6 +15,12 @@
 Changes
 =======
 
+Version 1.4.2 (2024-11-01)
+
+- setup: remove pytest-invenio to make imports cleaner
+- setup: install importlib_metadata for compatibility
+- bibcode/ads: normalize unicode
+
 Version 1.4.1 (2024-10-18)
 
 - install: add importlib_metadata
