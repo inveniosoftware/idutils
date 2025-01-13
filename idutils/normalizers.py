@@ -54,8 +54,10 @@ def normalize_orcid(val):
 
 def normalize_gnd(val):
     """Normalize a GND identifier."""
-    if val.startswith(gnd_resolver_url):
-        val = val[len(gnd_resolver_url) :]
+    if val.startswith("http://" + gnd_resolver_url):
+        val = val[len("http://" + gnd_resolver_url) :]
+    elif val.startswith("https://" + gnd_resolver_url):
+        val = val[len("https://" + gnd_resolver_url) :]
     if val.lower().startswith("gnd:"):
         val = val[len("gnd:") :]
     return "gnd:{0}".format(val)

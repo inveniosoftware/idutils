@@ -82,7 +82,7 @@ See
 """
 
 gnd_regexp = re.compile(
-    r"(gnd:|GND:)?("
+    r"(gnd:|GND:|http://d-nb.info/gnd/|https://d-nb.info/gnd/)?("
     r"(1|10)\d{7}[0-9X]|"
     r"[47]\d{6}-\d|"
     r"[1-9]\d{0,7}-[0-9X]|"
@@ -91,7 +91,7 @@ gnd_regexp = re.compile(
 )
 """See https://www.wikidata.org/wiki/Property:P227."""
 
-gnd_resolver_url = "http://d-nb.info/gnd/"
+gnd_resolver_url = "d-nb.info/gnd/"
 
 urn_resolver_url = "https://nbn-resolving.org/"
 
