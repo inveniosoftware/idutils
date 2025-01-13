@@ -81,8 +81,10 @@ See
     https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
 """
 
+gnd_resolver_url = "d-nb.info/gnd/"
+
 gnd_regexp = re.compile(
-    r"(gnd:|GND:|http://d-nb.info/gnd/|https://d-nb.info/gnd/)?("
+    rf"(gnd:|GND:|http://{re.escape(gnd_resolver_url)}|https://{re.escape(gnd_resolver_url)})?("
     r"(1|10)\d{7}[0-9X]|"
     r"[47]\d{6}-\d|"
     r"[1-9]\d{0,7}-[0-9X]|"
@@ -91,7 +93,6 @@ gnd_regexp = re.compile(
 )
 """See https://www.wikidata.org/wiki/Property:P227."""
 
-gnd_resolver_url = "d-nb.info/gnd/"
 
 urn_resolver_url = "https://nbn-resolving.org/"
 
