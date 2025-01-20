@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version <next>
+
+- is_url: allow URL parameters (i.e. semicolon)
+
 Version 1.4.2 (2024-11-01)
 
 - setup: remove pytest-invenio to make imports cleaner

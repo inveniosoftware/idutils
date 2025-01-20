@@ -172,7 +172,7 @@ def is_purl(val):
 def is_url(val):
     """Test if argument is a URL."""
     res = urlparse(val)
-    return bool(res.scheme and res.netloc and res.params == "")
+    return bool(res.scheme and res.netloc)
 
 
 def is_lsid(val):
