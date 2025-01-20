@@ -870,6 +870,13 @@ def test_doi():
     assert not idutils.is_doi("10.1.NOTGOOD.0/123456")
 
 
+def test_url():
+    """Test URL validation."""
+    for i, expected_schemes, normalized_value, url_value in identifiers:
+        if url_value:
+            assert idutils.is_url(url_value)
+
+
 def test_ascl():
     """Test ASCL validation."""
     assert idutils.is_ascl("ascl:1908.011")
