@@ -81,10 +81,8 @@ See
     https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
 """
 
-gnd_resolver_url = "d-nb.info/gnd/"
-
 gnd_regexp = re.compile(
-    rf"(gnd:|GND:|http://{re.escape(gnd_resolver_url)}|https://{re.escape(gnd_resolver_url)})?("
+    r"(gnd:|GND:|https?://d-nb\.info/gnd/)?("
     r"(1|10)\d{7}[0-9X]|"
     r"[47]\d{6}-\d|"
     r"[1-9]\d{0,7}-[0-9X]|"
