@@ -83,7 +83,7 @@ See
 
 gnd_regexp = re.compile(
     r"(gnd:|GND:|https?://d-nb\.info/gnd/)?("
-    r"(1|10)\d{7}[0-9X]|"
+    r"1[012]?\d{7}[0-9X]|"
     r"[47]\d{6}-\d|"
     r"[1-9]\d{0,7}-[0-9X]|"
     r"3\d{7}[0-9X]"
