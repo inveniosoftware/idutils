@@ -13,7 +13,6 @@
 
 """Utility file containing ID validators."""
 
-
 import unicodedata
 from urllib.parse import urlparse
 
@@ -237,9 +236,6 @@ def is_pmcid(val):
 
 def is_gnd(val):
     """Test if argument is a GND Identifier."""
-    if val.startswith(gnd_resolver_url):
-        val = val[len(gnd_resolver_url) :]
-
     return gnd_regexp.match(val)
 
 
