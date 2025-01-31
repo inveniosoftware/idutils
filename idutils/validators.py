@@ -236,8 +236,6 @@ def is_pmcid(val):
 
 def is_gnd(val):
     """Test if argument is a GND Identifier."""
-    if val.startswith("d-nb.info/gnd/"):
-        val = val[len("d-nb.info/gnd/") :]
 
     return gnd_regexp.match(val)
 
