@@ -317,3 +317,17 @@ def is_viaf(val):
         return viaf_regexp.match(val).group() == val
     else:
         return False
+
+
+def is_email(val):
+    """Test if argument looks like an email address.
+
+    Note this test is designed to distinguish an email from other identifier
+    schemes only. It does not imply a valid address / domain etc.
+    """
+    return email_regexp.match(val)
+
+
+def is_sha1(val):
+    """Test if argument is a valid SHA-1 (hex) hash."""
+    return sha1_regexp.match(val)
