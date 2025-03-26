@@ -50,6 +50,8 @@ IDUTILS_PID_SCHEMES = [
     ("arrayexpress_experiment", validators.is_arrayexpress_experiment),
     ("swh", validators.is_swh),
     ("viaf", validators.is_viaf),
+    ("email", validators.is_email),
+    ("sha1", validators.is_sha1),
 ]
 """Definition of scheme name and associated test function.
 

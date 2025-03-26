@@ -389,3 +389,9 @@ is_isbn10 = isbnlib.is_isbn10
 
 is_isbn13 = isbnlib.is_isbn13
 """Test if argument is an ISBN-13 number."""
+
+email_regexp = re.compile(r"\S+@(\S+\.)+\S+")
+"""Test to see if this looks like an email address."""
+
+sha1_regexp = re.compile(r"^[a-fA-F0-9]{40}$")
+"""See https://www.w3.org/TR/annotation-model/#agents."""
