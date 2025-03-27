@@ -15,9 +15,10 @@
 Changes
 =======
 
-Version <next>
+Version 1.4.3 (2025-01-31)
 
 - is_url: allow URL parameters (i.e. semicolon)
+- gnd: improve validation and normalization
 
 Version 1.4.2 (2024-11-01)
 
