@@ -243,7 +243,7 @@ identifiers = [
         "",
         "http://nbn-resolving.org/urn:nbn:de:101:1-201102033592",
     ),
-    ("PMC2631623", ["pmcid"], "", "http://www.ncbi.nlm.nih.gov/pmc/PMC2631623"),
+    ("PMC2631623", ["pmcid"], "", "http://pmc.ncbi.nlm.nih.gov/articles/PMC2631623"),
     (
         "2011ApJS..192...18K",
         ["ads"],
@@ -483,7 +483,7 @@ identifiers = [
             "refseq",
         ],
         "",
-        "http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=" "NZ_JXSL01000036.1",
+        "http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=NZ_JXSL01000036.1",
     ),
     (
         "NM_206454",
