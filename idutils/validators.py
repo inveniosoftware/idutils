@@ -16,6 +16,8 @@
 import unicodedata
 from urllib.parse import urlparse
 
+import rfc3987
+
 from .utils import *
 from .utils import _convert_x_to_10
 
@@ -68,7 +70,7 @@ def is_handle(val):
     Note, DOIs are also handles, and handle are very generic so they will also
     match e.g. any URL your parse.
     """
-    return handle_regexp.match(val) and not swh_regexp.match(val)
+    return handle_regexp.match(val) and not is_swh(val)
 
 
 def is_ean8(val):
@@ -294,12 +296,57 @@ def is_ascl(val):
     return ascl_regexp.match(val)
 
 
+def is_rfc3987_ipath_absolute(val):
+    """Test if the argument is an <ipath-absolute> from RFC 3987."""
+    m = rfc3987.match(val, rule="ihier_part")
+    return (
+        m is not None
+        and val.startswith("/")
+        and len(val) > 0
+        and not val.startswith("//")
+    )
+
+
+def is_rfc3987_absolute_iri(val):
+    """Test if the argment is an <absolute_iri> from RFC 3987."""
+    return rfc3987.match(val, rule="absolute_IRI") is not None
+
+
 def is_swh(val):
     """Test if argument is a Software Heritage identifier.
 
-    https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
+    https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html#syntax
     """
-    return swh_regexp.match(val)
+    m = swh_before_qualifiers_regexp.match(val)
+    if m is not None:
+        qualifiers = m.group("qualifiers")
+        if qualifiers is None:
+            return True
+        else:
+            qualifiers = str(qualifiers)[1:]  # remove the first semi-colon
+            qualifiers = qualifiers.split(";")  # split by semi-colon
+            for qualifier in qualifiers:
+                m = swh_qualifier_values_regexp.match(qualifier)
+                if m is None:
+                    return False
+                else:
+                    qualifier_dict = m.groupdict()
+
+                    # origin value must be absolute iri according to RFC 3987
+                    origin_value = qualifier_dict["origin_value"]
+                    if origin_value is not None and not is_rfc3987_absolute_iri(
+                        str(origin_value)
+                    ):
+                        return False
+
+                    # path value must be an <ipath-absolute>
+                    path_value = qualifier_dict["path_value"]
+                    if path_value is not None and not is_rfc3987_ipath_absolute(
+                        str(path_value)
+                    ):
+                        return False
+            return True
+    return False
 
 
 def is_ror(val):
