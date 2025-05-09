@@ -205,19 +205,19 @@ identifiers = [
     ("urn:lsid:ubio.org:namebank:11815", ["lsid", "urn"], "", ""),
     ("0A9 2002 12B4A105 7", ["istc"], "", ""),
     ("1188-1534", ["issn"], "1188-1534", ""),
-    ("12082125", ["pmid"], "12082125", "http://pubmed.ncbi.nlm.nih.gov/12082125"),
-    ("pmid:12082125", ["pmid"], "12082125", "http://pubmed.ncbi.nlm.nih.gov/12082125"),
+    ("12082125", ["pmid"], "12082125", "http://pubmed.ncbi.nlm.nih.gov/12082125/"),
+    ("pmid:12082125", ["pmid"], "12082125", "http://pubmed.ncbi.nlm.nih.gov/12082125/"),
     (
         "https://pubmed.ncbi.nlm.nih.gov/12082125",
         ["pmid", "url"],
         "12082125",
-        "http://pubmed.ncbi.nlm.nih.gov/12082125",
+        "http://pubmed.ncbi.nlm.nih.gov/12082125/",
     ),
     (
         "https://pubmed.ncbi.nlm.nih.gov/12082125/",
         ["pmid", "url"],
         "12082125",
-        "http://pubmed.ncbi.nlm.nih.gov/12082125",
+        "http://pubmed.ncbi.nlm.nih.gov/12082125/",
     ),
     (
         "http://purl.oclc.org/foo/bar",
@@ -243,7 +243,7 @@ identifiers = [
         "",
         "http://nbn-resolving.org/urn:nbn:de:101:1-201102033592",
     ),
-    ("PMC2631623", ["pmcid"], "", "http://pmc.ncbi.nlm.nih.gov/articles/PMC2631623"),
+    ("PMC2631623", ["pmcid"], "", "http://pmc.ncbi.nlm.nih.gov/articles/PMC2631623/"),
     (
         "2011ApJS..192...18K",
         ["ads"],
