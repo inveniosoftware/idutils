@@ -894,3 +894,70 @@ def test_ascl():
     assert idutils.is_ascl("ascl:1908.011")
     assert idutils.is_ascl("ascl:1908.0113")
     assert not idutils.is_ascl("1990.0803")
+
+
+def test_swh():
+    """Test SWHID validation"""
+
+    swh_with_bad_path_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=Programs/python.c;lines=12-16"
+    )
+    assert not idutils.is_swh(swh_with_bad_path_qualifier_value)
+
+    swh_with_bad_origin_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/py%thon/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=/Programs/python.c;lines=12-16"
+    )
+    assert not idutils.is_swh(swh_with_bad_origin_qualifier_value)
+
+    swh_with_bad_visit_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=https://github.com/python/cpython"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=/Programs/python.c;lines=1-2"
+    )
+    assert not idutils.is_swh(swh_with_bad_visit_qualifier_value)
+
+    swh_with_bad_anchor_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=https://github.com/python/cpython"
+        ";path=/Programs/python.c;lines=1-2"
+    )
+    assert not idutils.is_swh(swh_with_bad_anchor_qualifier_value)
+
+    swh_with_bad_lines_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=/Programs/python.c;lines=12--16"
+    )
+    assert not idutils.is_swh(swh_with_bad_lines_qualifier_value)
+
+    swh_with_bad_lines_qualifier_value = (
+        "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=/Programs/python.c;lines="
+    )
+    assert not idutils.is_swh(swh_with_bad_lines_qualifier_value)
+
+    swh_with_bad_scheme_version_value = (
+        "swh:2:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
+        ";origin=https://github.com/python/cpython"
+        ";visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b"
+        ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
+        ";path=/Programs/python.c;lines=1-2"
+    )
+    assert not idutils.is_swh(swh_with_bad_scheme_version_value)

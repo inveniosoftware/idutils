@@ -356,10 +356,31 @@ See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
 ascl_regexp = re.compile(r"^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
 
-swh_regexp = re.compile(
-    r"swh:1:(cnt|dir|rel|rev|snp):[0-9a-f]{40}"
-    r"(;(origin|visit|anchor|path|lines)=\S+)*$"
+swh_before_qualifiers_regexp = re.compile(
+    r"""^
+    swh:                        # scheme
+    1:                          # scheme_version
+    (snp|rel|rev|dir|cnt):      # object_type
+    [0-9a-f]{40}                # object_id
+    (?P<qualifiers>;.+)?
+    $
+    """,
+    re.VERBOSE,
 )
+
+swh_qualifier_values_regexp = re.compile(
+    r"""
+    ^(?:  
+        origin=(?P<origin_value>[^;]+)    # origin context qualifier
+        | visit=(?P<visit>swh:1:(?:snp|rel|rev|dir|cnt):[0-9a-f]{40})  # visit context qualifier
+        | anchor=(?P<anchor>swh:1:(?:snp|rel|rev|dir|cnt):[0-9a-f]{40}) # anchor context qualifier
+        | path=(?P<path_value>[^;]+)      # path context qualifier
+        | lines=(?P<lines>\d+(?:-\d+)?)  # lines fragment qualifier
+    )$
+    """,
+    re.VERBOSE,
+)
+
 """Matches Software Heritage identifiers."""
 
 ror_regexp = re.compile(r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$", flags=re.I)
