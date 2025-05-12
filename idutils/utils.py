@@ -2,6 +2,8 @@
 #
 # This file is part of IDUtils
 # Copyright (C) 2024 CERN.
+# Copyright (C) 2023 abnf-to-regexp AUTHORS
+# Copyright (C) 2025 Will Riley.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -356,6 +358,32 @@ See https://www.ebi.ac.uk/arrayexpress/help/accession_codes.html
 ascl_regexp = re.compile(r"^ascl:[0-9]{4}\.[0-9]{3,4}$", flags=re.I)
 """ASCL regular expression."""
 
+"""
+MIT License
+
+Copyright (c) 2023 abnf-to-regexp AUTHORS
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Please see the file AUTHORS for the full list of the authors of abnf-to-regexp.
+"""
+
 
 # adapted from https://github.com/aas-core-works/abnf-to-regexp/blob/main/test_data/nested-python/rfc3987/expected.py
 def _create_rfc3987_reg_exps():
@@ -430,6 +458,11 @@ def _create_rfc3987_reg_exps():
 
 
 rfc3987_reg_exps = _create_rfc3987_reg_exps()
+""" 
+A dictionary of compiled regular expressions for RFC 3987. 
+The key is the grammar term and the value is the compiled regular expression. 
+Some are used by SWH validation.
+"""
 
 swh_before_qualifiers_regexp = re.compile(
     r"""^

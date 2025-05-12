@@ -2,6 +2,7 @@
 #
 # This file is part of IDUtils
 # Copyright (C) 2024 CERN.
+# Copyright (C) 2025 Will Riley.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
