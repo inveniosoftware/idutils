@@ -16,8 +16,6 @@
 import unicodedata
 from urllib.parse import urlparse
 
-import rfc3987
-
 from .utils import *
 from .utils import _convert_x_to_10
 
@@ -298,18 +296,12 @@ def is_ascl(val):
 
 def is_rfc3987_ipath_absolute(val):
     """Test if the argument is an <ipath-absolute> from RFC 3987."""
-    m = rfc3987.match(val, rule="ihier_part")
-    return (
-        m is not None
-        and val.startswith("/")
-        and len(val) > 0
-        and not val.startswith("//")
-    )
+    return rfc3987_reg_exps["ipath_absolute"].fullmatch(val) is not None
 
 
-def is_rfc3987_absolute_iri(val):
-    """Test if the argment is an <absolute_iri> from RFC 3987."""
-    return rfc3987.match(val, rule="absolute_IRI") is not None
+def is_rfc3987_iri(val):
+    """Test if the argment is an <iri> from RFC 3987."""
+    return rfc3987_reg_exps["iri"].fullmatch(val) is not None
 
 
 def is_swh(val):
@@ -332,9 +324,9 @@ def is_swh(val):
                 else:
                     qualifier_dict = m.groupdict()
 
-                    # origin value must be absolute iri according to RFC 3987
+                    # origin value must be IRI according to RFC 3987
                     origin_value = qualifier_dict["origin_value"]
-                    if origin_value is not None and not is_rfc3987_absolute_iri(
+                    if origin_value is not None and not is_rfc3987_iri(
                         str(origin_value)
                     ):
                         return False
