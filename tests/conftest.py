@@ -21,6 +21,7 @@ def extra_entry_points():
     """Register `custom_scheme` entrypoints."""
     return {
         "idutils.custom_schemes": [
-            "custom_scheme = mock_module.custom_schemes:custom_scheme"
+            "custom_scheme = mock_module.custom_schemes:custom_scheme",
+            "custom_scheme2 = mock_module.custom_schemes:custom_scheme2",
         ]
     }
