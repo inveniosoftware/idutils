@@ -22,3 +22,13 @@ def custom_scheme():
         "filter": ["orcid"],
         "url_generator": lambda scheme, normalized_pid: f"{scheme}://custom/scheme/{normalized_pid}",
     }
+
+
+def custom_scheme2():
+    """Define validator for `custom_scheme2`."""
+    return {
+        "validator": lambda value: True if value == "custom_scheme2_valid" else False,
+        "normalizer": lambda value: value,
+        "filter": ["orcid"],
+        "url_generator": lambda scheme, normalized_pid: f"{scheme}://custom/scheme2/{normalized_pid}",
+    }
