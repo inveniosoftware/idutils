@@ -15,6 +15,7 @@
 
 import pytest
 
+from idutils.normalizers import to_url
 from idutils.proxies import custom_schemes_registry
 
 
@@ -25,3 +26,11 @@ def test_custom_registry_singleton(entry_points):
     instance2 = custom_schemes_registry()
 
     assert instance1 is instance2
+
+
+def test_custom_registry_url():
+    url1 = to_url("12345", "custom_scheme")
+    url2 = to_url("12345", "custom_scheme2")
+
+    assert "http://custom/scheme/12345" == url1
+    assert "http://custom/scheme2/12345" == url2
