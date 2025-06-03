@@ -15,6 +15,12 @@
 Changes
 =======
 
+Version 1.4.4 (2025-06-03)
+
+- swhid: improved SWHID validation
+- tests: additional tests
+
+
 Version 1.4.3 (2025-05-12)
 
 - is_url: allow URL parameters (i.e. semicolon)
