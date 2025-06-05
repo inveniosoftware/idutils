@@ -65,9 +65,8 @@ pmid_regexp = re.compile(
 )
 """PubMed ID regular expression."""
 
-ark_suffix_regexp = re.compile(r"ark:/[0-9bcdfghjkmnpqrstvwxz]+/.+$")
-"""See http://en.wikipedia.org/wiki/Archival_Resource_Key and
-       https://confluence.ucop.edu/display/Curation/ARK."""
+ark_suffix_regexp = re.compile(r"ark:/?[0-9bcdfghjkmnpqrstvwxz]+/.+$")
+"""See https://datatracker.ietf.org/doc/html/draft-kunze-ark-41"""
 
 lsid_regexp = re.compile(r"urn:lsid:[^:]+(:[^:]+){2,3}$", flags=re.I)
 """See http://en.wikipedia.org/wiki/LSID."""
@@ -434,9 +433,9 @@ def _create_rfc3987_reg_exps():
 
 
 rfc3987_reg_exps = _create_rfc3987_reg_exps()
-""" 
-A dictionary of compiled regular expressions for RFC 3987. 
-The key is the grammar term and the value is the compiled regular expression. 
+"""
+A dictionary of compiled regular expressions for RFC 3987.
+The key is the grammar term and the value is the compiled regular expression.
 Some are used by SWH validation.
 """
 
@@ -454,7 +453,7 @@ swh_before_qualifiers_regexp = re.compile(
 
 swh_qualifier_values_regexp = re.compile(
     r"""
-    ^(?:  
+    ^(?:
         origin=(?P<origin_value>[^;]+)    # origin context qualifier
         | visit=(?P<visit>swh:1:(?:snp|rel|rev|dir|cnt):[0-9a-f]{40})  # visit context qualifier
         | anchor=(?P<anchor>swh:1:(?:snp|rel|rev|dir|cnt):[0-9a-f]{40}) # anchor context qualifier
