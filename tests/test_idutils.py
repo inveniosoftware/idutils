@@ -87,6 +87,7 @@ identifiers = [
     ),
     ("ark:/13030/tqb3kh97gh8w", ["ark"], "", ""),
     ("ark:/c8131/g3js3v", ["ark"], "", ""),
+    ("ark:c8131/g3js3v.1", ["ark"], "", ""),
     ("http://www.example.org/ark:/13030/tqb3kh97gh8w", ["ark", "url"], "", ""),
     (
         "10.1016/j.epsl.2011.11.037",
