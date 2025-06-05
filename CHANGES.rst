@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version 1.4.5 (2025-06-05)
+
+- ark: fix regex to match new ARK identifiers without slash
+
 Version 1.4.4 (2025-06-03)
 
 - swhid: improved SWHID validation
