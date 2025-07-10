@@ -48,14 +48,11 @@ Each key is optional and if not provided a default value is defined in
 Note: You can only add new schemes but not override existing ones.
 """
 
+import importlib.metadata as m
+from sys import version_info
 from threading import Lock
 
-from importlib_metadata import entry_points
-
 from .schemes import IDUTILS_PID_SCHEMES
-
-# when Python >=3.12, remove importlib_metadata and replace with:
-# from importlib.metadata import entry_points
 
 
 def _set_default_custom_scheme_config(scheme_config):
@@ -147,3 +144,27 @@ class CustomSchemesRegistry:
 
             # Store in the registry
             self._custom_schemes_registry.setdefault(name, scheme_config)
+
+
+def entry_points(group):
+    """Entry points.
+
+    Copied here from invenio-base so that we do not introduce a dependency on invenio-base.
+    """
+    if version_info < (3, 10):
+        eps = m.entry_points()
+        # the only reason to add this check is to simplify the tests! the tests
+        # are implemented against python >=3.10 which uses the group keyword.
+        # since we drop python3.9 soon, this should work!
+        # in the tests there is a line which patches the return value of
+        # importlib.metadata.entry_points with a list. this works for
+        # python>=3.10 but not for 3.9
+        # the return value of .get can contain duplicates. the simplest way to
+        # remove is the set() call, to still return a list, list() is called on
+        # set()
+        if isinstance(eps, dict):
+            eps = list(set(eps.get(group, [])))
+    else:
+        eps = m.entry_points(group=group)
+
+    return eps
