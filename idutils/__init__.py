@@ -26,7 +26,7 @@ warn(
     stacklevel=2,
 )
 
-__version__ = "1.4.5"
+__version__ = "1.5.0"
 
 
 def import_attributes():
