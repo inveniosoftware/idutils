@@ -15,6 +15,10 @@
 Changes
 =======
 
+Version v1.5.0 (released 2025-07-14)
+
+- chores: replaced importlib_metadata with importlib.metadata
+
 Version 1.4.5 (2025-06-05)
 
 - ark: fix regex to match new ARK identifiers without slash
