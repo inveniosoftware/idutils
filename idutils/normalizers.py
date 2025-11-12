@@ -136,6 +136,12 @@ def normalize_viaf(val):
     return "viaf:{0}".format(val)
 
 
+def normalize_qid(val):
+    """Normalize a wikidata QID."""
+    m = qid_regexp.match(val)
+    return m.group(2)
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -171,6 +177,8 @@ def normalize_pid(val, scheme):
         return normalize_urn(val)
     elif scheme == "viaf":
         return normalize_viaf(val)
+    elif scheme == "wikidata":
+        return normalize_qid(val)
     else:
         for custom_scheme, normalizer in custom_schemes_registry().pick_scheme_key(
             "normalizer"
@@ -205,6 +213,7 @@ IDUTILS_LANDING_URLS = {
     "swh": "{scheme}://archive.softwareheritage.org/{pid}",
     "ror": "{scheme}://ror.org/{pid}",
     "viaf": "{scheme}://viaf.org/viaf/{pid}",
+    "wikidata": "{scheme}://www.wikidata.org/entity/{pid}",
 }
 """URL generation configuration for the supported PID providers."""
 
@@ -232,6 +241,10 @@ def to_url(val, scheme, url_scheme="http"):
         if scheme == "viaf" and pid.startswith("viaf:"):
             pid = pid[len("viaf:") :]
             url_scheme = "https"
+        if scheme == "wikidata":
+            url_scheme = "https"
+            if pid.startswith("wikidata:"):
+                pid = pid[len("wikidata:") :]
         return landing_urls[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ["purl", "url"]:
         return pid

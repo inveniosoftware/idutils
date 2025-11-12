@@ -371,3 +371,8 @@ def is_email(val):
 def is_sha1(val):
     """Test if argument is a valid SHA-1 (hex) hash."""
     return sha1_regexp.match(val)
+
+
+def is_wikidata(val):
+    """Test if argument is a wikidata QID."""
+    return qid_regexp.match(val)

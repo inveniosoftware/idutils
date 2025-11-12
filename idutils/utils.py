@@ -482,6 +482,11 @@ viaf_regexp = re.compile(
 )
 """See https://www.wikidata.org/wiki/Property:P214."""
 
+qid_regexp = re.compile(
+    r"(wikidata:\s*|(?:https?://)?www\.wikidata\.org/entity/)?(Q\d+$)", flags=re.I
+)
+"""See https://www.wikidata.org/wiki/Wikidata:Identifiers."""
+
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""
