@@ -781,6 +781,12 @@ identifiers = [
         ),
     ),
     (
+        "wikidata:Q303",
+        ["wikidata"],
+        "Q303",
+        "https://www.wikidata.org/entity/Q303",
+    ),
+    (
         "custom_scheme_valid",
         ["custom_scheme"],
         "custom_scheme_valid",
@@ -964,3 +970,13 @@ def test_swh():
         ";path=/Programs/python.c;lines=1-2"
     )
     assert not idutils.is_swh(swh_with_bad_scheme_version_value)
+
+
+def test_wikidata():
+    """Test wikidata validation."""
+    assert idutils.is_wikidata("wikidata:Q303")
+    assert idutils.is_wikidata("Q303")
+    assert idutils.is_wikidata("https://www.wikidata.org/entity/Q303")
+    assert not idutils.is_wikidata("wikidata:Q30a")
+    assert not idutils.is_wikidata("Q30a")
+    assert not idutils.is_wikidata("http://www.wikidata.org/entity/Q30a")
