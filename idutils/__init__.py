@@ -5,6 +5,7 @@
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
 # Copyright (C) 2022 University of Münster.
+# Copyright (C) 2025 Graz University of Technology.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -16,33 +17,34 @@
 
 """Small library for persistent identifiers used in scholarly communication."""
 
-import importlib
 import pkgutil
+from importlib import import_module
 from warnings import warn
-
-warn(
-    "Implicit imports (e.g., 'import idutils; idutils.function;') might be removed in the next major version. Please use explicit imports (e.g., 'from idutils import function;') instead.",
-    DeprecationWarning,
-    stacklevel=2,
-)
 
 __version__ = "1.5.0"
 
 
-def import_attributes():
-    """For backwards compatibility! Import everything for `idutils.__func__` and `from idutils import __func__` to work."""
+def import_module_by_name(name):
+    """Import module."""
     package_name = __name__
-
-    importlib.import_module
     for _, file_name, _ in pkgutil.walk_packages(__path__):
-        module = importlib.import_module(f".{file_name}", package_name)
+        module = import_module(f".{file_name}", package_name)
 
         for attribute_name in dir(module):
-            attribute = getattr(module, attribute_name)
-
-            # Make sure it's not private or built-in
-            if not attribute_name.startswith("_"):
-                globals()[attribute_name] = attribute
+            if attribute_name == name:
+                return getattr(module, attribute_name)
 
 
-import_attributes()
+def __getattr__(name: str):
+    """__getattr__"""
+    try:
+        return import_module(f".{name}", __name__)
+    except ImportError:
+        warn(
+            f"Accessing '{name}' via the package namespace idutils is deprecated. "
+            f"Please use 'from idutils.moduleA import {name}' instead. "
+            "Namespace access will be removed in a future version.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
+        return import_module_by_name(name)
