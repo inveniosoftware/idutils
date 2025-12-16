@@ -15,6 +15,11 @@
 Changes
 =======
 
+Version v1.5.1 (released 2025-12-15)
+
+- feat: add support for wikidata type QID scheme
+- gh-action: various version bumps
+
 Version v1.5.0 (released 2025-07-14)
 
 - chores: replaced importlib_metadata with importlib.metadata
@@ -27,7 +32,6 @@ Version 1.4.4 (2025-06-03)
 
 - swhid: improved SWHID validation
 - tests: additional tests
-
 
 Version 1.4.3 (2025-05-12)
 
