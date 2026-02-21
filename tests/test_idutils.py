@@ -980,3 +980,17 @@ def test_wikidata():
     assert not idutils.is_wikidata("wikidata:Q30a")
     assert not idutils.is_wikidata("Q30a")
     assert not idutils.is_wikidata("http://www.wikidata.org/entity/Q30a")
+
+
+def test_openalex():
+    """Test OpenAlex validation."""
+    assert idutils.is_openalex("W2741809807")
+    assert idutils.is_openalex("openalex:A5023888391")
+    assert idutils.is_openalex("https://openalex.org/S2739401519")
+    assert idutils.is_openalex("C1234567")
+    assert idutils.is_openalex("P1234567")
+    assert idutils.is_openalex("F1234567")
+    assert idutils.is_openalex("I1234567")
+    assert not idutils.is_openalex("Q303")
+    assert not idutils.is_openalex("openalex:Q1234567")
+    assert not idutils.is_openalex("https://openalex.org/Q1234567")
