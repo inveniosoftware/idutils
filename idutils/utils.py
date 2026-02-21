@@ -487,6 +487,11 @@ qid_regexp = re.compile(
 )
 """See https://www.wikidata.org/wiki/Wikidata:Identifiers."""
 
+openalex_regexp = re.compile(
+    r"(openalex:\s*|(?:https?://)?openalex\.org/)?([WASICPF]\d{6,10}$)", flags=re.I
+)
+"""See https://docs.openalex.org/how-to-use-the-api/get-single-entities."""
+
 
 def _convert_x_to_10(x):
     """Convert char to int with X being converted to 10."""

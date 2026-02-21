@@ -376,3 +376,11 @@ def is_sha1(val):
 def is_wikidata(val):
     """Test if argument is a wikidata QID."""
     return qid_regexp.match(val)
+
+
+def is_openalex(val):
+    """Test if argument is an OpenAlex identifier.
+
+    See (https://docs.openalex.org/how-to-use-the-api/get-single-entities)
+    """
+    return openalex_regexp.match(val)
