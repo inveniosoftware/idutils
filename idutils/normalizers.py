@@ -142,6 +142,12 @@ def normalize_qid(val):
     return m.group(2)
 
 
+def normalize_openalex(val):
+    """Normalize an OpenAlex identifier."""
+    m = openalex_regexp.match(val)
+    return m.group(2).upper()
+
+
 def normalize_pid(val, scheme):
     """Normalize an identifier.
 
@@ -179,6 +185,8 @@ def normalize_pid(val, scheme):
         return normalize_viaf(val)
     elif scheme == "wikidata":
         return normalize_qid(val)
+    elif scheme == "openalex":
+        return normalize_openalex(val)
     else:
         for custom_scheme, normalizer in custom_schemes_registry().pick_scheme_key(
             "normalizer"
@@ -214,6 +222,7 @@ IDUTILS_LANDING_URLS = {
     "ror": "{scheme}://ror.org/{pid}",
     "viaf": "{scheme}://viaf.org/viaf/{pid}",
     "wikidata": "{scheme}://www.wikidata.org/entity/{pid}",
+    "openalex": "{scheme}://openalex.org/{pid}",
 }
 """URL generation configuration for the supported PID providers."""
 
@@ -245,6 +254,8 @@ def to_url(val, scheme, url_scheme="http"):
             url_scheme = "https"
             if pid.startswith("wikidata:"):
                 pid = pid[len("wikidata:") :]
+        if scheme == "openalex":
+            url_scheme = "https"
         return landing_urls[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ["purl", "url"]:
         return pid
