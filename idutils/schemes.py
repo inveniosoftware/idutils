@@ -53,6 +53,7 @@ IDUTILS_PID_SCHEMES = [
     ("email", validators.is_email),
     ("sha1", validators.is_sha1),
     ("wikidata", validators.is_wikidata),
+    ("openalex", validators.is_openalex),
 ]
 """Definition of scheme name and associated test function.
 

@@ -804,6 +804,8 @@ identifiers = [
         "5b5056cbf89049064b44d5101764aaae42eb1447",
         "",
     ),
+    ("W2741809807", ["openalex"], "W2741809807", "https://openalex.org/W2741809807"),
+    ("A5010416163", ["openalex"], "A5010416163", "https://openalex.org/A5010416163"),
 ]
 
 
