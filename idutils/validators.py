@@ -384,3 +384,13 @@ def is_openalex(val):
     See (https://docs.openalex.org/how-to-use-the-api/get-single-entities)
     """
     return openalex_regexp.match(val)
+
+
+def is_cstr(val):
+    """Test if argument is a cstr."""
+    return cstr_regexp.match(val)
+
+
+def is_rrid(val):
+    """Test if argument is a RRID."""
+    return rrid_regexp.match(val)

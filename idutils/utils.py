@@ -509,3 +509,45 @@ email_regexp = re.compile(r"\S+@(\S+\.)+\S+")
 
 sha1_regexp = re.compile(r"^[a-fA-F0-9]{40}$")
 """See https://www.w3.org/TR/annotation-model/#agents."""
+
+cstr_regexp = re.compile(r"(?i)^(?:cstr:)?(?:[A-Za-z0-9_-]+\.){3}[A-Za-z0-9_-]+$")
+"""This is a very general implementation, since an emglish language version
+   of the specification could not be found. It is based on the example given in
+   the DataCite documentation"""
+
+RRID_CODES = (
+    "AB",
+    "CVCL",
+    "SCR",
+    "IMSR",
+    "Addgene",
+    "DGRC",
+    "Flybase",
+    "NCBITaxon",
+    "MGI",
+    "BDSC",
+    "WB-STRAIN",
+    "ZFIN",
+    "ZIRC",
+    "DGGR",
+    "IMSR_GPT",
+    "IMSR_CYAGEN",
+    "IMSR_EUMMCR",
+    "IMSR_JAX",
+    "IMSR_RIKEN_BRC",
+    "IMSR_MMRRC",
+    "IMSR_TIGM",
+    "IMSR_CRL",
+    "IMSR_KU",
+    "ISMR_NM",
+    "ISMR_EM",
+)
+"""List of RRID authorities.
+    
+Manually collected from https://rrid.site/, so may not be complete
+"""
+
+rrid_regexp = re.compile(
+    r"(?i)^(?:rrid:)?({codes})+_[A-Za-z0-9_-]+$".format(codes="|".join(RRID_CODES))
+)
+"""Based on RRID example in the DataCite documentation"""
