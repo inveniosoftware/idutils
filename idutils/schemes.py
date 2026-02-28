@@ -54,6 +54,8 @@ IDUTILS_PID_SCHEMES = [
     ("sha1", validators.is_sha1),
     ("wikidata", validators.is_wikidata),
     ("openalex", validators.is_openalex),
+    ("cstr", validators.is_cstr),
+    ("rrid", validators.is_rrid),
 ]
 """Definition of scheme name and associated test function.
 
@@ -65,7 +67,7 @@ IDUTILS_SCHEME_FILTER = [
     (
         "url",
         # None these can have URLs, in which case we exclude them
-        ["isbn", "istc", "urn", "lsid", "issn", "ean8", "viaf", "wikidata"],
+        ["isbn", "istc", "urn", "lsid", "issn", "ean8", "viaf", "wikidata", "cstr"],
     ),
     ("ean8", ["gnd", "pmid", "viaf"]),
     ("ean13", ["gnd", "pmid"]),

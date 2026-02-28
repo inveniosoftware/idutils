@@ -223,6 +223,7 @@ IDUTILS_LANDING_URLS = {
     "viaf": "{scheme}://viaf.org/viaf/{pid}",
     "wikidata": "{scheme}://www.wikidata.org/entity/{pid}",
     "openalex": "{scheme}://openalex.org/{pid}",
+    "rrid": "{scheme}://scicrunch.org/resolver/{pid}",
 }
 """URL generation configuration for the supported PID providers."""
 

@@ -806,6 +806,18 @@ identifiers = [
     ),
     ("W2741809807", ["openalex"], "W2741809807", "https://openalex.org/W2741809807"),
     ("A5010416163", ["openalex"], "A5010416163", "https://openalex.org/A5010416163"),
+    (
+        "31253.11.sciencedb.13238",
+        ["cstr"],
+        "31253.11.sciencedb.13238",
+        "",
+    ),
+    (
+        "RRID:SCR_014641",
+        ["rrid"],
+        "RRID:SCR_014641",
+        "http://scicrunch.org/resolver/RRID:SCR_014641",
+    ),
 ]
 
 
