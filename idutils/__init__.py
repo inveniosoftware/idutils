@@ -5,6 +5,7 @@
 # Copyright (C) 2018 Alan Rubin.
 # Copyright (C) 2019 Inria.
 # Copyright (C) 2022 University of Münster.
+# Copyright (C) 2026 Graz University of Technology.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -18,13 +19,6 @@
 
 import importlib
 import pkgutil
-from warnings import warn
-
-warn(
-    "Implicit imports (e.g., 'import idutils; idutils.function;') might be removed in the next major version. Please use explicit imports (e.g., 'from idutils import function;') instead.",
-    DeprecationWarning,
-    stacklevel=2,
-)
 
 __version__ = "1.5.1"
 
