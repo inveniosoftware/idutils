@@ -4,6 +4,7 @@
 # Copyright (C) 2015-2022 CERN.
 # Copyright (C) 2015-2018 Alan Rubin.
 # Copyright (C) 2025 Will Riley.
+# Copyright (C) 2026 Graz University of Technology.
 #
 # IDUtils is free software; you can redistribute it and/or modify
 # it under the terms of the Revised BSD License; see LICENSE file for
@@ -17,7 +18,21 @@
 
 import pytest
 
-import idutils
+import idutils.validators
+from idutils.detectors import detect_identifier_schemes
+from idutils.normalizers import normalize_pid, to_url
+from idutils.validators import (
+    is_ascl,
+    is_doi,
+    is_ean,
+    is_isbn,
+    is_isbn10,
+    is_isbn13,
+    is_openalex,
+    is_swh,
+    is_url,
+    is_wikidata,
+)
 
 identifiers = [
     ("urn:isbn:0451450523", ["urn", "isbn"], "", ""),
@@ -825,7 +840,7 @@ def test_detect_schemes(entry_points):
     """Test scheme detection."""
 
     for i, expected_schemes, normalized_value, url_value in identifiers:
-        schemes = idutils.detect_identifier_schemes(i)
+        schemes = detect_identifier_schemes(i)
         assert schemes == expected_schemes, i
 
 
@@ -834,29 +849,29 @@ def test_is_type():
     for i, schemes, normalized_value, url_value in identifiers:
         for s in schemes:
             if not s.startswith("custom"):
-                assert getattr(idutils, "is_%s" % s)(i)
+                assert getattr(idutils.validators, "is_%s" % s)(i)
 
 
 def test_normalize_pid():
     """Test persistent id normalization."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
-        assert idutils.normalize_pid(i, expected_schemes[0]) == (normalized_value or i)
+        assert normalize_pid(i, expected_schemes[0]) == (normalized_value or i)
 
-    assert idutils.normalize_pid(None, "handle") is None
+    assert normalize_pid(None, "handle") is None
 
 
 def test_idempotence(entry_points):
     """Test persistent id normalization."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
-        val_norm = idutils.normalize_pid(i, expected_schemes[0])
-        assert expected_schemes[0] in idutils.detect_identifier_schemes(val_norm)
+        val_norm = normalize_pid(i, expected_schemes[0])
+        assert expected_schemes[0] in detect_identifier_schemes(val_norm)
 
 
 def test_to_url(entry_points):
     """Test URL generation."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
-        assert idutils.to_url(i, expected_schemes[0]) == url_value
-        assert idutils.to_url(
+        assert to_url(i, expected_schemes[0]) == url_value
+        assert to_url(
             i,
             expected_schemes[0],
             url_scheme="https",
@@ -876,47 +891,47 @@ def test_valueerror(entry_points):
     # is invalid.
     for i in range(20):
         nonsense_pid = "a" * i
-        assert idutils.detect_identifier_schemes(nonsense_pid) == []
+        assert detect_identifier_schemes(nonsense_pid) == []
 
 
 def test_compund_ean():
     """Test EAN validation."""
-    assert idutils.is_ean("4006381333931")
-    assert idutils.is_ean("73513537")
+    assert is_ean("4006381333931")
+    assert is_ean("73513537")
 
 
 def test_compund_isbn():
     """Test ISBN validation."""
-    assert idutils.is_isbn("978-3-905673-82-1")
-    assert idutils.is_isbn13("978-3-905673-82-1")
-    assert not idutils.is_isbn10("978-3-905673-82-1")
-    assert idutils.is_isbn("0-9752298-0-X")
-    assert not idutils.is_isbn13("0-9752298-0-X")
-    assert idutils.is_isbn10("0-9752298-0-X")
+    assert is_isbn("978-3-905673-82-1")
+    assert is_isbn13("978-3-905673-82-1")
+    assert not is_isbn10("978-3-905673-82-1")
+    assert is_isbn("0-9752298-0-X")
+    assert not is_isbn13("0-9752298-0-X")
+    assert is_isbn10("0-9752298-0-X")
 
 
 def test_doi():
     """Test DOI validation."""
-    assert idutils.is_doi("10.1000/123456")
-    assert idutils.is_doi("10.1038/issn.1476-4687")
-    assert idutils.is_doi("10.1000.10/123456")
-    assert not idutils.is_doi("10.1000/")
-    assert not idutils.is_doi("10.10O0/123456")
-    assert not idutils.is_doi("10.1.NOTGOOD.0/123456")
+    assert is_doi("10.1000/123456")
+    assert is_doi("10.1038/issn.1476-4687")
+    assert is_doi("10.1000.10/123456")
+    assert not is_doi("10.1000/")
+    assert not is_doi("10.10O0/123456")
+    assert not is_doi("10.1.NOTGOOD.0/123456")
 
 
 def test_url():
     """Test URL validation."""
     for i, expected_schemes, normalized_value, url_value in identifiers:
         if url_value:
-            assert idutils.is_url(url_value)
+            assert is_url(url_value)
 
 
 def test_ascl():
     """Test ASCL validation."""
-    assert idutils.is_ascl("ascl:1908.011")
-    assert idutils.is_ascl("ascl:1908.0113")
-    assert not idutils.is_ascl("1990.0803")
+    assert is_ascl("ascl:1908.011")
+    assert is_ascl("ascl:1908.0113")
+    assert not is_ascl("1990.0803")
 
 
 def test_swh():
@@ -929,7 +944,7 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=Programs/python.c;lines=12-16"
     )
-    assert not idutils.is_swh(swh_with_bad_path_qualifier_value)
+    assert not is_swh(swh_with_bad_path_qualifier_value)
 
     swh_with_bad_origin_qualifier_value = (
         "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -938,7 +953,7 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=/Programs/python.c;lines=12-16"
     )
-    assert not idutils.is_swh(swh_with_bad_origin_qualifier_value)
+    assert not is_swh(swh_with_bad_origin_qualifier_value)
 
     swh_with_bad_visit_qualifier_value = (
         "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -947,7 +962,7 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=/Programs/python.c;lines=1-2"
     )
-    assert not idutils.is_swh(swh_with_bad_visit_qualifier_value)
+    assert not is_swh(swh_with_bad_visit_qualifier_value)
 
     swh_with_bad_anchor_qualifier_value = (
         "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -956,7 +971,7 @@ def test_swh():
         ";anchor=https://github.com/python/cpython"
         ";path=/Programs/python.c;lines=1-2"
     )
-    assert not idutils.is_swh(swh_with_bad_anchor_qualifier_value)
+    assert not is_swh(swh_with_bad_anchor_qualifier_value)
 
     swh_with_bad_lines_qualifier_value = (
         "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -965,7 +980,7 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=/Programs/python.c;lines=12--16"
     )
-    assert not idutils.is_swh(swh_with_bad_lines_qualifier_value)
+    assert not is_swh(swh_with_bad_lines_qualifier_value)
 
     swh_with_bad_lines_qualifier_value = (
         "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -974,7 +989,7 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=/Programs/python.c;lines="
     )
-    assert not idutils.is_swh(swh_with_bad_lines_qualifier_value)
+    assert not is_swh(swh_with_bad_lines_qualifier_value)
 
     swh_with_bad_scheme_version_value = (
         "swh:2:cnt:78e48f800c950530e36d3712d9e2e89673f23562"
@@ -983,28 +998,28 @@ def test_swh():
         ";anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977"
         ";path=/Programs/python.c;lines=1-2"
     )
-    assert not idutils.is_swh(swh_with_bad_scheme_version_value)
+    assert not is_swh(swh_with_bad_scheme_version_value)
 
 
 def test_wikidata():
     """Test wikidata validation."""
-    assert idutils.is_wikidata("wikidata:Q303")
-    assert idutils.is_wikidata("Q303")
-    assert idutils.is_wikidata("https://www.wikidata.org/entity/Q303")
-    assert not idutils.is_wikidata("wikidata:Q30a")
-    assert not idutils.is_wikidata("Q30a")
-    assert not idutils.is_wikidata("http://www.wikidata.org/entity/Q30a")
+    assert is_wikidata("wikidata:Q303")
+    assert is_wikidata("Q303")
+    assert is_wikidata("https://www.wikidata.org/entity/Q303")
+    assert not is_wikidata("wikidata:Q30a")
+    assert not is_wikidata("Q30a")
+    assert not is_wikidata("http://www.wikidata.org/entity/Q30a")
 
 
 def test_openalex():
     """Test OpenAlex validation."""
-    assert idutils.is_openalex("W2741809807")
-    assert idutils.is_openalex("openalex:A5023888391")
-    assert idutils.is_openalex("https://openalex.org/S2739401519")
-    assert idutils.is_openalex("C1234567")
-    assert idutils.is_openalex("P1234567")
-    assert idutils.is_openalex("F1234567")
-    assert idutils.is_openalex("I1234567")
-    assert not idutils.is_openalex("Q303")
-    assert not idutils.is_openalex("openalex:Q1234567")
-    assert not idutils.is_openalex("https://openalex.org/Q1234567")
+    assert is_openalex("W2741809807")
+    assert is_openalex("openalex:A5023888391")
+    assert is_openalex("https://openalex.org/S2739401519")
+    assert is_openalex("C1234567")
+    assert is_openalex("P1234567")
+    assert is_openalex("F1234567")
+    assert is_openalex("I1234567")
+    assert not is_openalex("Q303")
+    assert not is_openalex("openalex:Q1234567")
+    assert not is_openalex("https://openalex.org/Q1234567")
