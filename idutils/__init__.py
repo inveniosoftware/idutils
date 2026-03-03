@@ -35,7 +35,7 @@ def import_module_by_name(name):
                 return getattr(module, attribute_name)
 
 
-def __getattr__(name: str):
+def __getattr__(name):
     """__getattr__"""
     try:
         return import_module(f".{name}", __name__)
