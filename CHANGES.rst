@@ -15,6 +15,13 @@
 Changes
 =======
 
+Version v1.6.0 (released 2026-03-19)
+
+- refactor: remove DeprecationWarning
+- feat: add cstr and rrid identifiers
+- adding tests
+- feat: add openalex validator
+
 Version v1.5.1 (released 2025-12-15)
 
 - feat: add support for wikidata type QID scheme
