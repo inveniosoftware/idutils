@@ -1,11 +1,7 @@
 ..
-   This file is part of IDUtils
-   Copyright (C) 2015-2023 CERN.
-   Copyright (C) 2022 Northwestern University.
-
-   IDUtils is free software; you can redistribute it and/or modify
-   it under the terms of the Revised BSD License; see LICENSE file for
-   more details.
+   SPDX-FileCopyrightText: 2015-2023 CERN.
+   SPDX-FileCopyrightText: 2022 Northwestern University.
+   SPDX-License-Identifier: BSD-3-Clause
 
    In applying this license, CERN does not waive the privileges and immunities
    granted to it by virtue of its status as an Intergovernmental Organization

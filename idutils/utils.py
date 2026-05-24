@@ -1,13 +1,7 @@
-# -*- coding: utf-8 -*-
-#
-# This file is part of IDUtils
-# Copyright (C) 2024 CERN.
-# Copyright (C) 2023 abnf-to-regexp AUTHORS
-# Copyright (C) 2025 Will Riley.
-#
-# IDUtils is free software; you can redistribute it and/or modify
-# it under the terms of the Revised BSD License; see LICENSE file for
-# more details.
+# SPDX-FileCopyrightText: 2024 CERN.
+# SPDX-FileCopyrightText: 2023 abnf-to-regexp AUTHORS
+# SPDX-FileCopyrightText: 2025 Will Riley.
+# SPDX-License-Identifier: BSD-3-Clause
 #
 # In applying this license, CERN does not waive the privileges and immunities
 # granted to it by virtue of its status as an Intergovernmental Organization
