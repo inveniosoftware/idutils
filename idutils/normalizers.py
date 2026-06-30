@@ -234,13 +234,16 @@ IDUTILS_LANDING_URLS = {
 def to_url(val, scheme, url_scheme="http"):
     """Convert a resolvable identifier into a URL for a landing page.
 
-    :param val: The identifier's value.
-    :param scheme: The identifier's scheme.
-    :param url_scheme: Scheme to use for URL generation, 'http' or 'https'.
-    :returns: URL for the identifier.
+    Args:
+        val: The identifier's value.
+        scheme: The identifier's scheme.
+        url_scheme: Scheme to use for URL generation, 'http' or 'https'.
 
-    .. versionadded:: 0.3.0
-       ``url_scheme`` used for URL generation.
+    Returns:
+        URL for the identifier.
+
+    !!! info "New in version 0.3.0"
+        `url_scheme` used for URL generation.
     """
     pid = normalize_pid(val, scheme)
     landing_urls = IDUTILS_LANDING_URLS

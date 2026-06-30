@@ -9,5 +9,9 @@ set -o errexit
 # Quit on unbound symbols
 set -o nounset
 
-python -m sphinx.cmd.build -qnNW docs docs/_build/html
+# TODO: remove the version check once Python 3.9 is dropped from the CI matrix
+if python -c 'import sys; sys.exit(sys.version_info < (3, 10))'; then
+    zensical build --strict
+fi
+
 python -m pytest
