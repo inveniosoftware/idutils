@@ -1,3 +1,61 @@
+# SPDX-FileCopyrightText: 2015-2022 CERN.
+# SPDX-FileCopyrightText: 2022 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 TU Wien.
+# SPDX-License-Identifier: MIT
+
+[project]
+name = "idutils"
+description = "Small library for persistent identifiers used in scholarly communication."
+readme = "README.rst"
+requires-python = ">=3.9"
+license = "BSD-3-Clause"
+authors = [
+  { name = "Invenio Software", email = "info@inveniosoftware.org" },
+]
+keywords = [
+  "identifiers",
+  "persistent",
+]
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+]
+dependencies = [
+  "isbnlib2>=3.11.7",
+]
+dynamic = ["version"]
+
+[project.urls]
+Repository = "https://github.com/inveniosoftware/idutils"
+
+[project.optional-dependencies]
+docs = []
+tests = [
+  "pytest-black-ng>=0.4.0",
+  "pytest-cache>=1.0",
+  "pytest-invenio>=1.4.0",
+  "pytest-runner>=2.6.2",
+  "sphinx>=4.5",
+]
+
 [build-system]
-requires = ["setuptools", "wheel", "babel>2.8"]
-build-backend = "setuptools.build_meta"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "idutils/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/idutils",
+]
+
+[tool.isort]
+profile = "black"
+
+[tool.pydocstyle]
+add_ignore = ""
+
+[tool.pytest.ini_options]
+addopts = '--black --isort --pydocstyle --doctest-glob="*.rst" --doctest-modules --cov=idutils --cov-report=term-missing'
+testpaths = "tests idutils"
+live_server_scope = "module"
