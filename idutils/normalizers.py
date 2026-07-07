@@ -260,6 +260,8 @@ def to_url(val, scheme, url_scheme="http"):
                 pid = pid[len("wikidata:") :]
         if scheme == "openalex":
             url_scheme = "https"
+        if scheme == "ensembl":
+            pid = pid.split(".")[0]
         return landing_urls[scheme].format(scheme=url_scheme, pid=pid)
     elif scheme in ["purl", "url"]:
         return pid

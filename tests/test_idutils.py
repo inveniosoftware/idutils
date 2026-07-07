@@ -461,6 +461,14 @@ identifiers = [
         "http://www.ensembl.org/id/ENSMUST00000017290",
     ),
     (
+        "ENSG00000012048.15",
+        [
+            "ensembl",
+        ],
+        "",
+        "http://www.ensembl.org/id/ENSG00000012048",
+    ),
+    (
         "P02833",
         [
             "uniprot",

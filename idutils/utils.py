@@ -247,7 +247,7 @@ See https://asia.ensembl.org/info/genome/stable_ids/prefixes.html
 """
 
 ensembl_regexp = re.compile(
-    r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}$".format(
+    r"({prefixes})(E|FM|G|GT|P|R|T)\d{{11}}(\.\d+)?$".format(
         prefixes="|".join(ENSEMBL_PREFIXES)
     )
 )
