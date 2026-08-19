@@ -26,7 +26,8 @@ IDUTILS_SCHEME_FILTER = _IDUTILS_SCHEME_FILTER
 def detect_identifier_schemes(val):
     """Detect persistent identifier scheme for a given value.
 
-    .. note:: Some schemes like PMID are very generic.
+    !!! note
+        Some schemes like PMID are very generic.
     """
     schemes = []
     scheme_validators = IDUTILS_PID_SCHEMES + custom_schemes_registry().pick_scheme_key(
