@@ -1026,6 +1026,18 @@ def test_openalex():
     assert not idutils.is_openalex("https://openalex.org/Q1234567")
 
 
+def test_ror():
+    """Test ROR validation."""
+    assert idutils.is_ror("03yrm5c26")
+    assert idutils.is_ror("https://ror.org/05dxps055")
+    # "i", "l", "o" and "u" are not in the Crockford base 32 alphabet.
+    assert not idutils.is_ror("0iiiiii99")
+    assert not idutils.is_ror("0lououi99")
+    # A single character typo breaks the ISO/IEC 7064 checksum.
+    assert not idutils.is_ror("05dxps056")
+    assert not idutils.is_ror("05dxqs055")
+
+
 def test_raid():
     """Test RAiD validation and normalization."""
     # Bare short forms.
