@@ -337,8 +337,24 @@ def is_swh(val):
 
 
 def is_ror(val):
-    """Test if argument is a ROR id."""
-    return ror_regexp.match(val)
+    """Test if argument is a ROR id.
+
+    The nine character ROR id is a zero, six characters of the Crockford
+    base 32 alphabet (which excludes "i", "l", "o" and "u") and a two
+    digit checksum following ISO/IEC 7064:2003.
+
+    See https://ror.readme.io/docs/identifier.
+    """
+    m = ror_regexp.match(val)
+    if m is None:
+        return None
+    identifier = m.group(1).lower()
+    number = 0
+    for char in identifier[1:7]:
+        number = number * 32 + ROR_ALPHABET.index(char)
+    if int(identifier[7:]) != 98 - (number * 100) % 97:
+        return None
+    return m
 
 
 def is_viaf(val):

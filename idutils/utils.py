@@ -471,8 +471,21 @@ swh_qualifier_values_regexp = re.compile(
 
 """Matches Software Heritage identifiers."""
 
-ror_regexp = re.compile(r"(?:https?://)?(?:ror\.org/)?(0\w{6}\d{2})$", flags=re.I)
-"""See https://ror.org/facts/#core-components."""
+ROR_ALPHABET = "0123456789abcdefghjkmnpqrstvwxyz"
+"""Crockford base 32 alphabet used by the ROR identifier pattern.
+
+It excludes the letters "i", "l", "o" and "u".
+
+See https://ror.readme.io/docs/identifier.
+"""
+
+ror_regexp = re.compile(
+    r"(?:https?://)?(?:ror\.org/)?(0[{alphabet}]{{6}}\d{{2}})$".format(
+        alphabet=ROR_ALPHABET
+    ),
+    flags=re.I,
+)
+"""See https://ror.readme.io/docs/identifier."""
 
 viaf_urls = [
     "http://viaf.org/viaf/",
