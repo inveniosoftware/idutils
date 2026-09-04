@@ -548,7 +548,7 @@ RRID_CODES = (
     "ISMR_EM",
 )
 """List of RRID authorities.
-    
+
 Manually collected from https://rrid.site/, so may not be complete
 """
 
@@ -556,3 +556,8 @@ rrid_regexp = re.compile(
     r"(?i)^(?:rrid:)?({codes})+_[A-Za-z0-9_-]+$".format(codes="|".join(RRID_CODES))
 )
 """Based on RRID example in the DataCite documentation"""
+
+isni_urls = (
+    "http://isni.org/isni/",
+    "https://isni.org/isni/",
+)
