@@ -52,6 +52,16 @@ def detect_identifier_schemes(val):
         for viaf_url in validators.viaf_urls:
             if val.startswith(viaf_url):
                 schemes.remove("handle")
+    if "isni" in schemes and "url" in schemes:
+        # check explicitly if it's an isni
+        for isni_url in validators.isni_urls:
+            if val.startswith(isni_url):
+                schemes.remove("url")
+    if "isni" in schemes and "handle" in schemes:
+        # check explicitly if it's an isni
+        for isni_url in validators.isni_urls:
+            if val.startswith(isni_url):
+                schemes.remove("handle")
 
     scheme_filter = IDUTILS_SCHEME_FILTER + custom_schemes_registry().pick_scheme_key(
         "filter"
