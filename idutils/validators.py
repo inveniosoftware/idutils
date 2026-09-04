@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2024 CERN.
 # SPDX-FileCopyrightText: 2025 Will Riley.
+# SPDX-FileCopyrightText: 2026 University of Münster.
 # SPDX-License-Identifier: BSD-3-Clause
 #
 # In applying this license, CERN does not waive the privileges and immunities
