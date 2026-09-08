@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2024 CERN.
 # SPDX-FileCopyrightText: 2023 abnf-to-regexp AUTHORS
 # SPDX-FileCopyrightText: 2025 Will Riley.
+# SPDX-FileCopyrightText: 2026 University of Münster.
 # SPDX-License-Identifier: BSD-3-Clause
 #
 # In applying this license, CERN does not waive the privileges and immunities
@@ -548,7 +549,7 @@ RRID_CODES = (
     "ISMR_EM",
 )
 """List of RRID authorities.
-    
+
 Manually collected from https://rrid.site/, so may not be complete
 """
 
@@ -556,3 +557,8 @@ rrid_regexp = re.compile(
     r"(?i)^(?:rrid:)?({codes})+_[A-Za-z0-9_-]+$".format(codes="|".join(RRID_CODES))
 )
 """Based on RRID example in the DataCite documentation"""
+
+isni_urls = (
+    "http://isni.org/isni/",
+    "https://isni.org/isni/",
+)

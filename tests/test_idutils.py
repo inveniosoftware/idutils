@@ -1,6 +1,7 @@
 # SPDX-FileCopyrightText: 2015-2022 CERN.
 # SPDX-FileCopyrightText: 2015-2018 Alan Rubin.
 # SPDX-FileCopyrightText: 2025 Will Riley.
+# SPDX-FileCopyrightText: 2026 University of Münster.
 # SPDX-License-Identifier: BSD-3-Clause
 #
 # In applying this license, CERN does not waive the privileges and immunities
@@ -310,6 +311,7 @@ identifiers = [
         "http://orcid.org/0009-0002-4767-9017",
     ),
     ("1422-4586-3573-0476", ["isni"], "", ""),
+    ("https://isni.org/isni/1422-4586-3573-0476", ["isni"], "", ""),
     (
         "arXiv:1310.2590",
         [
@@ -1078,3 +1080,13 @@ def test_raid():
     assert "raid" in idutils.detect_identifier_schemes(
         "https://raid.org/10.83962/fb5be317"
     )
+
+
+def test_isni():
+    """Test ISNI validation."""
+    assert idutils.is_isni("1422-4586-3573-0476")
+    assert idutils.is_isni("http://isni.org/isni/1422-4586-3573-0476")
+    assert idutils.is_isni("https://isni.org/isni/1422-4586-3573-0476")
+    assert idutils.is_isni("0009-0005-6000-7479")
+    assert not idutils.is_isni("http://orcid.org/0009-0005-6000-7479")
+    assert not idutils.is_isni("https://orcid.org/0009-0005-6000-7479")

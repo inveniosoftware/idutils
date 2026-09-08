@@ -1,5 +1,6 @@
 # SPDX-FileCopyrightText: 2024 CERN.
 # SPDX-FileCopyrightText: 2025 Will Riley.
+# SPDX-FileCopyrightText: 2026 University of Münster.
 # SPDX-License-Identifier: BSD-3-Clause
 #
 # In applying this license, CERN does not waive the privileges and immunities
@@ -102,6 +103,11 @@ def is_ean(val):
 
 def is_isni(val):
     """Test if argument is an International Standard Name Identifier."""
+    for isni_url in isni_urls:
+        if val.startswith(isni_url):
+            val = val[len(isni_url) :]
+            break
+
     val = val.replace("-", "").replace(" ", "").upper()
     if len(val) != 16:
         return False
@@ -121,6 +127,10 @@ def is_orcid(val):
     See http://support.orcid.org/knowledgebase/
         articles/116780-structure-of-the-orcid-identifier
     """
+    for isni_url in isni_urls:
+        if val.startswith(isni_url):
+            return False
+
     for orcid_url in orcid_urls:
         if val.startswith(orcid_url):
             val = val[len(orcid_url) :]
