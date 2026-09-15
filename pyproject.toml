@@ -6,7 +6,7 @@
 [project]
 name = "idutils"
 description = "Small library for persistent identifiers used in scholarly communication."
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.9"
 license = "BSD-3-Clause"
 authors = [
@@ -28,13 +28,15 @@ dynamic = ["version"]
 Repository = "https://github.com/inveniosoftware/idutils"
 
 [project.optional-dependencies]
-docs = []
+docs = [
+    "zensical",
+    "mkdocstrings[python]",
+]
 tests = [
   "pytest-black-ng>=0.4.0",
   "pytest-cache>=1.0",
   "pytest-invenio>=1.4.0",
   "pytest-runner>=2.6.2",
-  "sphinx>=4.5",
 ]
 
 [build-system]
@@ -56,6 +58,6 @@ profile = "black"
 add_ignore = ""
 
 [tool.pytest.ini_options]
-addopts = '--black --isort --pydocstyle --doctest-glob="*.rst" --doctest-modules --cov=idutils --cov-report=term-missing'
+addopts = '--black --isort --pydocstyle --doctest-modules --cov=idutils --cov-report=term-missing'
 testpaths = "tests idutils"
 live_server_scope = "module"
