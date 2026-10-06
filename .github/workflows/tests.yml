@@ -1,3 +1,10 @@
+# SPDX-FileCopyrightText: 2020-2024 CERN.
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# In applying this license, CERN does not waive the privileges and immunities
+# granted to it by virtue of its status as an Intergovernmental Organization
+# or submit itself to any jurisdiction.
+
 name: CI
 
 on:

@@ -1,4 +1,5 @@
 # SPDX-FileCopyrightText: 2026 California Institute of Technology.
+# SPDX-License-Identifier: BSD-3-Clause
 
 site_name: IDUtils
 site_description: Small library for validating and normalising persistent identifiers used in scholarly communication.
