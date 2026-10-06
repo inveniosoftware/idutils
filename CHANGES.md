@@ -1,3 +1,4 @@
+<!--
 SPDX-FileCopyrightText: 2015-2023 CERN.
 SPDX-FileCopyrightText: 2022 Northwestern University.
 SPDX-FileCopyrightText: 2026 TU Wien.
@@ -6,6 +7,7 @@ SPDX-License-Identifier: BSD-3-Clause
 In applying this license, CERN does not waive the privileges and immunities
 granted to it by virtue of its status as an Intergovernmental Organization
 or submit itself to any jurisdiction.
+-->
 
 # Changes
 
