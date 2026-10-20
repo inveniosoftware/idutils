@@ -11,6 +11,14 @@ or submit itself to any jurisdiction.
 
 # Changes
 
+## Version v1.7.1 (released 2026-10-20)
+
+- feat(ensembl): support versioned Ensembl IDs
+- fix: for issn recognition take the url(s) into account as well
+- docs: switch from sphinx to zensical
+- licenses: normalize license headers
+- docs: remove authors file because it is out of date
+
 ## Version v1.7.0 (released 2026-07-16)
 
 - chore(workflows): use the centralized publish workflow
