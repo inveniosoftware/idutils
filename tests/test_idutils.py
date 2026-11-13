@@ -399,6 +399,42 @@ identifiers = [
         "http://d-nb.info/gnd/1055864695",
     ),
     (
+        "1300000000",
+        ["gnd", "pmid"],
+        "gnd:1300000000",
+        "http://d-nb.info/gnd/1300000000",
+    ),
+    (
+        "gnd:1300000000",
+        ["gnd"],
+        "gnd:1300000000",
+        "http://d-nb.info/gnd/1300000000",
+    ),
+    (
+        "http://d-nb.info/gnd/1300000000",
+        ["gnd", "url"],
+        "gnd:1300000000",
+        "http://d-nb.info/gnd/1300000000",
+    ),
+    (
+        "140000000X",
+        ["gnd"],
+        "gnd:140000000X",
+        "http://d-nb.info/gnd/140000000X",
+    ),
+    (
+        "gnd:140000000X",
+        ["gnd"],
+        "gnd:140000000X",
+        "http://d-nb.info/gnd/140000000X",
+    ),
+    (
+        "http://d-nb.info/gnd/140000000X",
+        ["gnd", "url"],
+        "gnd:140000000X",
+        "http://d-nb.info/gnd/140000000X",
+    ),
+    (
         "GND:4079154-3",
         [
             "gnd",
