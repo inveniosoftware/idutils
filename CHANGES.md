@@ -11,6 +11,11 @@ or submit itself to any jurisdiction.
 
 # Changes
 
+
+## Version v1.7.2 (released 2026-11-13)
+
+- fix: number range adjusted for recognition of gnd id
+
 ## Version v1.7.1 (released 2026-10-20)
 
 - feat(ensembl): support versioned Ensembl IDs
